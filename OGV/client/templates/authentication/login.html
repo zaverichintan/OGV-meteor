@@ -1,0 +1,10 @@
+<template name="logIn">
+	<div class="primary-container" id="log-in-container">
+		<a class="show-forgot-password" href="javascript:void(0);" id="showForgotPassword"> Forgot Password </a>
+		<form action="/login" class="log-in-form" id="log-in-form" method="post">
+			<input class="form-control email" id="log-in-email" type="email" name="email" placeholder="email@domain.tld" >
+			<input class="form-control password" id="log-in-password" type="password" name="password" placeholder="*********">
+			<button class="btn btn-default" type="submit"> Log In </button>
+		</form>
+	</div>
+</template>

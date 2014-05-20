@@ -1,0 +1,25 @@
+<head>
+	<title> Online Geometry Viewer </title>
+</head>
+<body>
+	{{> main}}
+</body>
+
+
+<template name = "main">
+	{{> alert}}
+	{{#unless resetPassword}}
+		{{#unless currentUser}}
+			{{#unless showForgotPassword}}
+				{{> logIn}}
+				{{> signUp}}
+			{{else}}
+				{{> forgotPassword}}
+			{{/unless}}
+		{{else}}
+			{{> logOut}}
+		{{/unless}}
+	{{else}}
+		{{> resetPassword}}
+	{{/unless}}
+</template>

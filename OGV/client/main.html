@@ -8,7 +8,7 @@
 
 <template name = "main">
 	{{> alert}}
-	{{#unless resetPassword}}
+	{{#unless resetPasswordToken}}
 		{{#unless currentUser}}
 			{{#unless showForgotPassword}}
 				{{> logIn}}

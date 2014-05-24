@@ -7,12 +7,12 @@ Template.main.helpers({
 
 
 if (Accounts._resetPasswordToken) {
-    Session.set('resetPassword', Accounts._resetPasswordToken);
+    Session.set('resetPasswordToken', Accounts._resetPasswordToken);
 }
 
 Template.main.helpers({
-    resetPassword: function()
+    resetPasswordToken: function()
     {
-	return Session.get('resetPassword');
+	return Session.get('resetPasswordToken');
     }
 });

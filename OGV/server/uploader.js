@@ -1,40 +1,34 @@
-var formidable = Npm.require('formidable');
-var fs = Npm.require('fs-extra');
-var http = Npm.require('http'); 
-var sys = Npm.require('sys'); 
-var connectHandlers, connect; 
+Meteor.methods({
+    saveFile: function(blob, name, path, encoding) 
+    {
+	var path = cleanPath(path),
+	    fs = Npm.require('fs'),
+	    name = cleanName(name || 'file'),
+	    encoding = encoding || 'binary',
+	    chroot = process.env.PWD+'/private/';
+	    console.log(chroot);
+	    path = chroot;
+	    console.log("path"+path);
+	    console.log(name);
 
-connectHandlers = WebApp.connectHandlers;
+	fs.writeFile(path + name, blob, encoding, function(err) 
+	{
+	    if (err) {
+	        throw (new Meteor.Error(500, 'Failed to save file.', err));
+	    } else {
+		console.log('The file' + name + '(' + encoding + ') was saved to' + path);
+	    }
+	});
 
-WebApp.connectHandlers.stack.splice(0,0,{ 
-    route: '/upload', 
-    handle: function(req, res, next) 
-    { 
-	if(req.method === 'POST') { 
-	    var form = new formidable.IncomingForm();
-	    form.uploadDir = process.env.PWD+'/private/'; 
-	    form.parse(req, function(err, fields, files) 
-	    { 
-		res.writeHead(200, {'content-type': 'text/plain'}); 
-		res.write('received upload:\n\n');
-		res.end(sys.inspect({fields: fields, files: files}));
-	    });
+	function cleanPath(str) {
+	    if (str) {
+		return str.replace(/\.\./g,'').replace(/\/+/g,'').replace(/^\/+/,'').replace(/\/+$/,'');
+	    }
+	}
 
-	    form.on('end', function(fields, files) {
-		var original_path = this.openedFiles[0].path;
-		var new_path = process.env.PWD+'/private/'+this.openedFiles[0].name;
-		fs.rename(original_path, new_path,function(err) {
-		    if (err) {
-			console.error(err);
-		    } else {
-			console.log("renamed!");
-		    }
-		});
-	   }); 
-	return; 
-	}	
-	res.writeHead(200, {'content-type': 'text/html'}); 
-	res.end ( '<div class="alert danger"> You are somewhere you are not supposed to be. </div>' ); 
-    }, 
+	function cleanName(str) {
+	    return str.replace(/\.\./g,'').replace(/\//g,'');
+	}
+    }
 });
- 
+    

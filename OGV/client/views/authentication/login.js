@@ -1,3 +1,6 @@
+/**
+ * authenticate user credentials, shows the errors if any
+ */
 Template.logIn.events({
     'submit #log-in-form':function(e,t)
     {
@@ -14,6 +17,7 @@ Template.logIn.events({
 	    Meteor.loginWithPassword(email,password,function(err){
 	        if (err) {
 		    Session.set('alert',err);
+		    console.log(err);
 		} else {
 		    Session.set('alert', 'Welcome back');
 		}
@@ -23,7 +27,11 @@ Template.logIn.events({
 	return false;
 	
     },
-
+ 
+    /**
+     * Show forgot password form, when clicked on the link 
+     */  
+ 
     'click #showForgotPassword':function(e,t)
     {
 	Session.set('showForgotPassword',true);

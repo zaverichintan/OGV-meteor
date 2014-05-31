@@ -8,6 +8,10 @@ Template.signUp.events({
 	    password = signUpForm.find('#sign-up-password').val(),
 	    passwordConfirm = signUpForm.find('#sign-up-password-confirm').val();
 
+	    /**
+	     * Validates the sign up form fields and gives errors if any 
+	     */
+
 	    if (isNotEmpty(email) && 
 		isNotEmpty(password) &&
 		isEmail(email) &&
@@ -22,6 +26,4 @@ Template.signUp.events({
 	    }
 	return false;	
     },
-});
-
-	
+});	

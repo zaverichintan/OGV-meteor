@@ -6,6 +6,10 @@ Template.resetPassword.events({
 	var resetPasswordForm = $(e.currentTarget),
 	    password = resetPasswordForm.find('#reset-password-password').val(),
 	    passwordConfirm = resetPasswordForm.find('#reset-password-confirm').val();
+
+        /**
+ 	 * Validate the password fields and show errors if any 
+	 */
 	
 	if (isNotEmpty(password) &&
 	    areValidPasswords(password,passwordConfirm)) {

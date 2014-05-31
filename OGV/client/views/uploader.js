@@ -1,3 +1,6 @@
+/**
+ * Checks if the file is text or binary and then encode it accordingly
+ */
 Meteor.saveFile = function(blob,name,path, type, callback)
 { 
     var fileReader = new FileReader(), 
@@ -25,6 +28,11 @@ Meteor.saveFile = function(blob,name,path, type, callback)
         
     fileReader[method](blob);
 }
+
+/**
+ * Whenever the input changes, save the file by calling saveFile function 
+ * from uploader.js from server
+ */
 
 Template.uploader.events({ 
     'change input': function(ev) {

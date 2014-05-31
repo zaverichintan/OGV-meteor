@@ -5,10 +5,17 @@ Meteor.methods({
 	    fs = Npm.require('fs'),
 	    name = cleanName(name || 'file'),
 	    encoding = encoding || 'binary',
-	    chroot = process.env.PWD+'/private/';
-	    console.log(chroot);
-	    path = chroot;
-
+	    appRoot = process.env.PWD+'/private/',
+	    userId = Meteor.userId(),
+	    path = appRoot + userId + '/';
+	    
+	if (!fs.existsSync(path))
+	{
+		console.log("now creating directory");
+		fs.mkdirSync(path);
+	}
+	
+	
 	fs.writeFile(path + name, blob, encoding, function(err) 
 	{
 	    if (err) {

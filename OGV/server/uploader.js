@@ -8,8 +8,6 @@ Meteor.methods({
 	    chroot = process.env.PWD+'/private/';
 	    console.log(chroot);
 	    path = chroot;
-	    console.log("path"+path);
-	    console.log(name);
 
 	fs.writeFile(path + name, blob, encoding, function(err) 
 	{

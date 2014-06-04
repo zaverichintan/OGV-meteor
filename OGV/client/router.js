@@ -1,3 +1,7 @@
 Meteor.Router.add({
-    '/' : 'main'
+    '/' : 'main',
+    '/forgot-password' : 'forgotPassword',
+    '/log-in' : 'logIn',
+    '/sign-up' : 'signUp'
+     
 });

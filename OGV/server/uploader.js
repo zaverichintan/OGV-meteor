@@ -17,17 +17,17 @@ Meteor.methods({
 	    fs.mkdirSync(path);
 	}
 
-	if (ext == '.obj') {	
+	if (ext == '.png') {	
 	    fs.writeFile(uploadPath + name, blob, encoding, function(err) 
 	    {
 	        if (err) {
 	            throw (new Meteor.Error(500, 'Failed to save file.', err));
 	        } else {
-		   info = 'The file' + name + '(' + encoding + ') was saved to' + uploadPath;
+		   console.log('The file' + name + '(' + encoding + ') was saved to' + uploadPath);
 	        }
 	    });
          } else {
-	     info = 'File type not supported';
+	     console.log('File type not supported');
 	 }
 
 	function cleanPath(str) 
@@ -40,8 +40,7 @@ Meteor.methods({
 	function cleanName(str) 
 	{
 	    return str.replace(/\.\./g,'').replace(/\//g,'');
-	}
-	return info;	
+	}	
     }
 });
     

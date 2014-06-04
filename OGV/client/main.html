@@ -2,26 +2,17 @@
 	<title> Online Geometry Viewer </title>
 </head>
 <body>
+	
+	{{> alert}}
 	{{> renderPage}}
 </body>
 
 
 <template name = "main">
-	{{> alert}}
-	{{#unless resetPasswordToken}}
 		{{#unless currentUser}}
-			{{#unless showForgotPassword}}
 				{{> logIn}}
-				{{> signUp}}
-			{{else}}
-				{{> forgotPassword}}
-			{{/unless}}
 		{{else}}
 			{{> logOut}}
-			{{> uploader}}
 		{{/unless}}
-	{{else}}
-		{{> resetPassword}}
-	{{/unless}}
 	
 </template>

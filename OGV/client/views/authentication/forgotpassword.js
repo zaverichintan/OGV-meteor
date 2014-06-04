@@ -26,13 +26,4 @@ Template.forgotPassword.events({
 	return false;
     },
     
-    /**
-     * return to log in form
-     */
- 
-    'click #returnToLogIn': function(e,t)
-    {
-	Session.set('showForgotPassword',null);
-	return false;
-    },
 });

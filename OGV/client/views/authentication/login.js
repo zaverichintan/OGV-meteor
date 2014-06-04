@@ -28,13 +28,4 @@ Template.logIn.events({
 	
     },
  
-    /**
-     * Show forgot password form, when clicked on the link 
-     */  
- 
-    'click #showForgotPassword':function(e,t)
-    {
-	Session.set('showForgotPassword',true);
-	return false;
-    },
 });	    

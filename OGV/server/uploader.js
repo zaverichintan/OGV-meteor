@@ -14,20 +14,21 @@ Meteor.methods({
 	console.log(ext);   
 	if (!fs.existsSync(uploadPath)) {
 	    console.log("now creating directory");
-	    fs.mkdirSync(path);
+	    fs.mkdirSync(uploadPath);
 	}
 
-	if (ext == '.png') {	
+	if (ext == '.obj') {	
+	    console.log("extension is obj");
 	    fs.writeFile(uploadPath + name, blob, encoding, function(err) 
 	    {
 	        if (err) {
 	            throw (new Meteor.Error(500, 'Failed to save file.', err));
 	        } else {
-		   console.log('The file' + name + '(' + encoding + ') was saved to' + uploadPath);
+		    console.log( 'The file' + name + '(' + encoding + ') was succesfully saved');
 	        }
 	    });
          } else {
-	     console.log('File type not supported');
+	     throw (new Meteor.Error (409,'File type not supported'));
 	 }
 
 	function cleanPath(str) 

@@ -9,27 +9,32 @@ Meteor.methods({
 	    encoding = encoding || 'binary',
 	    appRoot = process.env.PWD+'/private/',
 	    userId = Meteor.userId(),
-	    uploadPath = appRoot + userId + '/';
-	
-	console.log(ext);   
-	if (!fs.existsSync(uploadPath)) {
-	    console.log("now creating directory");
-	    fs.mkdirSync(uploadPath);
-	}
+	    fileUploaded = false;
+	    uploadPath = appRoot + userId + '/';	
 
-	if (ext == '.obj') {	
-	    console.log("extension is obj");
-	    fs.writeFile(uploadPath + name, blob, encoding, function(err) 
-	    {
-	        if (err) {
-	            throw (new Meteor.Error(500, 'Failed to save file.', err));
-	        } else {
-		    console.log( 'The file' + name + '(' + encoding + ') was succesfully saved');
-	        }
-	    });
+	if (ext == '.obj') {
+	    if (!fs.existsSync(uploadPath)) {
+		fs.mkdirSync(uploadPath);
+		fs.writeFileSync(uploadPath + name, blob, encoding);
+		fileUploaded = true;
+	    } else if (fs.existsSync(uploadPath + name)) {
+	    	throw (new Meteor.Error(409, 'File Already Exists'));
+	    } else {
+		fs.writeFileSync(uploadPath + name, blob, encoding);
+		fileUploaded = true;
+	    }	
          } else {
 	     throw (new Meteor.Error (409,'File type not supported'));
-	 }
+	 }	
+	
+	if (fileUploaded) {
+	    var model = {
+	    	name: name,
+	    	userId: userId,
+	  	lovemeter: 13
+	    }
+	    model._id = Models.insert(model);
+	}
 
 	function cleanPath(str) 
 	{

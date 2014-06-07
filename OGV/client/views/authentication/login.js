@@ -16,7 +16,7 @@ Template.logIn.events({
 	    isValidPassword(password)) {
 	    Meteor.loginWithPassword(email,password,function(err){
 	        if (err) {
-		    Session.set('alert',err);
+		    Session.set('alert',"Uh Oh!, we were unable to log you in, Error: " + err.message);
 		    console.log(err);
 		} else {
 		    Session.set('alert', 'Welcome back');

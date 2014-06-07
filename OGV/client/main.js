@@ -27,3 +27,5 @@ Template.main.helpers({
 	return Session.get('resetPasswordToken');
     }
 });
+
+Meteor.subscribe('models');

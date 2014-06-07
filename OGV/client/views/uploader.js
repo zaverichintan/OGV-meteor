@@ -29,6 +29,7 @@ Meteor.saveFile = function(blob,name,path, type)
 	    }
 	    else {
 		Session.set('alert','Yay! file uploaded');
+		Meteor.Router.to('/render');
 	    }
 	});
     }

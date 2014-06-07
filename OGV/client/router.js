@@ -3,5 +3,6 @@ Meteor.Router.add({
     '/forgot-password' : 'forgotPassword',
     '/log-in' : 'logIn',
     '/sign-up' : 'signUp',
-    '/upload' : 'uploader' 
+    '/upload' : 'uploader',
+    '/filemanager': 'filemanager' 
 });

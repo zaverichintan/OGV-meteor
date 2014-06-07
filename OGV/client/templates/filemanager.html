@@ -1,0 +1,18 @@
+<template name="filemanager">
+	<p> models </p>
+    <div class="modelsList">
+	{{#each models}}
+		{{> aboutModel}}
+	{{/each}}
+    </div>
+</template>
+
+<template name ="aboutModel">
+	<p> model </p>
+     <div class="model-file">
+	<div class = "model-meta">
+		<p> {{name}} </p>
+		<p> {{lovemeter}} </p>
+	</div>
+     </div>
+</template>

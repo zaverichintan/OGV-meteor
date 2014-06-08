@@ -1,18 +1,21 @@
 <template name="filemanager">
-	<p> models </p>
-    <div class="modelsList">
+    <div class="modelsList container-fluid">
+	<div class = "models row">
 	{{#each models}}
 		{{> aboutModel}}
 	{{/each}}
+	</div>
     </div>
 </template>
 
 <template name ="aboutModel">
-	<p> model </p>
-     <div class="model-file">
+     <div class="model-file .col-xs-3">
 	<div class = "model-meta">
-		<p> {{name}} </p>
-		<p> {{lovemeter}} </p>
+		<span class = "model-meta-name meta-desc"> {{name}} </span>
+		<span class = "model-meta-love meta-desc">
+			<span class = "meta-love-icon meta-icon"> </span>
+			 {{lovemeter}} 
+		</span>
 	</div>
      </div>
 </template>

@@ -43,6 +43,7 @@ Meteor.saveFile = function(blob,name,path, type)
 
 Template.uploader.events({ 
     'change input': function(ev) {
+	Session.set('alert','Uploading . . .');
 	_.each(ev.currentTarget.files, function(file)
 	{
 	    Meteor.saveFile(file, file.name );

@@ -117,8 +117,10 @@ input:focus {
 
 .model-file {
 	background:#555;
-	width: 300px;
+	width: 280px;
 	height: 250px;
+	float:left;
+	margin: 5px 5px;
 }
 
 .model-meta {

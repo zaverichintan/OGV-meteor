@@ -22,7 +22,7 @@ Template.signUp.events({
 		    if (err) {
 			Session.set('alert',err.message);
 		    } else {
-			Session.set('alert','Congrats! Everything went fine and you can now view models at OGV');
+			Session.set('alert','Congrats! Check your inbox at' + email + 'to verify it');
 		    }
 		});
 	    }

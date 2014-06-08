@@ -21,11 +21,22 @@ if (Accounts._resetPasswordToken) {
 }
 
 
+if (Accounts._verifyEmailToken) {
+    Accounts.verifyEmail(Accounts._verifyEmailToken, function(err) {
+	if (err) {
+	    Session.set('alert',err.message);
+	} else {
+	    Session.set('alert','Your email is verified');
+	}
+    });
+}
+
 Template.main.helpers({
     resetPasswordToken: function()
     {
 	return Session.get('resetPasswordToken');
     }
 });
+
 
 Meteor.subscribe('models');

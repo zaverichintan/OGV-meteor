@@ -17,7 +17,7 @@ Template.forgotPassword.events({
 	    isEmail(email)) {
 	    Accounts.forgotPassword({email:email},function(err){
 		if (err) {
-		    Session.set('alert',err);
+		    Session.set('alert',err.message);
 	        } else {
 		    Session.set('alert','Email Sent, Please check your mailbox to reset your password');
 	        }

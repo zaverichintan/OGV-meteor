@@ -1,7 +1,7 @@
 if (Models.find().count() === 0) 
 {
    Models.insert({
-	name: 'sphere.obj',
+	name: 'spherical.obj',
 	userid : '1',
 	lovemeter : '13'
     });

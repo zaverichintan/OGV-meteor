@@ -14,7 +14,7 @@ Meteor.Router.filters({
 	if (Meteor.user()) {
 	    return page;
 	} else {
-	    return 'log-in';
+	    return 'logIn';
 	}
     },
     'checkEmailVerified': function(page) 
@@ -26,6 +26,8 @@ Meteor.Router.filters({
 	    } else {
 		return 'notVerified';
 	    }
+	} else {
+	    return 'logIn';
 	}
     }
 });

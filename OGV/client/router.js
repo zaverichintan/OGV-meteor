@@ -10,28 +10,26 @@ Meteor.Router.add({
 });
 
 Meteor.Router.filters({
-    'checkLoggedIn': function(page) 
-    {
-	if (Meteor.user()) {
-	    return page;
-	} else {
-	    return 'logIn';
-	}
-    },
-    'checkEmailVerified': function(page) 
+    'loginFilter': function(page) 
     {
 	if (Meteor.loggingIn()) {
 	    return 'preloader';
-	} else if (Meteor.user()) {
+	} else {
+	    return page;
+	}
+    },
+
+    'verifyFilter':function(page)
+    {    
+	if (Meteor.user()) {
 	    if (Meteor.user().emails[0].verified) {	
 		return page;
 	    } else {
 		return 'notVerified';
 	    }
-	} else {
-	    return 'logIn';
 	}
     }
 });
-Meteor.Router.filter('checkEmailVerified', {only: ['main','uploader','filemanager']});
 
+Meteor.Router.filter('loginFilter');
+Meteor.Router.filter('verifyFilter',{only:['uploader','filemanager']});

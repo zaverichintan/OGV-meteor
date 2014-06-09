@@ -32,4 +32,4 @@ Meteor.Router.filters({
 });
 
 Meteor.Router.filter('loginFilter');
-Meteor.Router.filter('verifyFilter',{only:['uploader','filemanager']});
+Meteor.Router.filter('verifyFilter',{only:['uploader','filemanager','main']});

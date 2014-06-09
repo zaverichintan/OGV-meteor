@@ -16,6 +16,7 @@ Template.main.helpers({
  * when user clicks on the reset password link in the mail it got.
  */
 
+
 if (Accounts._resetPasswordToken) {
     Session.set('resetPasswordToken', Accounts._resetPasswordToken);
 }

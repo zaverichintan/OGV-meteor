@@ -5,6 +5,7 @@ Meteor.Router.add({
     '/sign-up' : 'signUp',
     '/upload' : 'uploader',
     '/not-verified' : 'notVerified',
+    '/preloader' : 'preloader',
     '/filemanager': 'filemanager' 
 });
 
@@ -19,8 +20,9 @@ Meteor.Router.filters({
     },
     'checkEmailVerified': function(page) 
     {
-	
-	if (Meteor.user()) {
+	if (Meteor.loggingIn()) {
+	    return 'preloader';
+	} else if (Meteor.user()) {
 	    if (Meteor.user().emails[0].verified) {	
 		return page;
 	    } else {
@@ -31,5 +33,5 @@ Meteor.Router.filters({
 	}
     }
 });
-Meteor.Router.filter('checkEmailVerified', {only: ['uploader','filemanager']});
+Meteor.Router.filter('checkEmailVerified', {only: ['main','uploader','filemanager']});
 

@@ -7,13 +7,15 @@ Template.resetPassword.events({
 	    password = resetPasswordForm.find('#reset-password-password').val(),
 	    passwordConfirm = resetPasswordForm.find('#reset-password-confirm').val();
 
+		console.log (password);
+		console.log (passwordConfirm);
         /**
  	 * Validate the password fields and show errors if any 
 	 */
 	
 	if (isNotEmpty(password) &&
 	    areValidPasswords(password,passwordConfirm)) {
-	    Accounts.resetPassword(Session.get('resetPassword'),password,function(err)
+	    Accounts.resetPassword(Session.get('resetPasswordToken'),password,function(err)
 	    {
 		if (err) {
 		    Session.set('alert', {type:'error', message:'We\'re sorry but something went wrong'});

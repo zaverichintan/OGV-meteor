@@ -31,5 +31,5 @@ Meteor.Router.filters({
 	}
     }
 });
-Meteor.Router.filter('checkEmailVerified', {only: ['uploader','main','filemanager']});
+Meteor.Router.filter('checkEmailVerified', {only: ['uploader','filemanager']});
 

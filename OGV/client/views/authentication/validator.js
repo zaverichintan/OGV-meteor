@@ -48,12 +48,12 @@ isValidPassword = function(password)
  * Checks if password field and confirm password field match
  */
 
-areValidPasswords = function(password,confirm)
+areValidPasswords = function(password,confirmPassword)
 {
     if (!isValidPassword(password)) {
 	return false;
     }
-    if (password !== confirm) {
+    if (password !== confirmPassword) {
 	Session.set('alert','Your two passwords are not same');
 	return false;
     }

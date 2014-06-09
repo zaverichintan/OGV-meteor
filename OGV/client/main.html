@@ -11,10 +11,14 @@
 
 
 <template name = "main">
+	{{#unless resetPasswordToken}}
 		{{#unless currentUser}}
 				{{> logIn}}
 		{{else}}
 			{{> uploader}}
 		{{/unless}}
+	{{else}}
+		{{> resetPassword}}
+	{{/unless}}
 	
 </template>

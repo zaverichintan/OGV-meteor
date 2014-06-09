@@ -22,7 +22,7 @@ Template.signUp.events({
 		    if (err) {
 			Session.set('alert',err.message);
 		    } else {
-			Session.set('alert','Congrats! Check your inbox at' + email + 'to verify it');
+			Session.set('alert','Congrats! Check your inbox at ' + email + ' to verify it');
 		    }
 		});
 	    }

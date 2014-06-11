@@ -1,24 +1,3 @@
 <head>
 	<title> Online Geometry Viewer </title>
 </head>
-<body>
-	{{> menu}}
-	<div class="page-container wrapper">
-		{{> alert}}
-		{{> renderPage}}
-	</div>
-</body>
-
-
-<template name = "main">
-	{{#unless resetPasswordToken}}
-		{{#unless currentUser}}
-				{{> logIn}}
-		{{else}}
-			{{> uploader}}
-		{{/unless}}
-	{{else}}
-		{{> resetPassword}}
-	{{/unless}}
-	
-</template>

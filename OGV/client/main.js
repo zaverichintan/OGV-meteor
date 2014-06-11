@@ -4,7 +4,7 @@
  * to see whether or not to show forgot password form
  */
   
-Template.main.helpers({
+Template.index.helpers({
     showForgotPassword:function()
     {
 	return Session.get('showForgotPassword');
@@ -32,7 +32,7 @@ if (Accounts._verifyEmailToken) {
     });
 }
 
-Template.main.helpers({
+Template.index.helpers({
     resetPasswordToken: function()
     {
 	return Session.get('resetPasswordToken');

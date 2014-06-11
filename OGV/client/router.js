@@ -1,4 +1,4 @@
-Meteor.Router.add({
+/*Meteor.Router.add({
     '/' : 'main',
     '/forgot-password' : 'forgotPassword',
     '/log-in' : 'logIn',
@@ -32,4 +32,4 @@ Meteor.Router.filters({
 });
 
 Meteor.Router.filter('loginFilter');
-Meteor.Router.filter('verifyFilter',{only:['uploader','filemanager','main']});
+Meteor.Router.filter('verifyFilter',{only:['uploader','filemanager']}); */

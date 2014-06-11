@@ -1,0 +1,12 @@
+<template name = "index">
+	{{#unless resetPasswordToken}}
+		{{#unless currentUser}}
+				{{> logIn}}
+		{{else}}
+			{{> logOut}}
+		{{/unless}}
+	{{else}}
+		{{> resetPassword}}
+	{{/unless}}
+	
+</template>

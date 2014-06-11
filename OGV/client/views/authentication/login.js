@@ -20,6 +20,7 @@ Template.logIn.events({
 		    console.log(err);
 		} else {
 		    Session.set('alert', 'Welcome back');
+		    Meteor.Router.to('/upload');
 		}
 	    });
 	}

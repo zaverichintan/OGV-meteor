@@ -1,6 +1,5 @@
 {
   "packages": {
-    "ogv-threejs": {},
-    "router": {}
+    "ogv-threejs": {}
   }
 }

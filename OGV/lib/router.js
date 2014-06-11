@@ -7,9 +7,21 @@ Router.map(function() {
     this.route('index', {path : '/'});
     this.route('signUp', {path : 'sign-up'});
     this.route('logIn', {path : 'log-in'});
-    this.route('upload', {path : 'uploader'});
+    this.route('uploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
     this.route('filemanager', {path : 'filemanager'});
 });
 
-Router.onBeforeAction('loading');
+var validateUser = function(pause) {
+    if (Meteor.user()) {
+	if (Meteor.user().emails[0].verified) {
+	    this.render();
+	} else {
+	    this.render('notVerified');
+        }
+    } 
+    pause();
+}
+
+Router.onBeforeAction(loading);
+Router.onBeforeAction(validateUser,{only:['uploader','filemanager']});

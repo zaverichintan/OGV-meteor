@@ -23,5 +23,11 @@ var validateUser = function(pause) {
     pause();
 }
 
-Router.onBeforeAction(loading);
+var loggingIn = function(pause) {
+	if (Meteor.loggingIn()) {
+	    this.render('preloader');
+	}
+}
+
+Router.onBeforeAction(loggingIn);
 Router.onBeforeAction(validateUser,{only:['uploader','filemanager']});

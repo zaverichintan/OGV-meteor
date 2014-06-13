@@ -4,9 +4,8 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-insecure
 accounts-password
 bootstrap
 email
-router
 ogv-threejs
+iron-router

@@ -10,6 +10,13 @@ Router.map(function() {
     this.route('uploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
     this.route('filemanager', {path : 'filemanager'});
+    this.route('modelViewer', {
+	path: '/models/:_id',
+	data: function() 
+	{ 
+	    return Models.findOne (this.params._id);
+	}
+    });
 });
 
 var validateUser = function(pause) {

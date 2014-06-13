@@ -132,11 +132,14 @@ input:focus {
 
 .meta-desc {
 	margin: 0px 10px 0px 10px;
+	height:50px;
 }
 
 .model-meta-name {
 	float:left;
 	width:100px;
+	color:#fff;
+	overflow:hidden;
 }
 .meta-love-icon {
 	display:inline-block;

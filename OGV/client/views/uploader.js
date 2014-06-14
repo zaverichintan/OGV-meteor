@@ -2,7 +2,8 @@
  * Checks if the file is text or binary and then encode it accordingly
  */
 Meteor.saveFile = function(blob,name,path, type)
-{ 
+{
+	console.log (path); 
     var fileReader = new FileReader(), 
 	method, encoding = 'binary', type = type || 'binary'; 
     switch (type) { 

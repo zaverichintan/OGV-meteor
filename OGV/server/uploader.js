@@ -7,11 +7,12 @@ Meteor.methods({
 	    name = cleanName(name || 'file'),
 	    ext = path.extname(name),
 	    encoding = encoding || 'binary',
-	    appRoot = process.env.PWD+'/private/',
+	    appRoot = process.env.PWD,
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
 	    uploadPath = appRoot + userId + '/';	
-
+		console.log(uploadPath);
+		console.log(appRoot);
 	if (ext == '.obj') {
 	    if (!fs.existsSync(uploadPath)) {
 		fs.mkdirSync(uploadPath);

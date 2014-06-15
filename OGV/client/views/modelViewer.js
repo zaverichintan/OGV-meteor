@@ -35,12 +35,20 @@ function init()
      * Light up the scene 
      */
     
-    var ambient = new THREE.AmbientLight( 0x101030 );
+    var ambient = new THREE.AmbientLight(0x555555);
     scene.add(ambient);
-    var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-    directionalLight.position.set( 0, 0, 1 );
-    scene.add( directionalLight );
+    var directionalLight = new THREE.PointLight(0xaaaaaa);
+    directionalLight.position = camera.position;
+    scene.add(directionalLight);
    
+    /** Axes */
+    var axes = new THREE.AxisHelper(10000);
+    scene.add(axes);
+
+    /** Grid */
+    var grid = new THREE.GridHelper(300, 10);
+    scene.add(grid); 	 
+
     /**
      * Loader Managerial tasks
      */
@@ -64,7 +72,7 @@ function init()
      */
 
     loader.load( '/' + modelName, function(object) {
-	var OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0xffffff});
+	var OBJMaterial = new THREE.MeshPhongMaterial({color: 0xeeeeee});
 	object.traverse(function(child) {
 	    if (child instanceof THREE.Mesh) {
 		child.material  = OBJMaterial;
@@ -79,7 +87,9 @@ function init()
      * Renders the model, using renderer and assigns size to it
      */
 
-    renderer = new THREE.WebGLRenderer();
+    renderer = window.WebGLRenderingContext ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x555555, 1); 
     container.appendChild(renderer.domElement);
 
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -96,19 +106,19 @@ function onWindowResize()
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function onDocumentMouseMove( event ) 
+function onDocumentMouseMove(event) 
 {
-    mouseX = ( event.clientX - windowHalfX ) / 2;
-    mouseY = ( event.clientY - windowHalfY ) / 2;
+    mouseX = (event.clientX - windowHalfX) / 2;
+    mouseY = (event.clientY - windowHalfY) / 2;
 }
 
 
 function animate() 
 {
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
     render();
 }
 

@@ -52,6 +52,24 @@ h2 {
 #header-logo:hover {
 	text-decoration:none;
 }
+.right-menu {
+	float:right;
+	line-height:40px;	
+}
+
+.rm-item:hover {
+	background: #e74c3c;
+}
+
+.rm-item {
+	display:inline-block;
+	width:50px;
+	height:40px;
+}
+
+.rm-item img {
+	padding-left:10px;
+}
 
 .ogv-status{
 	max-width: 400px;

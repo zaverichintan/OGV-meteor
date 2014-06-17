@@ -1,5 +1,4 @@
-
-/*                     L O G O U T . J S
+/*                     F I L E _ M A N A G E R . J S
  * BRL-CAD
  *
  * Copyright (c) 1995-2013 United States Government as represented by
@@ -19,19 +18,15 @@
  * information.
  */
 
-/** @file OGV/client/views/logout.js
- *  @brief deals with logout.html
+/** @file OGV/client/views/filemanager.js
+ *  @brief Helper for filemanager.html
  *
- *  Logs the user out
+ *  Searches for all the models that belong to the current user and 
+ *  returns them.
  */
-
-Template.logOut.events({
-    'click #log-out':function(e,t)
+Template.filemanager.helpers({
+    models: function() 
     {
-	Meteor.logout(function() {
-	     Session.set('alert','Bye!, See you back soon');
-	});
-	
-	return false;
+	return Models.find({'userId' : Meteor.userId()});
     }
 });

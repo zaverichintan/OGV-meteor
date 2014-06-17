@@ -1,3 +1,31 @@
+
+/*                     U P L O A D E R . J S
+ * BRL-CAD
+ *
+ * Copyright (c) 1995-2013 United States Government as represented by
+ * the U.S. Army Research Laboratory.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * version 2.1 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this file; see the file named COPYING for more
+ * information.
+ */
+
+/** @file OGV/client/views/uploader.js
+ *  @brief client side uploading mechanism
+ * 
+ * User file uploading is handled by calling a SaveFile method defined
+ * in server/uploader.js. 
+ */
+
 /**
  * Checks if the file is text or binary and then encode it accordingly
  */
@@ -22,13 +50,14 @@ Meteor.saveFile = function(blob,name,path, type)
 	    encoding = 'binary';
 	break;
     }
-
+    /**
+     * Call server method saveFile 
+     */
     fileReader.onload = function(file) {
 	Meteor.call('saveFile', file.srcElement.result, name, path, encoding, function(err) { 
 	    if (err) {
 		Session.set('alert','Sorry,' + err);
-	    }
-	    else {
+	    } else {
 		Session.set('alert','Yay! file uploaded');
 	    }
 	});
@@ -39,7 +68,7 @@ Meteor.saveFile = function(blob,name,path, type)
 
 /**
  * Whenever the input changes, save the file by calling saveFile function 
- * from uploader.js from server
+ * which is defined in server/uploader.js from server
  */
 
 Template.uploader.events({ 

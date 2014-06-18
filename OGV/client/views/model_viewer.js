@@ -20,16 +20,13 @@
  */
 
 /** @file OGV/client/views/model_viewer.js
- * Renders model into model_viewer.html
+ * Renders model into modelViewer.html
  * Loads the model after the template has been rendered
  */
 
 Template.modelViewer.rendered = function() 
 {
     console.log("rendered");
-    mouseX = 0, mouseY = 0;
-    windowHalfX = window.innerWidth / 2;
-    windowHalfY = window.innerHeight / 2;
     model = this.data;
     modelName = model.name;    
 
@@ -49,33 +46,35 @@ function init()
      * named container, and sets up the scene 
      */
     container = document.getElementById('model-container');
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-    camera.position.z = 100;
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 500;
+ 
+
     scene = new THREE.Scene();
     
     /**
      * Light up the scene 
      */
     
-    var ambient = new THREE.AmbientLight(0x555555);
+    ambient = new THREE.AmbientLight(0x555555);
     scene.add(ambient);
-    var directionalLight = new THREE.PointLight(0xaaaaaa);
+    directionalLight = new THREE.PointLight(0xaaaaaa);
     directionalLight.position = camera.position;
     scene.add(directionalLight);
    
     /** Axes */
-    var axes = new THREE.AxisHelper(10000);
+    axes = new THREE.AxisHelper(10000);
     scene.add(axes);
 
     /** Grid */
-    var grid = new THREE.GridHelper(300, 10);
+    grid = new THREE.GridHelper(300, 10);
     scene.add(grid); 	 
 
     /**
      * Loader Managerial tasks
      */
 
-    var manager = new THREE.LoadingManager();
+    manager = new THREE.LoadingManager();
     manager.onProgress = function(item, loaded, total) 
     {
 	console.log(item, loaded, total);
@@ -86,7 +85,7 @@ function init()
      * using OBJ-Loader
      */
 
-    var loader = new THREE.OBJLoader(manager);
+    loader = new THREE.OBJLoader(manager);
 
     /**
      * Adds material to the model, which hence controls 
@@ -114,8 +113,14 @@ function init()
     renderer.setClearColor(0x555555, 1); 
     container.appendChild(renderer.domElement);
 
-
-    window.addEventListener( 'resize', onWindowResize, false );
+    
+    /**
+     * orbitControls for zoom in/ zoom out and other basic controls
+     */
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.addEventListener( 'change', animate );    
+	 
+    window.addEventListener( 'resize', onWindowResize, false );1
 
 }
 
@@ -124,29 +129,24 @@ function init()
  */
 function onWindowResize() 
 {
-    windowHalfX = window.innerWidth / 2;
-    windowHalfY = window.innerHeight / 2;
 
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-}
 
-
-function animate() 
-{
-    requestAnimationFrame(animate);
     render();
 }
 
 function render() 
 {
-    camera.position.x += (mouseX - camera.position.x) * .05;
-    camera.position.y += (-mouseY - camera.position.y) * .05;
-
-    camera.lookAt(scene.position);
-
     renderer.render(scene, camera);
+}
+
+function animate() 
+{
+    requestAnimationFrame( animate );
+    render();
+
 }
 

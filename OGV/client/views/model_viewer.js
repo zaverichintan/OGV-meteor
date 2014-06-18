@@ -105,10 +105,17 @@ function init()
     });
 
     /**
-     * Renders the model, using renderer and assigns size to it
+     * If webgl is there then use it otherwise use canvas
      */
+    if (Detector.webgl) {
+	renderer = new THREE.WebGLRenderer({antialias:true});
+    } else {
+	renderer = new THREE.CanvasRenderer(); 
+    }
 
-    renderer = window.WebGLRenderingContext ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer();
+    /**
+     * Sets size and color to renderer
+     */
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x555555, 1); 
     container.appendChild(renderer.domElement);
@@ -117,10 +124,10 @@ function init()
     /**
      * orbitControls for zoom in/ zoom out and other basic controls
      */
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
-    controls.addEventListener( 'change', animate );    
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.addEventListener('change', render);    
 	 
-    window.addEventListener( 'resize', onWindowResize, false );1
+    window.addEventListener('resize', onWindowResize, false);
 
 }
 
@@ -149,4 +156,3 @@ function animate()
     render();
 
 }
-

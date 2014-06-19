@@ -24,6 +24,10 @@ h2 {
 	margin:auto;
 }
 
+#main {
+	padding-top:50px;
+}
+
 .wrapper {
 	margin-top:20px;
 }

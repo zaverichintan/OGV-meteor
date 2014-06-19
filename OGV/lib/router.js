@@ -26,6 +26,8 @@ var validateUser = function(pause) {
 	} else {
 	    this.render('notVerified');
         }
+    } else {
+	this.render('logIn');
     } 
     pause();
 }

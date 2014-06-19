@@ -3,16 +3,24 @@ Meteor.methods({
     {
 	var uploadPath = cleanPath(uploadPath),
 	    fs = Npm.require('fs'),
+	    sys = Npm.require('sys'),
+	    exec = Npm.require('child_process').exec,
 	    path = Npm.require('path'),
 	    name = cleanName(name || 'file'),
 	    ext = path.extname(name),
 	    encoding = encoding || 'binary',
-	    appRoot = process.env.PWD,
+	    appRoot = process.env.PWD + '/public/models/',
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
-	    uploadPath = appRoot + userId + '/';	
-		console.log(uploadPath);
-		console.log(appRoot);
+	
+	var child = exec("pwd", function (error, stdout, stderr) {
+	    sys.print('stdout' + stdout);
+	    sys.print('stderr' + stderr);
+	if (error != null) {
+	    console.log('exec error: ' + error);
+	}
+	});	
+	uploadPath = appRoot + userId + '/';	
 	if (ext == '.obj') {
 	    if (!fs.existsSync(uploadPath)) {
 		fs.mkdirSync(uploadPath);
@@ -32,6 +40,7 @@ Meteor.methods({
 	    var model = {
 	    	name: name,
 	    	userId: userId,
+		path: uploadPath + name,
 	  	lovemeter: 13
 	    }
 	    model._id = Models.insert(model);

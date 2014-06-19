@@ -18,7 +18,7 @@
  * information.
  */
 
-/** @file OGV/client/views/filemanager.js
+/** @file OGV/client/views/file_manager.js
  *  @brief Helper for filemanager.html
  *
  *  Searches for all the models that belong to the current user and 

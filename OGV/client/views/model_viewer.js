@@ -28,8 +28,7 @@ Template.modelViewer.rendered = function()
 {
     console.log("rendered");
     model = this.data;
-    modelName = model.name;    
-
+    modelPath ="/models/"+ model.userId + "/" + model.name;
     init();
     animate();
 }
@@ -92,7 +91,7 @@ function init()
      * how the model shall look 
      */
 
-    loader.load( '/' + modelName, function(object) {
+    loader.load( modelPath, function(object) {
 	var OBJMaterial = new THREE.MeshPhongMaterial({color: 0xeeeeee});
 	object.traverse(function(child) {
 	    if (child instanceof THREE.Mesh) {

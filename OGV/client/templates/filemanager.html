@@ -14,8 +14,14 @@
 		<a class = "model-meta-name meta-desc" href="/models/{{_id}}"> {{name}}  </a>
 		<span class = "model-meta-love meta-desc">
 			<span class = "meta-love-icon meta-icon"> </span>
-			 {{lovemeter}} 
+			 {{> love}} 
 		</span>
 	</div>
      </div>
+</template>
+
+<template name ="love">
+	<span class ="lovemeter" id ="lovemeter-{{id}}">
+		{{lovemeter}}
+	</span>
 </template>

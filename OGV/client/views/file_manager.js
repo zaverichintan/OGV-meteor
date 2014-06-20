@@ -30,3 +30,11 @@ Template.filemanager.helpers({
 	return Models.find({'userId' : Meteor.userId()});
     }
 });
+
+Template.love.events({
+    'click .lovemeter':function(e,t)
+    {
+	Meteor.call('addLove', this , function(err) {
+	    }); 
+    }
+}); 	

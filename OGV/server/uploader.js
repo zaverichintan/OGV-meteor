@@ -12,15 +12,8 @@ Meteor.methods({
 	    appRoot = process.env.PWD + '/public/models/',
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
-	
-	var child = exec("pwd", function (error, stdout, stderr) {
-	    sys.print('stdout' + stdout);
-	    sys.print('stderr' + stderr);
-	if (error != null) {
-	    console.log('exec error: ' + error);
-	}
-	});	
-	uploadPath = appRoot + userId + '/';	
+
+	uploadPath = appRoot + userId + '/' + name + '/';	
 	if (ext == '.obj') {
 	    if (!fs.existsSync(uploadPath)) {
 		fs.mkdirSync(uploadPath);
@@ -44,6 +37,17 @@ Meteor.methods({
 	  	lovemeter: 13
 	    }
 	    model._id = Models.insert(model);
+	}
+	
+	function gToObj()
+	{
+	    var child = exec("which ", function (error, stdout, stderr) {
+		sys.print('stdout' + stdout);
+		sys.print('stderr' + stderr);
+		if (error != null) {
+		    console.log('exec error: ' + error);
+	        }
+	    });
 	}
 
 	function cleanPath(str) 

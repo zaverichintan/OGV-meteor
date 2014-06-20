@@ -28,7 +28,7 @@ Template.modelViewer.rendered = function()
 {
     console.log("rendered");
     model = this.data;
-    modelPath ="/models/"+ model.userId + "/" + model.name;
+    modelPath ="/models/"+ model.userId + "/" + model.name + "/" + model.name;
     init();
     animate();
 }

@@ -73,11 +73,11 @@ if (Accounts._verifyEmailToken) {
 /**
  * Subscribe to collection models
  *
- * Subscribes to collection named models, so that it can show it
- * in file manager and at other places. 
+ * Subscribes to collection named models and lovemeter so that it can show
+ `* models with how much of love it has got in file manager and at other places. 
  */
 Meteor.subscribe('models');
-
+Meteor.subscribe('lovemeter');
 /*                                                                    
  * Local Variables:                                                   
  * mode: javascript                                                            

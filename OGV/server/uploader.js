@@ -13,7 +13,9 @@ Meteor.methods({
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
 
-	uploadPath = appRoot + userId + '/' + name + '/';	
+	gToObj();
+	uploadPath = appRoot + userId + '/' + name + '/';
+	console.log(uploadPath);	
 	if (ext == '.obj') {
 	    if (!fs.existsSync(uploadPath)) {
 		fs.mkdirSync(uploadPath);
@@ -34,14 +36,15 @@ Meteor.methods({
 	    	name: name,
 	    	userId: userId,
 		path: uploadPath + name,
-	  	lovemeter: 13
+	  	lovemeter: 0,
+		lovers: []
 	    }
 	    model._id = Models.insert(model);
 	}
 	
 	function gToObj()
 	{
-	    var child = exec("which ", function (error, stdout, stderr) {
+	    var child = exec("which g-obj", function (error, stdout, stderr) {
 		sys.print('stdout' + stdout);
 		sys.print('stderr' + stderr);
 		if (error != null) {

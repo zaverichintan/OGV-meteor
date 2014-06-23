@@ -1,8 +1,7 @@
 Meteor.methods({
     saveFile: function(blob, name, uploadPath, encoding) 
     {
-	var uploadPath = cleanPath(uploadPath),
-	    fs = Npm.require('fs'),
+	var fs = Npm.require('fs'),
 	    sys = Npm.require('sys'),
 	    exec = Npm.require('child_process').exec,
 	    path = Npm.require('path'),
@@ -13,12 +12,17 @@ Meteor.methods({
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
 
-	uploadDirPath = appRoot + userId + '/' + name + '/';
+	userDirPath = appRoot + userId + '/';
+	uploadDirPath = userDirPath + name + '/';
 	uploadFilePath = uploadDirPath + name;
 	console.log(uploadDirPath);	
 	if (ext == '.obj') {
 	    if (!fs.existsSync(uploadDirPath)) {
+		if (!fs.existsSync(userDirPath)) {
+		    fs.mkdirSync(userDirPath);
+		}
 		fs.mkdirSync(uploadDirPath);
+		console.log("directory created");
 		fs.writeFileSync(uploadFilePath, blob, encoding);
 		fileUploaded = true;
 	    } else if (fs.existsSync(uploadFilePath)) {
@@ -81,4 +85,4 @@ Meteor.methods({
 	}	
     }
 });
-    `
+    

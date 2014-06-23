@@ -15,16 +15,16 @@ Meteor.methods({
 
 	uploadDirPath = appRoot + userId + '/' + name + '/';
 	uploadFilePath = uploadDirPath + name;
-	console.log(uploadPath);	
+	console.log(uploadDirPath);	
 	if (ext == '.obj') {
-	    if (!fs.existsSync(uploadPath)) {
-		fs.mkdirSync(uploadPath);
-		fs.writeFileSync(uploadPath + name, blob, encoding);
+	    if (!fs.existsSync(uploadDirPath)) {
+		fs.mkdirSync(uploadDirPath);
+		fs.writeFileSync(uploadFilePath, blob, encoding);
 		fileUploaded = true;
-	    } else if (fs.existsSync(uploadPath + name)) {
+	    } else if (fs.existsSync(uploadFilePath)) {
 	    	throw (new Meteor.Error(409, 'File Already Exists'));
 	    } else {
-		fs.writeFileSync(uploadPath + name, blob, encoding);
+		fs.writeFileSync(uploadFilePath, blob, encoding);
 		fileUploaded = true;
 	    }	
          } else {
@@ -81,4 +81,4 @@ Meteor.methods({
 	}	
     }
 });
-    
+    `

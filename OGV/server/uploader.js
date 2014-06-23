@@ -13,7 +13,6 @@ Meteor.methods({
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
 
-	gToObj();
 	uploadDirPath = appRoot + userId + '/' + name + '/';
 	uploadFilePath = uploadDirPath + name;
 	console.log(uploadPath);	
@@ -48,7 +47,7 @@ Meteor.methods({
 	    var objects;
 	    var mgedPath = '/usr/brlcad/dev-7.25.0/bin/mged';
 	    var g_objPath = '/usr/brlcad/dev-7.25.0/bin/g-obj';
-	    var cmd = mgedPath + " -c  " + $uploadFilePath +" ls -a 2>&1";
+	    var cmd = mgedPath + " -c  " + uploadFilePath +" ls -a 2>&1";
 	    
 	    child = exec(cmd, function (error, stdout, stderr) {
 		sys.print('stdout' + stdout);

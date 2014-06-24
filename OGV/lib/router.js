@@ -9,6 +9,7 @@ Router.map(function() {
     this.route('logIn', {path : 'log-in'});
     this.route('uploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
+    this.route('forgotPassword', {path : 'forgot-password'});
     this.route('filemanager', {path : 'filemanager'});
     this.route('modelViewer', {
 	path: '/models/:_id',
@@ -26,9 +27,12 @@ var validateUser = function(pause) {
 	} else {
 	    this.render('notVerified');
         }
-    } else {
-	this.render('logIn');
+    } else if (Meteor.loggingIn()) {
+	this.render('preloader');
     } 
+    else {
+	this.render('logIn');
+	}
     pause();
 }
 

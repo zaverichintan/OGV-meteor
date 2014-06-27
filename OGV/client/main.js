@@ -77,7 +77,7 @@ if (Accounts._verifyEmailToken) {
  `* models with how much of love it has got in file manager and at other places. 
  */
 Meteor.subscribe('models');
-Meteor.subscribe('lovemeter');
+Meteor.subscribe('modelFiles');
 /*                                                                    
  * Local Variables:                                                   
  * mode: javascript                                                            

@@ -28,7 +28,9 @@ Template.modelViewer.rendered = function()
 {
     console.log("rendered");
     model = this.data;
-    modelPath ="/models/"+ model.userId + "/" + model.name + "/" + model.name;
+    console.log(model);
+    modelPath ="/cfs/files/modelFiles/"+ model._id + "/" + model.name();
+    console.log(modelPath);
     init();
     animate();
 }

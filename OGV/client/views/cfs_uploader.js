@@ -1,18 +1,24 @@
 Template.cfsUploader.events({
     'change #fileInput':function(event,temp)
     {
+	console.log(event);
 	FS.Utility.eachFile(event, function(file)
 	{
+	    var fileId;
 	    var fsFile = new FS.File(file);
-	    console.log(fsFile.name());
-	    console.log(fsFile.extension());
-	    Meteor.call('insertFile', fsFile, function(err) {
+	    fsFile.owner = Meteor.userId();
+	    fsFile.converted = false;
+	    
+	    ModelFiles.insert(fsFile,function(err,fileObj) {
 		if (err) {
-		    Session.set('alert',err.message);
+		    Session.set('alert', err.reason);
 		} else {
-		    Session.set('alert', 'Yay! File Uploaded');
-		} 
+		    Session.set('alert', "File Uploaded" );   
+		}
 	    });
+
+	    console.log(fileId);
+
 	});
     }
 });	

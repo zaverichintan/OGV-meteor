@@ -1,31 +1,95 @@
-Meteor.methods({
-    insertFile:function(file)
+/*                C F S _ U P L O A D E R . J S
+ * BRL-CAD
+ *
+ * Copyright (c) 1995-2013 United States Government as represented by
+ * the U.S. Army Research Laboratory.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * version 2.1 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this file; see the file named COPYING for more
+ * information.
+ */
+
+/** @file OGV/server/cfs_uploader.js
+ *  @brief uploads files to server
+ *
+ *  it uploads .g files to server and then converts them to .obj files
+ */
+
+
+ModelFiles.allow({
+    insert: function(userId, file) 
     {
-	console.log("file being inserted");
-	file.owner = Meteor.userId();
-	console.log(file.owner);
-	var ext = file.extension();
-	var existingFile = ModelFiles.findOne({'original.name':file.name()});
-	/** Check if file already exists */
-	if (existingFile) {
-	    throw (new Meteor.Error(409, 'File Already Exists'));
-	
-	/** Don't allow any file other than obj */
-	} else if (ext != 'obj'){
-	    throw (new Meteor.Error(503, 'File type not supported'));
-	
-	/** 
-	 * If file extension is fine and file doesn't already
-	 * exists then insert the model file into collection
-	 */
+	if ((file.extension() == 'g') || (file.extension() == 'obj')) {	
+	    return true;
 	} else {
-	    ModelFiles.insert(file, function(err,fileObj) {
-		if (err) {
-	            console.log(err);
-		    throw (new Meteor.Error(503, err.message));
-		}
+	    return false;
+	}
+    },
+    update: function(userId,file) 
+    {
+	return !! userId;
+    },
+    download: function(userId, file) 
+    {
+    	return true;
+    }	
+});
+
+Meteor.methods({
+    convertFile:function(fileId)
+    {
+	var sys = Npm.require('sys'),
+	    exec = Npm.require('child_process').exec;
+
+	findModel(convertModel);
+
+	function findModel(callback) 
+	{
+	    console.log("here" +"file id is" + fileId);
+	    ModelFiles.find(fileId).forEach(function (modelObj) {
+		var readStream = modelObj.createReadStream('modelFiles');
+		var filePath = readStream.path;
+	        callback(modelObj, filePath);
 	    });
 	}
 
+	function convertModel(model,filePath)
+	{
+	   console.log(model);
+	   console.log(filePath);
+           
+	    var objects;
+	    var mgedPath = '/usr/brlcad/dev-7.25.0/bin/mged';
+	    var g_objPath = '/usr/brlcad/dev-7.25.0/bin/g-obj';
+	    var cmd = mgedPath + " -c  " + filePath +" ls -a 2>&1";
+	    var uploadDirPath = filePath.substring(0, filePath.lastIndexOf("/")); 
+	    console.log (uploadDirPath); 
+	    child = exec(cmd, function (error, stdout, stderr) {
+		sys.print('stdout' + stdout);
+		objects = stdout.split(" ");
+		console.log(objects);
+		sys.print('stderr' + stderr);
+	   
+		if (error != null) {
+		    console.log('exec error: ' + error);
+	    	}
+		for (i in objects) {
+		    cmd = g_objPath + " -n 10 -o " + uploadDirPath +"/" + objects[i] + ".obj " + filePath  + " " +  objects[i];
+	            console.log(cmd); 
+	            child = exec(cmd, function (error, stdout, stderr) {
+			sys.print(stdout);
+	   	    });
+		}
+	    });
+	}
     }
 });

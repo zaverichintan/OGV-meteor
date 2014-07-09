@@ -30,9 +30,19 @@ Template.modelViewer.rendered = function()
     model = this.data;
     console.log(model);
     modelPath ="/cfs/files/modelFiles/"+ model._id + "/" + model.name();
-    console.log(modelPath);
+    fileId = model._id; 
+    Meteor.call('convertFile', fileId, function(err) {
+	if (err) {
+	    console.log("convertFileError");
+	    console.log(err);
+	} else {
+	    console.log("inserted");
+	    
     init();
     animate();
+	}
+    }); 
+    console.log(modelPath);
 }
 
 /**

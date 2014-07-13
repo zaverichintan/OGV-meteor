@@ -40,6 +40,10 @@ var loggingIn = function(pause) {
 	if (Meteor.loggingIn()) {
 	    this.render('preloader');
 	}
+	else {
+	    this.render();
+	}
+	pause();
 }
 
 Router.onBeforeAction(loggingIn);

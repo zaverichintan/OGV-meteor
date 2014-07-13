@@ -5,6 +5,7 @@ Template.cfsUploader.events({
 	FS.Utility.eachFile(event, function(file)
 	{
 	    var fileId;
+	    console.log(file);
 	    var fsFile = new FS.File(file);
 	    fsFile.owner = Meteor.userId();
 	    fsFile.converted = false;

@@ -5,3 +5,7 @@ Meteor.publish('models', function() {
 Meteor.publish('modelFiles', function() {
     return ModelFiles.find();
 });
+
+Meteor.publish('objFiles', function() {
+    return OBJFiles.find();
+});

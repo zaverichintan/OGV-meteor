@@ -78,6 +78,7 @@ if (Accounts._verifyEmailToken) {
  */
 Meteor.subscribe('models');
 Meteor.subscribe('modelFiles');
+Meteor.subscribe('objFiles');
 /*                                                                    
  * Local Variables:                                                   
  * mode: javascript                                                            

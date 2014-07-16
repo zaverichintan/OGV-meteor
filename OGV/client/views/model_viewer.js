@@ -29,11 +29,26 @@ Template.modelViewer.rendered = function()
     console.log("rendered");
     model = this.data;
     console.log(model);
-    modelPath ="/cfs/files/modelFiles/"+ model._id + "/" + model.name();
-	    
+    objList = getObjFiles(model);	
+    console.log(objList);    
     init();
     animate();
-    console.log(modelPath);
+}
+
+/**
+ * Get OBJ files for the current .g database
+ */
+
+function getObjFiles(model) 
+{
+    var objUrls = [];
+    console.log("getting objs");
+    modelId = model._id;
+    OBJFiles.find({ gFile : modelId }).forEach( function (objFile) {
+	objUrls.push(objFile.url());
+    });
+    console.log(objUrls);
+    return objUrls;
 }
 
 /**
@@ -48,7 +63,7 @@ function init()
      * named container, and sets up the scene 
      */
     container = document.getElementById('model-container');
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 100000);
     camera.position.z = 500;
  
 
@@ -69,7 +84,7 @@ function init()
     scene.add(axes);
 
     /** Grid */
-    grid = new THREE.GridHelper(300, 10);
+    grid = new THREE.GridHelper(3000, 100);
     scene.add(grid); 	 
 
     /**
@@ -93,18 +108,18 @@ function init()
      * Adds material to the model, which hence controls 
      * how the model shall look 
      */
-
-    loader.load( modelPath, function(object) {
-	var OBJMaterial = new THREE.MeshPhongMaterial({color: 0xeeeeee});
-	object.traverse(function(child) {
-	    if (child instanceof THREE.Mesh) {
-		child.material  = OBJMaterial;
-	   }
+    for (i in objList) {
+	loader.load( objList[i], function(object) {
+	    var OBJMaterial = new THREE.MeshPhongMaterial({color: 0xeeeeee});
+	    object.traverse(function(child) {
+		if (child instanceof THREE.Mesh) {
+		    child.material  = OBJMaterial;
+		}
+	    });
+	    object.position.y = 0.1;
+	    scene.add(object);
 	});
-
-	object.position.y = - 80;
-	scene.add(object);
-    });
+    }
 
     /**
      * If webgl is there then use it otherwise use canvas

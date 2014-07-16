@@ -25,11 +25,6 @@
  */
 
 
-ModelFiles.on("stored", onStored);
-
-function onStored() {
-	console.log("on stored");
-}
 
 ModelFiles.allow({
     insert: function(userId, file) 
@@ -73,18 +68,19 @@ Meteor.methods({
 	    fs = Npm.require('fs'),
 	    exec = Npm.require('child_process').exec;
 
-            var modelObj = ModelFiles.findOne(fileId);
-	    var readStream = modelObj.createReadStream('modelFiles');
-            var filePath = readStream.path;
+	var modelObj = ModelFiles.findOne(fileId);
+	var readStream = modelObj.createReadStream('modelFiles');
+	var filePath = readStream.path;
            
-	    var objects;
-	    var mgedPath = '/usr/brlcad/dev-7.25.0/bin/mged';
-	    var g_objPath = '/usr/brlcad/dev-7.25.0/bin/g-obj';
-	    var cmd = mgedPath + " -c  " + filePath +" ls -a 2>&1";
-	    console.log (cmd);
-	    var uploadDirPath = filePath.substring(0, filePath.lastIndexOf("/")); 
-	    console.log (uploadDirPath); 
-	    child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
+	var objects;
+	var objPath = [];
+	var mgedPath = '/usr/brlcad/dev-7.25.0/bin/mged';
+	var g_objPath = '/usr/brlcad/dev-7.25.0/bin/g-obj';
+	var cmd = mgedPath + " -c  " + filePath +" ls -a 2>&1";
+	console.log (cmd);
+	var uploadDirPath = filePath.substring(0, filePath.lastIndexOf("/")); 
+	
+	child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
 		sys.print('stdout' + stdout);
 		objects = stdout.split(" ");
 		console.log(objects);
@@ -94,25 +90,26 @@ Meteor.methods({
 		    console.log('exec error: ' + error);
 	    	} else {
 		    for (i in objects) {
-		        var objPath = uploadDirPath + "/" + objects[i] + ".obj";
-		        cmd = g_objPath + " -n 10 -o " + objPath + " " + filePath  + " " +  objects[i];
-	                console.log(cmd);
-	                child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
-			    if (error) {
-			        console.log("There's some error in converting file" + error);
-			    } else {
-			        console.log("File has been converted");
-			    }
-	   	        }));
-			console.log(objPath);	
-			objFS = new FS.File(objPath);
-			console.log(objFS);
-		        OBJFiles.insert(objFS, function (err, objFile) {
-			    if (err) { console.log(err); }
-			    else { console.log (objFile); }
-			});	
+			(function(i) {
+			    objPath[i] = uploadDirPath + "/" + objects[i] + ".obj";
+		            cmd = g_objPath + " -n 10 -o " + objPath[i] + " " + filePath  + " " +  objects[i];
+	                    child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
+				if (error) {
+				    console.log("There's some error in converting file" + error);
+			        } else {
+				    console.log("File has been converted" + objects[i] + i);
+				    objFS = new FS.File(objPath[i]);
+				    objFS.gFile = fileId;				
+				    OBJFiles.insert(objFS, function (err, objFile) {
+			    	        if (err) { 
+					    console.log(err); 
+				        }
+				    });	
+			        }    
+	   	            }));
+		        })(i);
 		    }
-	    }
+	    }       
 	}));
     }
 });		

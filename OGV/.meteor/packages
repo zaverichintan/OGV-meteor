@@ -9,3 +9,5 @@ bootstrap
 email
 ogv-threejs
 iron-router
+collectionFS
+cfs-filesystem

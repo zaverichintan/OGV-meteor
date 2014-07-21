@@ -1,6 +1,16 @@
 Template.cfsUploader.events({
-    'change #fileInput':function(event,temp)
-    {
+        'dropped #dropzone': function(event, temp) 
+        {
+	    uploadFile(event, temp);
+        },
+
+        'change #fileInput': function(event, temp)
+	{
+	    uploadFile(event, temp);
+	}
+});
+
+function uploadFile(event, temp){
 	console.log(event);
 	FS.Utility.eachFile(event, function(file)
 	{
@@ -21,5 +31,4 @@ Template.cfsUploader.events({
 	    console.log(fileId);
 
 	});
-    }
-});	
+}

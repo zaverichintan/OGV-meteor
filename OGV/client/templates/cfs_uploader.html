@@ -1,5 +1,11 @@
 <template name="cfsUploader">
-	<h2> Upload </h2>
+	<h2> Upload File </h2>
+
 	<input type="file" class="form-control" id="fileInput" accept=".g"/>
-	{{> filemanager }}
+
+
+	<div id="dropzone" class="dropzone">
+           <div class="dropzone-text">Drag and Drop your model here to upload</div>
+        </div>
+      {{> filemanager }}	
 </template>

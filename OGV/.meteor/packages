@@ -9,3 +9,8 @@ bootstrap
 email
 ogv-threejs
 iron-router
+collectionFS
+cfs-filesystem
+Dropzonejs
+ui-dropped-event
+cfs-ui

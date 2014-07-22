@@ -2,7 +2,9 @@
     <div class="modelsList container-fluid">
 	<div class = "models row">
 	{{#each models}}
+		{{#if converted }}
 		{{> aboutModel}}
+		{{/if}}
 	{{/each}}
 	</div>
     </div>
@@ -11,7 +13,7 @@
 <template name ="aboutModel">
      <div class="model-file .col-xs-3">
 	<div class = "model-meta">
-		<a class = "model-meta-name meta-desc" href="/models/{{_id}}"> {{name}}  </a>
+		<a class = "model-meta-name meta-desc" href="/models/{{_id}}"> {{ name }}  </a>
 		<span class = "model-meta-love meta-desc">
 			<span class = "meta-love-icon meta-icon"> </span>
 			 {{> love}} 
@@ -21,7 +23,7 @@
 </template>
 
 <template name ="love">
-	<span class ="lovemeter" id ="lovemeter-{{id}}">
-		{{lovemeter}}
+	<span class ="lovemeter" id ="lovemeter-{{_id}}">
+		13
 	</span>
 </template>

@@ -12,6 +12,7 @@ Template.cfsUploader.events({
 
 function uploadFile(event, temp){
 	console.log(event);
+	Session.set("alert","");
 	FS.Utility.eachFile(event, function(file)
 	{
 	    var fileId;
@@ -24,11 +25,9 @@ function uploadFile(event, temp){
 		if (err) {
 		    Session.set('alert', err.reason);
 		} else {
-		    Session.set('alert', "File Uploaded" );   
+		    Session.set('alert', "File Uploaded, and will appear in file manager after it's converted" );   
 		}
 	    });
-
-	    console.log(fileId);
 
 	});
 }

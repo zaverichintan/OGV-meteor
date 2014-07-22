@@ -41,6 +41,7 @@ var loggingIn = function(pause) {
 	    this.render('preloader');
 	}
 	else {
+	    Session.set("alert","");
 	    this.render();
 	}
 	pause();

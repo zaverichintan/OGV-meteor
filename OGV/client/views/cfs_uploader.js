@@ -1,3 +1,5 @@
+var fsFile;
+
 Template.cfsUploader.events({
         'dropped #dropzone': function(event, temp) 
         {
@@ -9,7 +11,6 @@ Template.cfsUploader.events({
 	    uploadFile(event, temp);
 	}
 });
-
 function uploadFile(event, temp){
 	console.log(event);
 	Session.set("alert","");
@@ -17,15 +18,17 @@ function uploadFile(event, temp){
 	{
 	    var fileId;
 	    console.log(file);
-	    var fsFile = new FS.File(file);
+	    fsFile = new FS.File(file);
 	    fsFile.owner = Meteor.userId();
 	    fsFile.converted = false;
-	    
+	     
+	
 	    ModelFiles.insert(fsFile,function(err,fileObj) {
 		if (err) {
 		    Session.set('alert', err.reason);
 		} else {
-		    Session.set('alert', "File Uploaded, and will appear in file manager after it's converted" );   
+		    Session.set('alert', "File Uploaded, and will appear in file manager after it's converted" ); 
+		    
 		}
 	    });
 

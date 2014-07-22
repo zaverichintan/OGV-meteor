@@ -89,10 +89,12 @@ Meteor.methods({
 		if (error != null) {
 		    console.log('exec error: ' + error);
 	    	} else {
-		    for (i in objects) {
+		    for (i = 1; i < objects.length; i++) {
+			var counter = 0;
 			(function(i) {
 			    objPath[i] = uploadDirPath + "/" + objects[i] + ".obj";
 		            cmd = g_objPath + " -n 10 -o " + objPath[i] + " " + filePath  + " " +  objects[i];
+			    console.log(cmd);
 	                    child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
 				if (error) {
 				    console.log("There's some error in converting file" + error);
@@ -103,11 +105,20 @@ Meteor.methods({
 				    OBJFiles.insert(objFS, function (err, objFile) {
 			    	        if (err) { 
 					    console.log(err); 
-				        }
+				        } else {
+					     counter = counter + 1;
+					     var convertPercentage =  (counter/(objects.length - 2)) *100; 
+					     console.log("done " + convertPercentage + " %");
+					     if (convertPercentage == 100) { 
+						modelObj.update({$set: {converted: true}});
+						console.log(modelObj);
+					    }
+					}
 				    });	
 			        }    
 	   	            }));
 		        })(i);
+			
 		    }
 	    }       
 	}));

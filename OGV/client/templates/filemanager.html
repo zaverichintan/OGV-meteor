@@ -2,7 +2,9 @@
     <div class="modelsList container-fluid">
 	<div class = "models row">
 	{{#each models}}
+		{{#if converted }}
 		{{> aboutModel}}
+		{{/if}}
 	{{/each}}
 	</div>
     </div>

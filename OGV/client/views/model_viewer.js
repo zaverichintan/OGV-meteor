@@ -30,7 +30,8 @@ Template.modelViewer.rendered = function()
     model = this.data;
     console.log(model);
     objList = getObjFiles(model);	
-    console.log(objList);    
+    console.log(objList);
+     
     init();
     animate();
 }

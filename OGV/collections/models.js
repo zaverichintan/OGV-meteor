@@ -8,8 +8,9 @@ gStore = new FS.Store.FileSystem("modelFiles", {
 		console.log("convertFileError");
 		console.log(err);
  	    } else {
-		console.log("inserted");
+		Session.set("alert","File has been converted");
 	    }
+
         });
  	readStream.pipe(writeStream);
     } 

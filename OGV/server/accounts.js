@@ -26,13 +26,36 @@
  *  one can upload their models, and use OGV.
  */
 
-/** 
- * index.html helper
- *
- * Helper function for the template index.html that returns the
- * session variable resetPasswordToken which is set in function
- * @return reset password token
- */
 Accounts.config({
   sendVerificationEmail: true
 });
+
+/**
+ * Create a test user without admin roles and a super user with 
+ * admin roles on a fresh install (when number of users is zero)
+ */
+
+if (Meteor.users.find().fetch().length === 0) {
+    var users = [
+	{name:"Test User",email:"normal@example.com",roles:[]},
+	{name:"Super User",email:"admin@example.com",roles:['admin']}
+    ];
+
+    _.each(users, function (userData) {
+	var id,
+	    user; 
+
+	id = Accounts.createUser({
+	    email: userData.email,
+            password: "ogv123",
+            profile: { name: userData.name }
+	});
+
+	// email verification
+	Meteor.users.update({_id: id}, {$set:{'emails.0.verified': true}});
+
+	Roles.addUsersToRoles(id, userData.roles);
+    
+    });
+}
+

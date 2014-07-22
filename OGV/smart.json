@@ -4,6 +4,8 @@
     "iron-router": {},
     "collectionFS": {},
     "Dropzonejs": {},
-    "ui-dropped-event": {}
+    "ui-dropped-event": {},
+    "cfs-ui": {},
+    "roles": {}
   }
 }

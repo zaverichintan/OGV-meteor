@@ -7,14 +7,15 @@ Router.map(function() {
     this.route('index', {path : '/'});
     this.route('signUp', {path : 'sign-up'});
     this.route('logIn', {path : 'log-in'});
-    this.route('uploader', {path : 'upload'});
+    this.route('cfsUploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
+    this.route('forgotPassword', {path : 'forgot-password'});
     this.route('filemanager', {path : 'filemanager'});
     this.route('modelViewer', {
 	path: '/models/:_id',
 	data: function() 
 	{ 
-	    return Models.findOne (this.params._id);
+	    return ModelFiles.findOne (this.params._id);
 	}
     });
 });
@@ -26,9 +27,12 @@ var validateUser = function(pause) {
 	} else {
 	    this.render('notVerified');
         }
-    } else {
-	this.render('logIn');
+    } else if (Meteor.loggingIn()) {
+	this.render('preloader');
     } 
+    else {
+	this.render('logIn');
+	}
     pause();
 }
 
@@ -36,7 +40,12 @@ var loggingIn = function(pause) {
 	if (Meteor.loggingIn()) {
 	    this.render('preloader');
 	}
+	else {
+	    Session.set("alert","");
+	    this.render();
+	}
+	pause();
 }
 
 Router.onBeforeAction(loggingIn);
-Router.onBeforeAction(validateUser,{only:['uploader','filemanager']});
+Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager']});

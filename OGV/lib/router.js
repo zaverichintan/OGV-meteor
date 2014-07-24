@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('notVerified', {path : 'not-verified'});
     this.route('forgotPassword', {path : 'forgot-password'});
     this.route('filemanager', {path : 'filemanager'});
+    this.route('dashboard',{path: 'dashboard'});
     this.route('modelViewer', {
 	path: '/models/:_id',
 	data: function() 
@@ -41,11 +42,9 @@ var loggingIn = function(pause) {
 	    this.render('preloader');
 	}
 	else {
-	    Session.set("alert","");
 	    this.render();
 	}
 	pause();
 }
 
-Router.onBeforeAction(loggingIn);
-Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager']});
+Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard']});

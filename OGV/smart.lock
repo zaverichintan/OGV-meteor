@@ -6,7 +6,9 @@
       "iron-router": {},
       "collectionFS": {},
       "Dropzonejs": {},
-      "ui-dropped-event": {}
+      "ui-dropped-event": {},
+      "cfs-ui": {},
+      "roles": {}
     },
     "packages": {
       "ogv-threejs": {
@@ -33,6 +35,16 @@
         "git": "https://github.com/CollectionFS/Meteor-ui-dropped-event.git",
         "tag": "v0.0.5",
         "commit": "d894083c9eecb72b9245944bddb9f35a66c7c25c"
+      },
+      "cfs-ui": {
+        "git": "https://github.com/CollectionFS/Meteor-cfs-ui.git",
+        "tag": "v0.1.0",
+        "commit": "41feb979e88cb2cf4c6f2934ba58ae0bb4e3dddb"
+      },
+      "roles": {
+        "git": "https://github.com/alanning/meteor-roles.git",
+        "tag": "v1.2.10",
+        "commit": "7ccb35de0a6cb0c9a0c3666badd04757e39c09a6"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

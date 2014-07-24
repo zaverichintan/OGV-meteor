@@ -259,3 +259,17 @@ input:focus {
 	float: right;
 	margin-top: -40px;
 }
+
+.rm-log-out{
+	background: #333;
+	border: none;
+	height: inherit;
+}
+
+.rm-log-in{
+	color:#fff;
+}
+
+.rm-log-in:hover{
+	background-color:#333;
+}

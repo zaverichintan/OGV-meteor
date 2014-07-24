@@ -3,7 +3,12 @@
 		<div class = "page-container">
 			<a class="logo" id="header-logo" href="/"> OGV </a>
 			<span class = "right-menu">
-				<a class="rm-item" id="upload-icon" href ="/upload"> <img src="/icons/upload.png" width="30px" height="30px"/>  </a>
+				<a class="rm-item" id="upload-icon" href ="/upload"> <img src="/icons/upload.png" width="30px" height="30px"/>  </a>  
+		{{#unless currentUser}}
+			<a class="rm-item rm-log-in" id="log-in" href="/log-in">Login</a>
+		{{else}}
+			<button class="rm-item rm-log-out" id="log-out"><img src="/icons/logout.png" width="30px" height="30px"></button>
+		{{/unless}}
 			</span>
 		</div>	
 	</header>

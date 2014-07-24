@@ -42,10 +42,12 @@ Template.signUp.events({
 		isNotEmpty(username) &&
 		isEmail(email) &&
 		areValidPasswords(password, passwordConfirm)) {
-	        Accounts.createUser({email:email, password:password, username:username},function(err){
+	        Accounts.createUser({email:email, password:password, profile: { name: username }},function(err){
 		    if (err) {
 			Session.set('alert',err.message);
+			console.log(err.message);
 		    } else {
+			console.log("account creation success");
 			Session.set('alert','Congrats! Check your inbox at ' + email + ' to verify it');
 		    }
 		});

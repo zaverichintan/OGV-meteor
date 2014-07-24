@@ -42,11 +42,9 @@ var loggingIn = function(pause) {
 	    this.render('preloader');
 	}
 	else {
-	    Session.set("alert","");
 	    this.render();
 	}
 	pause();
 }
 
-Router.onBeforeAction(loggingIn);
 Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard']});

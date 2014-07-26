@@ -1,7 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Megrim);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
 body {
-	background:#fafafa;
+	background:#f3f3f3;
 	font-family:'open sans', sans-serif;
 	font-size:16px;
 }
@@ -263,7 +264,7 @@ input:focus {
 .rm-log-out{
 	background: #333;
 	border: none;
-	height: inherit;
+	margin-top:-3px;
 }
 
 .rm-log-in{
@@ -272,4 +273,65 @@ input:focus {
 
 .rm-log-in:hover{
 	background-color:#333;
+}
+
+.feed-wrapper{
+	width: 800px;
+	margin-top: 50px;
+	padding-bottom: 30px;
+	margin-left: auto;
+}
+
+.user-info, .model-info, .love-share{
+	float:left;
+	padding: 15px;
+}
+
+
+.user-info{
+	margin-left: 25px;
+	width: 100px;
+}
+
+.user-image{
+	width: 70px;
+	height:70px;
+	background: #333;
+	border-radius:50%;
+}
+
+.model-name{
+	text-align:center;
+	margin-top: 90px;
+	color: #fff;
+	text-transform: capitalize;
+	font-weight: 300;
+	font-size: 25px;
+	background-color: rgba(0,0,0,0.2);
+}
+
+.model-info{
+	background: #fff;
+	margin-top: 15px;
+	box-shadow: 3px 3px 2px 2px #ccc;
+}
+
+.feed-model-preview{
+	width: 500px;
+	height: 250px;
+}
+
+.user-name{
+	margin-left: 5px;
+}
+
+.model-description{
+	width:500px;
+}
+
+.model-description > p{
+	font-size: 14px;
+	color: #555;
+	margin-left: 5px;
+	line-height: 1.5;
 }

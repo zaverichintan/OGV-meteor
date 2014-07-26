@@ -168,12 +168,19 @@ input:focus {
 	color:#fff;
 	overflow:hidden;
 }
-.meta-love-icon {
+.meta-icon {
 	display:inline-block;
 	width:40px;
 	height: 40px;
 	vertical-align:bottom;
+}
+
+.meta-love-icon{
 	background:url('/icons/love.png') no-repeat;
+}
+
+.meta-comment-icon{
+	background:url('/icons/Chat.png') no-repeat;
 }
 
 .model-meta-love {

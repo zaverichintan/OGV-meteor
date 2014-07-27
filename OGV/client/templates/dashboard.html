@@ -1,6 +1,67 @@
 <template name ="dashboard">
+	<div class="dashboard-module">
+		<form action="/dashboard" class="secondary-form" id="dash-form" method="post">
+		
+			<h3 class="secondary-form-head"> User Settings </h3>
+		
+										
+			<label for="user-bio" class ="input-head"> Short Bio </label>
+			<textarea class="form-control" id="dash-short-bio" name="shortBio" placeholder="Write a small something about yourself within 140 characters"></textarea>
+			<label for="profile-pic" class ="input-head"> Profile Pic </label>
+			<p class ="help-text"> Upload a photo of size not more than 300 X 300 </p>
+			<img src = ""/>	
+			<input class="form-control profile-pic" id="dash-profile-pic" name="profilePic" type="file">
+
+			<label for="username" class ="input-head"> Username </label>
+			<p class ="help-text"> What you want to be known as around </p>	
+			<input class="form-control username" id="dash-username" name="username" placeholder="username" type="text">
+			
+			<label for="first-name" class ="input-head"> First Name </label>
+			<input class="form-control first-name" id="dash-first-name" name="firstName" placeholder="First name" type="text">
+			
+			
+			<label for="last-name" class ="input-head"> Last Name </label>
+			<input class="form-control last-name" id="dash-last-name" name="lastName" placeholder="Last name" type="text">
+			<button class="btn primary-btn btn-default" type="submit"> Save User Settings </button>
+			
+			
+			
+		</form>
+	</div>
     {{#if isInRole 'admin' }}
-	<h1> It's admin </h1>
+		<form action="/dashboard" class="secondary-form" id="dash-form" method="post">
+			
+		<h3 class ="secondary-form-head"> Admin Settings </h3>
+			 
+			<label for="primary-branding" class ="input-head"> Site Name </label>
+			<p class ="help-text"> 
+				What do you want to call your website ?				
+			</p>	
+			<input class="form-control" id="dash-primary-branding" name="primaryBranding" placeholder="Online Geometry Viewer" type="text">
+
+			<label for="mail_url" class ="input-head"> Mail Url </label>
+			<p class ="help-text"> Mail_Url provides authentication to email-id from where emails shall be sent to users. It's in format 
+				<code> http://username:password@example.com:25 </code>
+			</p>	
+			<input class="form-control mail_url" id="dash-mail-url" name="mailUrl" placeholder="http://username:password@example.com:25" type="text">
+			 
+			<label for="g_obj-path" class="input-head"> g-obj Path </label>
+			<p class ="help-text"> Type command  
+				<code> which g-obj </code> to get path of g-obj convertor in your server. BRL-CAD must already be installed for OGV to work.
+			</p>
+			<input class="form-control g_obj-path" id="dash-g-obj-path" name="gObjPath" placeholder="Path to your g-obj binary" type="text">
+			
+			<label for="mged-path" class="input-head"> mged Path </label>
+			<p class ="help-text"> Use the command 
+				<code> which mged</code> to get path of mged. 
+			</p>
+			<input class="form-control mged-path" id="dash-mged-path" name="mgedPath" placeholder="Path to your mged binary" type="text">
+
+			<button class="btn primary-btn btn-default" type="submit"> Save Admin Settings </button>
+		</form>
+
+
+		
     {{else}}
 	<h1> It's not admin </h1>
     {{/if}}

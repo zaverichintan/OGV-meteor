@@ -1,11 +1,37 @@
 <template name="cfsUploader">
 	<h2> Upload File </h2>
 
+	<p class = "help-text"> Add .g file that you want to upload </p>
 	<input type="file" class="form-control" id="fileInput" accept=".g"/>
 
 
 	<div id="dropzone" class="dropzone">
-           <div class="dropzone-text">Drag and Drop your model here to upload</div>
+		<div class="dropzone-text">Drag and Drop your model here to upload</div>
         </div>
-      {{> filemanager }}	
+</template>
+
+
+<template name="modelMeta">
+	<div class="secondary-container" id="uploader-container">
+		<form action=" " method="post" class="secondary-form" id="uploader-form">
+						
+						
+			<label for="filename" class ="input-head"> Filename </label>
+			<p class ="help-text"> What you want to be known as around </p>	
+			<input class="form-control filename" id="desc-filename" name="filename" value="{{ name }}" type="text">
+
+			<label for="uplaoder-about" class ="input-head"> About Model: </label>
+			<p class = "help-text"> Provide a short description about your model </p>
+			<textarea class="form-control secondary-textarea" id = "desc-about" cols=25 >{{ about }}</textarea>
+
+			
+			<label for="filename" class ="input-head"> Model-Image </label>
+			<p class ="help-text"> An image that will be used as a thumbnail for your model, the preferred size is 500 X 300 </p>	
+			<input class="form-control model-thumb" id="desc-model-thumb" name="modelThumb" type="file">
+
+			<input id = "model-id" type = "hidden" value = "{{ _id }}">
+
+			<button class="btn primary-btn btn-default" type="submit" id="save-btn"> Save </button>
+		</form>
+	</div>
 </template>

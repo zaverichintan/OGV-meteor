@@ -11,12 +11,14 @@ gStore = new FS.Store.FileSystem("modelFiles", {
 		Session.set("alert","File has been converted");
 	    }
 
-        });
- 	readStream.pipe(writeStream);
+	});
+	readStream.pipe(writeStream);
     } 
 });
 
+
 Models = new Meteor.Collection('models');
+
 
 OBJFiles = new FS.Collection ("objFiles", {
     stores: [
@@ -24,8 +26,30 @@ OBJFiles = new FS.Collection ("objFiles", {
     ]
 });
 
-ModelFiles = new FS.Collection("modelFiles", {
-    stores: [ gStore ]
+ThumbFiles = new FS.Collection ("thumbFiles", {
+	stores: [
+	    new FS.Store.FileSystem("thumbFiles")
+	]
 });
 
-  
+
+ThumbFiles.allow({
+    insert: function(userId, file) 
+    { 
+	return !! userId;
+    
+    },
+    update: function(userId,file) 
+    {
+	return !! userId;
+    },
+    download: function(userId, file) 
+    {
+    	return true;
+    }	
+});
+
+
+ModelFiles = new FS.Collection("modelFiles", {
+    stores: [ gStore ]
+});  

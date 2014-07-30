@@ -22,6 +22,7 @@ function uploadFile(event, temp)
 	fsFile.timeUploaded = new Date();
 	fsFile.about = "The model " + fsFile.name() + " was uploaded by " + fsFile.owner.profile.name + " on " + fsFile.timeUploaded;
 	fsFile.thumbnail = new FS.File();
+	fsFile.lovers = [];
 	
 	ModelFiles.insert(fsFile,function(err,fileObj) {
 	    if (err) {

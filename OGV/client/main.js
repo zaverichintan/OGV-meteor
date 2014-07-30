@@ -81,6 +81,7 @@ Meteor.subscribe('modelFiles');
 Meteor.subscribe('objFiles');
 Meteor.subscribe('thumbFiles');
 Meteor.subscribe('comments');
+Meteor.subscribe('lovers');
 /*                                                                    
  * Local Variables:                                                   
  * mode: javascript                                                            

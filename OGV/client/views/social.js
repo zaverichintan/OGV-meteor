@@ -16,7 +16,7 @@ Template.commentSubmit.events({
     
 	    Meteor.call('comment', comment, function(error, commentId) {
 		if (error){
-		    throwError(error.reason);
+		    console.log(error.reason);
 		} else {
 		    $body.val('');
 		}
@@ -46,4 +46,32 @@ Template.comments.events({
 	    });
 	});
     }
-});        
+});
+
+        
+Template.lovemeter.events({
+    'click .lovemeter-wrapper':function(){
+        var love = {
+            postId: this._id
+        };
+     Meteor.call('love', love, function(error, loveId) {
+		if (error){
+		    console.log(error.reason);
+		} else {
+		    
+		}
+	   });
+    }
+});
+
+Template.lovemeter.helpers({
+    lovers: function(){
+        loversObj = Lovers.findOne({postId: this._id});
+        if(loversObj){
+        loversArray = loversObj.lovers;
+        return loversArray.length;
+        } else{
+            return 0;
+        }
+    }
+});

@@ -26,11 +26,8 @@
 
 Template.modelViewer.rendered = function() 
 {
-    console.log("rendered");
     model = this.data;
-    console.log(model);
     objList = getObjFiles(model);	
-    console.log(objList);
      
     init();
     animate();
@@ -43,12 +40,10 @@ Template.modelViewer.rendered = function()
 function getObjFiles(model) 
 {
     var objUrls = [];
-    console.log("getting objs");
     modelId = model._id;
     OBJFiles.find({ gFile : modelId }).forEach( function (objFile) {
 	objUrls.push(objFile.url());
     });
-    console.log(objUrls);
     return objUrls;
 }
 

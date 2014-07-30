@@ -332,6 +332,7 @@ input:focus {
 
 .feed-item {
     margin:10px 0px 10px 0px;
+    overflow:hidden;
 }
 
 .post-section{
@@ -361,6 +362,7 @@ input:focus {
 
 .post-content {
     padding:10px 10px;
+    width:500px;
     max-width:500px;
     background:#fff;
     border-radius:5px;
@@ -371,6 +373,7 @@ input:focus {
 .model-preview {
     margin: 10px 0px 10px 0px;
     height:250px;
+    width:100%;
     background-repeat:no-repeat;
     background-size:contain;
     background-position:center;    
@@ -471,4 +474,8 @@ input:focus {
 
 .author{
     color:#333;
+}
+
+.clear {
+    float:none;
 }

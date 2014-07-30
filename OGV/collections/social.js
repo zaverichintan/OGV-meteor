@@ -27,49 +27,48 @@ Meteor.methods({
 	return Comments.insert(comment);
     },
     
+
     love: function(loveAttributes){
-        var lovers = [];
-        var alreadyLoved = false;
-        var user = Meteor.user();
-        lovers.push(user);
+	var lovers = [];
+	var alreadyLoved = false;
+	var user = Meteor.user();
+	lovers.push(user._id);
         
-        var post = ModelFiles.findOne(loveAttributes.postId);
-        
-        	if (!user) {
+	var post = ModelFiles.findOne(loveAttributes.postId);
+	var loversObj = Lovers.findOne({postId: loveAttributes.postId});
+
+	if (!user) {
 	    throw new Meteor.Error(401, "You need to login to love post");
 	}
         
-        if (!post) {
+	if (!post) {
 	    throw new Meteor.Error(422, 'You must love a post');
 	}
-	
        
-        var loversObj = Lovers.findOne({postId: loveAttributes.postId});
-        if(loversObj){
-            loversArray = loversObj.lovers;
-            for (l in loversArray) 
-            {
-                if (loversArray[l] == user) {
-                    alreadyLoved = true;
-                    console.log("loved");
-                } 
-                console.log(loversArray[l]);
-            }
-            if(alreadyLoved) {
+        
+	if (loversObj) {
+	    loversArray = loversObj.lovers;
+ 	    
+	    for (l in loversArray) {
+		if (loversArray[l] == user._id) {
+		    alreadyLoved = true;
+		} 
+	    }
+
+            if(alreadyLoved) {  
                 console.log("you already love this");
-            } else {
-                loversArray.push(user);
-                return Lovers.update({postId: loveAttributes.postId},{$set: {lovers: loversArray}});
-                console.log(loversObj);
+	    } else {
+		loversArray.push(user._id);
+		return Lovers.update({postId: loveAttributes.postId},{$set: {lovers: loversArray}}); // update lovers
             }
-        } else{
-            love = _.extend(_.pick(loveAttributes, 'postId'), {
-	    lovers: lovers,
-	    author: user.profile.name,
-	    submitted: new Date().getTime()
-        });
-            console.log(love);
-            return Lovers.insert(love);
+
+        } else {
+	    love = _.extend(_.pick(loveAttributes, 'postId'), {
+		lovers: lovers,
+		submitted: new Date().getTime()
+	    });
+
+	    return Lovers.insert(love);
         }
     }
 });

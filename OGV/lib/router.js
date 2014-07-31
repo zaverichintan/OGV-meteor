@@ -15,10 +15,14 @@ Router.map(function() {
     this.route('dashboard',{path: 'dashboard'});
     this.route('modelViewer', {
 	path: '/models/:_id',
+	waitOn: function(){ return Meteor.subscribe('modelFiles'); },
 	data: function() 
 	{ 
 	    return ModelFiles.findOne (this.params._id);
-	}
+	},
+	action : function () {
+   if (this.ready()) this.render();
+}
     });
 
     this.route('modelMeta', {

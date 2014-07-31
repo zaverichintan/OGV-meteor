@@ -30,10 +30,7 @@ Template.modelViewer.rendered = function()
     model = this.data;
     console.log(model);
     objList = getObjFiles(model);	
-    console.log(objList);
-     
-    init();
-    animate();
+    init(); 
 }
 
 /**
@@ -146,6 +143,8 @@ function init()
     controls.addEventListener('change', render);    
 	 
     window.addEventListener('resize', onWindowResize, false);
+
+    animate();
 
 }
 

@@ -76,8 +76,6 @@ if (Accounts._verifyEmailToken) {
  * Subscribes to collection named models and lovemeter so that it can show
  `* models with how much of love it has got in file manager and at other places. 
  */
-Meteor.subscribe('models');
-Meteor.subscribe('modelFiles');
 Meteor.subscribe('objFiles');
 Meteor.subscribe('thumbFiles');
 Meteor.subscribe('comments');

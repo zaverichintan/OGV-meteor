@@ -2,7 +2,12 @@ Template.modelFeed.helpers({
     models: function() 
     {
 	model = ModelFiles.find();
-	return model;
+	if(model.count()){
+	    console.log(model);
+	    return model;
+	} else{
+	    return false;
+	} 
     }
 });
 

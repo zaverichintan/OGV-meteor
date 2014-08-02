@@ -1,8 +1,12 @@
 <template name = "modelFeed">
     <div class="feed-wrapper">
-    {{#each models}}
-        {{> modelPost }}
-    {{/each}}
+    {{#if models}}
+	{{#each models}}
+	    {{> modelPost }}
+	{{/each}}
+    {{else}}
+	<h3>OGV is hungry, <a href="/upload">feed some models</a></h3>
+    {{/if}}
     </div>
 </template>
 

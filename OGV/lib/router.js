@@ -31,6 +31,14 @@ Router.map(function() {
 	    return ModelFiles.findOne(this.params._id);
 	}
     });
+
+    this.route('filemanager',{
+	path: '/my-models',
+	data: function()
+	{
+	    return ModelFiles.find({'owner' : Meteor.user()});
+	}
+    });
 });
 
 

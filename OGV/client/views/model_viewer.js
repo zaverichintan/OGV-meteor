@@ -30,7 +30,12 @@ Template.modelViewer.rendered = function()
     model = this.data;
     console.log(model);
     objList = getObjFiles(model);	
-    init(); 
+
+    console.log(objList);
+     
+    init();
+    generateEmbedCode();
+    animate();
 }
 
 /**
@@ -172,4 +177,11 @@ function animate()
     requestAnimationFrame( animate );
     render();
 
+}
+
+function generateEmbedCode()
+{
+    var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
+    embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
+    console.log(embedCode);
 }

@@ -78,6 +78,25 @@ h2 {
 	padding-left:10px;
 }
 
+.secondary-menu{
+	max-width:450px;
+	position:absolute;
+	margin-top:50px;
+	left:40%;
+}
+
+.sm-item{
+	float:left;
+	padding-left:10px;
+	width:100px;
+	text-align: center;
+}
+
+.sm-menu-text{
+	color:#e3e3e3;
+	margin-top:10px;
+	font-size:14px;
+}
 .ogv-status{
 	max-width: 400px;
 	margin:auto;

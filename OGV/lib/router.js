@@ -1,11 +1,13 @@
 Router.configure({
     layoutTemplate:'layout',
     loadingTemplate:'preloader',
-    waitOn: function() { return Meteor.subscribe('modelFiles'); }
+    waitOn: function() { return Meteor.subscribe('modelFiles'); },
 });
 
 Router.map(function() {
-    this.route('index', {path : '/'});
+    this.route('index', {
+	path : '/'	
+    });
     this.route('signUp', {path : 'sign-up'});
     this.route('logIn', {path : 'log-in'});
     this.route('cfsUploader', {path : 'upload'});
@@ -57,6 +59,13 @@ var validateUser = function(pause) {
     pause();
 }
 
+var actionReady = function(pause) 
+{
+    if (this.ready()) {
+	this.render();
+    }
+    pause();
+}
 
 var loggingIn = function(pause) {
     if (Meteor.loggingIn()) {
@@ -68,5 +77,5 @@ var loggingIn = function(pause) {
     pause();
 }
 
-
+Router.onBeforeAction(actionReady);
 Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});

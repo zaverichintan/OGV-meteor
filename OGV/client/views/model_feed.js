@@ -1,7 +1,7 @@
 Template.modelFeed.helpers({
     models: function() 
     {
-	model = ModelFiles.find();
+	model = ModelFiles.find({}, {sort:{timeUploaded:-1}});
 	if(model.count()){
 	    console.log(model);
 	    return model;

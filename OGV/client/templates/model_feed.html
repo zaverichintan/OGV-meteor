@@ -2,7 +2,9 @@
     <div class="feed-wrapper">
     {{#if models}}
 	{{#each models}}
-	    {{> modelPost }}
+	    {{#if converted }}
+		{{> modelPost }}
+	    {{/if}}
 	{{/each}}
     {{else}}
 	<h3>OGV is hungry, <a href="/upload">feed some models</a></h3>

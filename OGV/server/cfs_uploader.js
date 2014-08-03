@@ -109,7 +109,7 @@ Meteor.methods({
 					     counter = counter + 1;
 					     var convertPercentage =  (counter/(objects.length - 2)) *100; 
 					     console.log("done " + convertPercentage + " %");
-					     if (convertPercentage == 100) { 
+					     if (convertPercentage > 70) { 
 						modelObj.update({$set: {converted: true}});
 						console.log(modelObj);
 					    }

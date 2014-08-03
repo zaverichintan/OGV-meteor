@@ -22,12 +22,8 @@
 	    
      <div class="post-section post-content model-info">
 		<p class="post-item post-text user-name"> {{ owner.profile.name }} posted {{ name }}</p>
-		<div class="post-item model-preview" style="background-image:url(&quot;{{thumbImg.url}}&quot;);">
-		  
-		    <a class = " model-preview-link" href="/models/{{_id}}"><h2 class="post-subitem model-name"><span class="model-link-text">{{ name }}</span></h2></a>
-	
-		</div>
 		<div class="post-item">
+	        {{> modelView }}	
 		<p class="post-text post-subitem"> {{ about }} </p>
 		</div>
         <div class="post-item love-wrapper">
@@ -42,4 +38,9 @@
 	    
 	     
 
+</template>
+<template name="modelView">
+	<div class="post-item model-preview" style="background-image:url(&quot;{{thumbImg.url}}&quot;);">
+		<a class = " model-preview-link" href="/models/{{_id}}"><h2 class="post-subitem model-name"><span class="model-link-text">{{ name }}</span></h2></a>
+	</div>
 </template>

@@ -11,7 +11,7 @@ Template.modelFeed.helpers({
     }
 });
 
-Template.modelPost.helpers({
+Template.modelView.helpers({
     thumbImg:function()
     {
 	thumbImage = ThumbFiles.findOne({gFile:this._id});

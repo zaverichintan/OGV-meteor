@@ -198,25 +198,22 @@ input:focus {
 }
 
 .model-file {
-	background:#555;
 	width: 280px;
 	height: 250px;
 	float:left;
-	margin: 5px 5px;
-    background-size:cover;
-    background-repeat:no-repeat;
+	margin-left:10px;
+}
+
+.model-file .model-preview[style] {
+	background-size: cover;
 }
 
 .model-meta {
-	color:#fff;
-	padding-top:200px;
-	height:50px;
-	line-height:50px;
+	color:#333;
 }
 
 .meta-desc {
 	margin: 0px 10px 0px 10px;
-	height:50px;
 }
 
 .model-meta-name {

@@ -31,10 +31,3 @@ Template.filemanager.helpers({
     }
 });
 
-Template.love.events({
-    'click .lovemeter':function(e,t)
-    {
-	Meteor.call('addLove', this , function(err) {
-	    }); 
-    }
-}); 	

@@ -67,7 +67,9 @@ function init()
      */
     container = document.getElementById('model-container');
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 100000);
-    camera.position.z = 500;
+    camera.position.z = 1000;
+    camera.position.x = 1000;
+    camera.position.y = 1000;
  
 
     scene = new THREE.Scene();
@@ -120,6 +122,8 @@ function init()
 		}
 	    });
 	    object.position.y = 0.1;
+	    object.rotation.z =  90 * Math.PI/180;
+	    object.rotation.x = -90 * Math.PI/180;
 	    scene.add(object);
 	});
     }

@@ -22,8 +22,8 @@ Router.map(function() {
 	    return ModelFiles.findOne (this.params._id);
 	},
 	action : function () {
-   if (this.ready()) this.render();
-}
+   	     if (this.ready()) this.render();
+	}
     });
 
     this.route('modelMeta', {

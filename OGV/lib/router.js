@@ -63,6 +63,8 @@ var actionReady = function(pause)
 {
     if (this.ready()) {
 	this.render();
+    } else {
+	this.render('preloader'); 
     }
     pause();
 }
@@ -77,5 +79,6 @@ var loggingIn = function(pause) {
     pause();
 }
 
-Router.onBeforeAction(actionReady);
 Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});
+Router.onBeforeAction(actionReady, {only:['index']});
+Router.onBeforeAction(loggingIn);

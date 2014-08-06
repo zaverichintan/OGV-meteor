@@ -42,7 +42,7 @@ Template.signUp.events({
 		isNotEmpty(username) &&
 		isEmail(email) &&
 		areValidPasswords(password, passwordConfirm)) {
-	        Accounts.createUser({email:email, password:password, profile: { name: username }},function(err){
+	        Accounts.createUser({email:email, password:password, profile: { name: username ,bio: "Greatest 3d modeller on the planet" }},function(err){
 		    if (err) {
 			Session.set('alert',err.message);
 			console.log(err.message);

@@ -18,6 +18,11 @@ Meteor.publish('comments', function() {
     return Comments.find();
 });
 
+
+Meteor.publish('profilePictures', function() {
+    return ProfilePictures.find();
+});
+
 Meteor.publish('lovers', function(){
     return Lovers.find();
 });

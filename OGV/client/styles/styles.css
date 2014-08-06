@@ -376,6 +376,15 @@ input:focus {
 	border-radius:50%;
 }    
 
+.user-profile-pic {
+	width: 200px;
+	height: 200px;
+	border: 2px solid #333;
+	border-radius:50%;
+	background-size:cover !important;
+	background-position:center !important;
+}
+
 .post-content {
     padding:10px 10px;
     width:500px;

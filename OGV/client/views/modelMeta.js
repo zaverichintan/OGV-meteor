@@ -18,7 +18,7 @@ Template.modelMeta.events({
 	    if (err) {
 		Session.set('alert', err.reason);
 	    } else {
-		Session.set('alert', "Image Uploaded, and will appear in file manager after it's converted" );
+		Session.set('alert', "Image Uploaded" );
 		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {
 		    if(error) {
 			console.log(error);

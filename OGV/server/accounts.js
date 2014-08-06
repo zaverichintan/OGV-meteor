@@ -41,6 +41,7 @@ if (Meteor.users.find().fetch().length === 0) {
 	{name:"Super User",email:"admin@example.com",roles:['admin']}
     ];
 
+	var Bio = "greatest 3d modeller on the planet";
     _.each(users, function (userData) {
 	var id,
 	    user; 
@@ -48,7 +49,7 @@ if (Meteor.users.find().fetch().length === 0) {
 	id = Accounts.createUser({
 	    email: userData.email,
             password: "ogv123",
-            profile: { name: userData.name }
+            profile: { name: userData.name, bio: Bio }
 	});
 
 	// email verification

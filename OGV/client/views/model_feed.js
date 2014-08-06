@@ -11,6 +11,18 @@ Template.modelFeed.helpers({
     }
 });
 
+Template.modelPost.helpers({
+    userImg: function()
+    {
+	console.log(this.owner);
+	picId = this.owner.profile.pic;
+	picUrl = ProfilePictures.findOne(picId).url();
+	console.log(picUrl)
+	return picUrl;
+    }
+});
+    
+
 Template.modelView.helpers({
     thumbImg:function()
     {

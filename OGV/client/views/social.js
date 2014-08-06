@@ -38,10 +38,10 @@ Template.comments.events({
     {
 	console.log(e);
 	$header = $(e.currentTarget);
-
+	console.log($header);
 	$content = $header.next();
 	$content.slideToggle(500, function () {
-	    $('.comments-header-text').text(function () {
+	    $header.text(function () {
 		return $content.is(":visible") ? "Hide Comments" : "Show Comments";
 	    });
 	});

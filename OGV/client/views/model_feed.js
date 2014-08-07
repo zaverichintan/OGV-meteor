@@ -15,10 +15,22 @@ Template.modelPost.helpers({
     userImg: function()
     {
 	console.log(this.owner);
-	picId = this.owner.profile.pic;
-	picUrl = ProfilePictures.findOne(picId).url();
-	console.log(picUrl)
-	return picUrl;
+	modelOwner = Meteor.users.findOne(this.owner);
+	picId = modelOwner.profile.pic;
+	console.log(picId);
+	pic = ProfilePictures.findOne(picId);
+	picUrl = pic.url();
+	console.log(pic);
+	if (pic) {
+	    return picUrl;
+        } else {
+	    return '/public/profile-pic.jpg';
+	}
+    },
+    owner: function()
+    {
+	console.log("owner is" + this.owner);
+	return Meteor.users.findOne(this.owner);
     }
 });
     

@@ -49,7 +49,7 @@ if (Meteor.users.find().fetch().length === 0) {
 	id = Accounts.createUser({
 	    email: userData.email,
             password: "ogv123",
-            profile: { name: userData.name, bio: Bio }
+            profile: { name: userData.name, bio: Bio, pic: false }
 	});
 
 	// email verification

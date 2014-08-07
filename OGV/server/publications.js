@@ -29,4 +29,8 @@ Meteor.publish('lovers', function(){
 
 Meteor.publish('ogvSettings', function(){
     return OgvSettings.find();
+});
+
+Meteor.publish('profiles', function() {
+    return Meteor.users.find({}, {fields: {emails : 1, profile: 1, roles: 1}});
 }); 

@@ -17,10 +17,10 @@ function uploadFile(event, temp)
     FS.Utility.eachFile(event, function(file) {
 	var fileId;
 	var fsFile = new FS.File(file);
-	fsFile.owner = Meteor.user();
+	fsFile.owner = Meteor.userId();
 	fsFile.converted = false;
 	fsFile.timeUploaded = new Date();
-	fsFile.about = "The model " + fsFile.name() + " was uploaded by " + fsFile.owner.profile.name + " on " + fsFile.timeUploaded;
+	fsFile.about = "The model " + fsFile.name() + " was uploaded on " + fsFile.timeUploaded;
 	fsFile.thumbnail = new FS.File();
 	fsFile.lovers = [];
 	

@@ -59,7 +59,6 @@ if (Accounts._resetPasswordToken) {
  * email ID accordingly. Such token shall eb sent to user's email-id
  * along with a "verify your email" link.
  */ 
-
 if (Accounts._verifyEmailToken) {
     Accounts.verifyEmail(Accounts._verifyEmailToken, function(err) {
 	if (err) {
@@ -81,6 +80,8 @@ Meteor.subscribe('thumbFiles');
 Meteor.subscribe('comments');
 Meteor.subscribe('lovers');
 Meteor.subscribe('profilePictures');
+Meteor.subscribe('ogvSettings');
+
 /*                                                                    
  * Local Variables:                                                   
  * mode: javascript                                                            

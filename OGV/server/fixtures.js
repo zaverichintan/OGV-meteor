@@ -1,21 +1,12 @@
-if (Models.find().count() === 0) 
+if (OgvSettings.find().count() === 0) 
 {
-   Models.insert({
-	name: 'spherical.obj',
-	userid : '1',
-	lovemeter : '13'
+	console.log("fixture");
+   OgvSettings.insert({
+	settingSwitch: true,
+	siteName :"Online Geometry Viewer",
+	mailUrl : "http://username:password@example.com",
+	gobjPath : "/usr/brlcad/dev-7.25.0/bin/g-obj",
+	mgedPath : "/usr/brlcad/dev-7.25.0/bin/mged"
     });
     
-   Models.insert({
-	name: 'cube.obj',
-	userid : '1',
-	lovemeter : '9'
-    });
-
-    
-   Models.insert({
-	name: 'diamond.obj',
-	userid : '1',
-	lovemeter : '7'
-    });
 }

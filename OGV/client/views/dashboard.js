@@ -32,6 +32,19 @@ Template.dashboard.events({
 	     
 	    }
 	});
+    },
+    'submit #dash-admin-form' : function(e,t) 
+    {
+	e.preventDefault();
+	
+	var adminDash = $(e.currentTarget),
+	    primaryBranding = adminDash.find('#dash-primary-branding').val(),
+	    mailUrl = adminDash.find ('#dash-mail-url').val(),
+	    mgedPath = adminDash.find('#dash-mged-path').val(),
+	    gobjPath = adminDash.find('#dash-g-obj-path').val();
+	
+	settings = OgvSettings.findOne();
+	OgvSettings.update( settings._id, { $set: { siteName: primaryBranding, mailUrl : mailUrl, mgedPath : mgedPath, gobjPath :gobjPath }});	
     }
 });
 
@@ -41,6 +54,10 @@ Template.dashboard.helpers({
 	var picId = Meteor.user().profile.pic;
 	console.log(picId);	
 	return ProfilePictures.findOne(picId).url();
+    },
+    settings: function() 
+    {
+	return OgvSettings.findOne();
     }
 });
 	

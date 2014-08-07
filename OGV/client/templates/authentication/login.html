@@ -1,7 +1,7 @@
 <template name="logIn">
 	{{#unless currentUser}}
 	<div class="primary-container" id="log-in-container">
-		<h2 class="primary-branding"> Online Geometry Viewer </h2>
+		{{> primaryBranding }}
 		<form action="/login" class=" primary-form log-in-form" id="log-in-form" method="post">
 			<input class="primary-input email" id="log-in-email" type="email" name="email" placeholder="your email address here" >
 			<input class= "primary-input password" id="log-in-password" type="password" name="password" placeholder="password">

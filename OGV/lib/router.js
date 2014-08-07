@@ -14,7 +14,12 @@ Router.map(function() {
     this.route('notVerified', {path : 'not-verified'});
     this.route('forgotPassword', {path : 'forgot-password'});
     this.route('filemanager', {path : 'filemanager'});
-    this.route('dashboard',{path: 'dashboard'});
+    this.route('dashboard',{
+	path: 'dashboard',
+	waitOn: function() {
+	    return Meteor.subscribe('ogvSettings');
+	}
+    });
     this.route('modelViewer', {
 	path: '/models/:_id',
 	data: function() 

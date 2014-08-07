@@ -26,3 +26,7 @@ Meteor.publish('profilePictures', function() {
 Meteor.publish('lovers', function(){
     return Lovers.find();
 });
+
+Meteor.publish('ogvSettings', function(){
+    return OgvSettings.find();
+}); 

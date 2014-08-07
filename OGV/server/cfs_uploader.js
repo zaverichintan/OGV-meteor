@@ -71,11 +71,11 @@ Meteor.methods({
 	var modelObj = ModelFiles.findOne(fileId);
 	var readStream = modelObj.createReadStream('modelFiles');
 	var filePath = readStream.path;
-           
 	var objects;
 	var objPath = [];
-	var mgedPath = '/usr/brlcad/dev-7.25.0/bin/mged';
-	var g_objPath = '/usr/brlcad/dev-7.25.0/bin/g-obj';
+	var settings = OgvSettings.findOne();
+	var mgedPath = settings.mgedPath;
+	var g_objPath = settings.gobjPath;
 	var cmd = mgedPath + " -c  " + filePath +" ls -a 2>&1";
 	console.log (cmd);
 	var uploadDirPath = filePath.substring(0, filePath.lastIndexOf("/")); 

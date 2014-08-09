@@ -6,33 +6,42 @@ Template.dashboard.events({
 	var userDash = $(e.currentTarget),
 	    userBio = userDash.find('#dash-short-bio').val(),
 	    userName = userDash.find('#dash-username').val();
-
-	console.log(userBio);	
-	userImageFile = $('#dash-user-pic');
-
+	    
 	var currentUser = Meteor.user();
-	console.log(e.target[2].files[0]);
-	var fsFile = new FS.File(e.target[2].files[0]);
-	console.log(fsFile);
-	fsFile.user = currentUser._id;
-	
-	ProfilePictures.insert(fsFile, function(err, dpFile) {
-	    if (err) {
-		throwError(err.reason);
-	    } else {
-		Session.set('alert','profile pic uploaded');
-		console.log(dpFile);
-	        Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: dpFile._id} }}, function(error, res) {
-	   	     if (error) {
+
+	var saveSettings = function(picId)
+	{
+	    if (!picId) {
+		picId = currentUser.profile.pic;
+	    } 
+		Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: picId} }}, function(error, res) {
+		    if (error) {
 			throwError(error.reason);
 	    	    } else {
-			console.log("update errors");
+			throwNotification("Settings saved");
 		    }
 		});
-	     
-	    }
-	});
+	}
+
+	if (e.target[2].files[0]) {
+	    var fsFile = new FS.File(e.target[2].files[0]);
+	    console.log(fsFile);
+	    fsFile.user = currentUser._id;
+	
+	    ProfilePictures.insert(fsFile, function(err, dpFile) {
+		if (err) {
+		    throwError(err.reason);
+	    	} else {
+		    throwNotification('Profile pic uploaded');
+	    	    saveSettings(dpFile._id);
+		} 
+	    });
+	} else {
+	    saveSettings();
+	}
     },
+
+
     'submit #dash-admin-form' : function(e,t) 
     {
 	e.preventDefault();

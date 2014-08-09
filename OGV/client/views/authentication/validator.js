@@ -40,7 +40,7 @@ isNotEmpty = function(value)
     if (value && value !== '') {
 	return true;
     }
-    Session.set('alert','Please fill in all required fields');
+    throwError("Please fill in all the fields");
     return false;
 };
 
@@ -54,7 +54,7 @@ isEmail = function(value)
     if (filter.test(value)) {
 	return true;
     }
-    Session.set('alert','Please enter a valid email address');
+    throwError("Your email address is not valid");
     return false;
 };
 
@@ -65,7 +65,7 @@ isEmail = function(value)
 isValidPassword = function(password)
 {
     if (password.length < 6) {
-        Session.set('alert','Your password should be at-least 6 characters or longer.');
+	throwError("Password should be at-least 6 characters long");
 	return false;
     }
     return true;
@@ -81,7 +81,7 @@ areValidPasswords = function(password,confirmPassword)
 	return false;
     }
     if (password !== confirmPassword) {
-	Session.set('alert','Your two passwords are not same');
+	throwError("Password and confirm-password fields don't match");
 	return false;
     }
     return true;

@@ -18,13 +18,13 @@ Template.dashboard.events({
 	
 	ProfilePictures.insert(fsFile, function(err, dpFile) {
 	    if (err) {
-		Session.set('alert',err.reason);
+		throwError(err.reason);
 	    } else {
 		Session.set('alert','profile pic uploaded');
 		console.log(dpFile);
 	        Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: dpFile._id} }}, function(error, res) {
 	   	     if (error) {
-			console.log(error);
+			throwError(error.reason);
 	    	    } else {
 			console.log("update errors");
 		    }

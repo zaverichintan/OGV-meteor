@@ -27,7 +27,7 @@
 Template.filemanager.helpers({
     models: function() 
     {
-	return ModelFiles.find({'owner' : Meteor.user()});
+	return ModelFiles.find({'owner' : Meteor.userId()});
     }
 });
 

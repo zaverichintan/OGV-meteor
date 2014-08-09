@@ -12,7 +12,6 @@ Template.cfsUploader.events({
 
 function uploadFile(event, temp)
 {
-    Session.set("alert","");
     
     FS.Utility.eachFile(event, function(file) {
 	var fileId;
@@ -26,7 +25,7 @@ function uploadFile(event, temp)
 	
 	ModelFiles.insert(fsFile,function(err,fileObj) {
 	    if (err) {
-		Session.set('alert', err.reason);
+		throwError(err.reason);
 	     } else {
 		Session.set('alert', "File Uploaded, and will appear in file manager after it's converted" ); 
 		Router.go("/description/" +fileObj._id);  

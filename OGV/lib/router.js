@@ -84,6 +84,8 @@ var loggingIn = function(pause) {
     pause();
 }
 
+
+Router.onBeforeAction(function() { clearErrors(); });
 Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});
 Router.onBeforeAction(actionReady, {only:['index']});
 Router.onBeforeAction(loggingIn);

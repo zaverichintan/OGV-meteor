@@ -57,8 +57,6 @@ Template.lovemeter.events({
      Meteor.call('love', love, function(error, loveId) {
 		if (error){
 		    throwError(error.reason);
-		} else {
-		    
 		}
 	   });
     }

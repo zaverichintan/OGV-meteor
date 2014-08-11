@@ -47,7 +47,7 @@ Template.logIn.events({
 		    throwError(err.reason);
 		    console.log(err);
 		} else {
-		    Session.set('alert', 'Welcome back');
+		    throwNotification('Welcome back');
 		    Router.go('/upload');
 		}
 	    });

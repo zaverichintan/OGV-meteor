@@ -97,7 +97,7 @@ Meteor.methods({
 			    console.log(cmd);
 	                    child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
 				if (error) {
-				    console.log("There's some error in converting file" + error);
+				    throw (new Meteor.Error("There's some error in converting file" + error));
 			        } else {
 				    console.log("File has been converted" + objects[i] + i);
 				    objFS = new FS.File(objPath[i]);

@@ -27,7 +27,7 @@ function uploadFile(event, temp)
 	    if (err) {
 		throwError(err.reason);
 	     } else {
-		Session.set('alert', "File Uploaded, and will appear in file manager after it's converted" ); 
+		throwNotification( "File Uploaded, and will appear in file manager after it's converted"); 
 		Router.go("/description/" +fileObj._id);  
 	    }
 	});

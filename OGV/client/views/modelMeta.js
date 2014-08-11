@@ -16,13 +16,15 @@ Template.modelMeta.events({
 	
 	ThumbFiles.insert(fsFile,function(err,thumbFile) {
 	    if (err) {
-		Session.set('alert', err.reason);
+		throwError(err.reason);
 	    } else {
-		Session.set('alert', "Image Uploaded" );
+		throwNotification("Image has been Uploaded" );
 		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {
-		    if(error) {
-			console.log(error);
-		    } 
+		    if (error) {
+			throwError(error.reason);
+		    } else {
+			throwNotification("Data about model has been saved");
+		    }
 		});
   
 	    }

@@ -53,7 +53,20 @@ Template.dashboard.events({
 	    gobjPath = adminDash.find('#dash-g-obj-path').val();
 	
 	settings = OgvSettings.findOne();
-	OgvSettings.update( settings._id, { $set: { siteName: primaryBranding, mailUrl : mailUrl, mgedPath : mgedPath, gobjPath :gobjPath }});	
+	OgvSettings.update( settings._id, { 
+	    $set: { 
+		siteName: primaryBranding, 
+		mailUrl : mailUrl, 
+		mgedPath : mgedPath, 
+		gobjPath :gobjPath 
+	    }
+	}, function(error, res) {
+	    if (error) {
+		throwError(error.reason);
+	    } else {
+		throwNotification("Admin Settings saved");
+	    }
+	});	
     }
 });
 

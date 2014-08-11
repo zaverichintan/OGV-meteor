@@ -11,6 +11,7 @@ ProfilePictures.allow({
 	if (file.extension() == 'jpg') {	
 	    return true;
 	} else {
+	    throw ( new Meteor.Error(550, "Only .jpg files are allowed"));
 	    return false;
 	}
     },

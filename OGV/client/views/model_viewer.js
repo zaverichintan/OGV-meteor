@@ -45,7 +45,7 @@ Template.modelViewer.rendered = function()
 function getObjFiles(model) 
 {
     var objUrls = [];
-    console.log("getting objs");
+    throwNotification("getting obj files");
     modelId = model._id;
     OBJFiles.find({ gFile : modelId }).forEach( function (objFile) {
 	objUrls.push(objFile.url());
@@ -188,4 +188,5 @@ function generateEmbedCode()
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
     console.log(embedCode);
+    return embedCode;
 }

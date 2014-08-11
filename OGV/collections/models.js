@@ -5,10 +5,9 @@ gStore = new FS.Store.FileSystem("modelFiles", {
 	var fileId = fileObj._id;
 	Meteor.call('convertFile', fileId, function(err) {
 	     if (err) {
-		console.log("convertFileError");
-		console.log(err);
+		throwError(err.reason);
  	    } else {
-		Session.set("alert","File has been converted");
+		throwNotification("File has been converted");
 	    }
 
 	});

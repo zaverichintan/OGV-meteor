@@ -46,8 +46,7 @@ Template.signUp.events({
 		    if (err) {
 			throwError(err.reason);
 		    } else {
-			console.log("account creation success");
-			Session.set('alert','Congrats! Check your inbox at ' + email + ' to verify it');
+			throwNotification('Congrats! Check your inbox at ' + email + ' to verify it');
 		    }
 		});
 	    }

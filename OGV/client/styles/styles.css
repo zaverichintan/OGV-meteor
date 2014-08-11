@@ -79,15 +79,12 @@ h2 {
 }
 
 .secondary-menu{
-	max-width:450px;
 	position:absolute;
-	margin-top:50px;
-	left:40%;
+	margin-top:100px;
 }
 
 .sm-item{
-	float:left;
-	padding-left:10px;
+	padding-bottom:10px;
 	width:100px;
 	text-align: center;
 }

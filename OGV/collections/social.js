@@ -56,7 +56,7 @@ Meteor.methods({
 	    }
 
             if(alreadyLoved) {  
-                console.log("you already love this");
+                throw (new Meteor.Error(550,"you already love this"));
 	    } else {
 		loversArray.push(user._id);
 		return Lovers.update({postId: loveAttributes.postId},{$set: {lovers: loversArray}}); // update lovers

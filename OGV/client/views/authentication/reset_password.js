@@ -44,7 +44,7 @@ Template.resetPassword.events({
 		if (err) {
 		    throwError('We\'re sorry but something went wrong');
 		} else {
-		    Session.set('alert', 'Your password has been changed. Welcome back!');
+		    throwNotification('Your password has been changed. Welcome back!');
 		    Session.set('resetPassword',null);
 		}
 	    });

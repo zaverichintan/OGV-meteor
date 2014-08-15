@@ -25,10 +25,12 @@ Template.commentSubmit.events({
 });
 
 
-Template.comments.helpers({
+Template.commentBody.helpers({
     comments: function() 
     {
-	return Comments.find({postId:this._id});
+	var commentList = Comments.find({postId:this._id});
+	if (!commentList) commentList = Comments.find({postId:this.data._id});
+	return commentList
     }
 });
 

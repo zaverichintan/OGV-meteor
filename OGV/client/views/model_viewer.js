@@ -24,17 +24,57 @@
  * Loads the model after the template has been rendered
  */
 
+Template.modelViewer.events({
+    'click #sm-item-love':function(){
+        var love = {
+            postId: this._id
+        };
+ 	Meteor.call('love', love, function(error, loveId) {
+	    if (error){
+		throwError(error.reason);
+	    }
+	});
+    },
+    'click #sm-item-embed':function(){
+	generateEmbedCode();
+    },
+    'click #sm-item-comment':function() {
+	console.log('clocked');
+	$('#overlay-comments').css({'bottom':'0px'});
+    },
+    'click #comments-close-button':function() {
+	$('#overlay-comments').css({'bottom':'-10000px'});
+    }
+});
+
+Template.modelViewer.helpers({
+    lovers: function(){
+        loversObj = Lovers.findOne({postId: this._id});
+        if(loversObj){
+        loversArray = loversObj.lovers;
+        return loversArray.length;
+        } else{
+            return 0;
+        }
+    },
+    comments: function() {
+	return Comments.find({postId: this._id});
+    },
+    model: function() {
+	console.log("url check");
+	console.log(this.url());
+	return this.data;
+    }
+});
+
 Template.modelViewer.rendered = function() 
 {
     console.log("rendered");
     model = this.data;
-    console.log(model);
     objList = getObjFiles(model);	
-
     console.log(objList);
      
     init();
-    generateEmbedCode();
     animate();
 }
 
@@ -187,6 +227,6 @@ function generateEmbedCode()
 {
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
-    console.log(embedCode);
+    throwNotification(embedCode);
     return embedCode;
 }

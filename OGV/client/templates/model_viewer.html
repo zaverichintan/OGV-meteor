@@ -1,24 +1,38 @@
 <template name = "modelViewer">
+	<div id="overlay-comments">
+	<div id ="comments-close-button"> X </div>
+	<div class="comments">
+	    {{#each comments}}
+		{{> comment}}
+	    {{/each}}
+
+	    {{#if currentUser}}
+		{{> commentSubmit}}
+	    {{else}}
+	        <p> Please log in to leave a comment.</p>
+	    {{/if}}
+	</div>
+	</div>
 	<div id="model-container">
 	<div class="secondary-menu">
-		<div class="sm-item">
-			<img src="/icons/Download.png" width="35px" height="35px">
-			<p class="sm-menu-text">Download</p>
+		<div class="sm-item" id="sm-item-download">
+		<a href = "/cfs/files/modelFiles/{{_id}}/{{name}}">	<img src="/icons/Download.png" width="35px" height="35px">
+			<p class="sm-menu-text">Download</p></a>
 		</div>
 
-		<div class="sm-item">
+		<div class="sm-item" id="sm-item-love">
 			<img src="/icons/Shape-Heart.png" width="35px" height="35px">
-			<p class="sm-menu-text">Love</p>
+			<p class="sm-menu-text">Love ({{ lovers }})</p>
 		</div>
 
-		<div class="sm-item">
+		<div class="sm-item" id="sm-item-comment">
 			<img src="/icons/Message.png" width="35px" height="35px">
 			<p class="sm-menu-text">Comment</p>
 		</div>
 
-		<div class="sm-item">
+		<div class="sm-item" id="sm-item-embed">
 			<img src="/icons/Link.png" width="35px" height="35px">
-			<p class="sm-menu-text">Link</p>
+			<p class="sm-menu-text">Embed</p>
 		</div>
 	</div>
 	</div>

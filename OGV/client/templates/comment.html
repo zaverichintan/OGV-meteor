@@ -1,12 +1,9 @@
-<template name ="comments"> 
-	<div class="comments-icon"> 
-	     <img src="/icons/Chat.png"/> 
-	</div>
+<template name ="comments">
+	{{> commentsHeader }}
+	{{> commentBody }} 
+</template>
 
-	<div class ="comments-header">
-		<span class="comments-header-text"> Show comments</span>
-	</div>
-     
+<template name="commentBody">
 	<div class="comments">
 	    {{#each comments}}
 		{{> comment}}
@@ -17,6 +14,16 @@
 	    {{else}}
 	        <p> Please log in to leave a comment.</p>
 	    {{/if}}
+	</div>
+</template>
+
+<template name ="commentsHeader">
+	<div class="comments-icon"> 
+	     <img src="/icons/Chat.png"/> 
+	</div>
+
+	<div class ="comments-header">
+		<span class="comments-header-text"> Show comments</span>
 	</div>
 </template>
 

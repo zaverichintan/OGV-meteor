@@ -1,9 +1,46 @@
+/*                   R O U T E R . J S
+ * BRL-CAD
+ *
+ * Copyright (c) 1995-2013 United States Government as represented by
+ * the U.S. Army Research Laboratory.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * version 2.1 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this file; see the file named COPYING for more
+ * information.
+ */
+
+/**
+ * @file OGV/lib/router.js
+ * @brief connects URLs to views, handles routing of the application
+ *
+ * Meteor is basically meant for single page apps but that does not 
+ * mean that we cannot have urls to bookmark our favorite models. Using
+ * package named Iron Router, routing of OGV is handled.
+ */
+
+/**
+ * Configurations that are applied globally to all the routes.
+ */
+
 Router.configure({
     layoutTemplate:'layout',
     loadingTemplate:'preloader',
     waitOn: function() { return Meteor.subscribe('modelFiles'); },
 });
 
+
+/**
+ * Mapping urls to template names
+ */
 Router.map(function() {
     this.route('index', {
 	path : '/'	
@@ -49,6 +86,10 @@ Router.map(function() {
 });
 
 
+/**
+ * Some routes are shown only when user has a valid email 
+ * address
+ */
 var validateUser = function(pause) {
     if (Meteor.user()) {
 	if (Meteor.user().emails[0].verified) {
@@ -64,6 +105,11 @@ var validateUser = function(pause) {
     pause();
 }
 
+
+/**
+ * actionReady shows a route only after it has fetched all
+ * the required data. 
+ */
 var actionReady = function(pause) 
 {
     if (this.ready()) {
@@ -74,6 +120,10 @@ var actionReady = function(pause)
     pause();
 }
 
+/**
+ * While the user is still logging in, all the routes should
+ * show a preloader
+ */
 var loggingIn = function(pause) {
     if (Meteor.loggingIn()) {
 	this.render('preloader');
@@ -84,8 +134,11 @@ var loggingIn = function(pause) {
     pause();
 }
 
-
+/**
+ * Remove notifactions and error messages that have been seen
+ * everytime a route is changed 
+*/
 Router.onBeforeAction(function() { clearNotifications(); });
 Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});
-Router.onBeforeAction(actionReady, {only:['index']});
+Router.onBeforeAction(actionReady, {only:['index', 'modelViewer']});
 Router.onBeforeAction(loggingIn);

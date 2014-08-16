@@ -21,9 +21,10 @@
 /** @file OGV/server/accounts.js
  *  @brief file for email validation configuration
  *
- *  This file contain configuration regarding sending email for the
- *  purpose of validating the new registered user. After verification
- *  one can upload their models, and use OGV.
+ *  This file  serves two purposes. Firstly it contains configuration
+ *  regarding sending email for the purpose of validating the new 
+ *  registered user. After verification  one can upload their models, 
+ *  and use OGV.
  */
 
 Accounts.config({
@@ -59,4 +60,3 @@ if (Meteor.users.find().fetch().length === 0) {
     
     });
 }
-

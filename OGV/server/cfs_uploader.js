@@ -25,62 +25,41 @@
  */
 
 
-
-ModelFiles.allow({
-    insert: function(userId, file) 
-    {
-	if ((file.extension() == 'g') || (file.extension() == 'obj')) {	
-	    return true;
-	} else {
-	    return false;
-	}
-    },
-    update: function(userId,file) 
-    {
-	return !! userId;
-    },
-    download: function(userId, file) 
-    {
-    	return true;
-    }	
-});
-
-OBJFiles.allow({
-    insert: function(userId, file) 
-    { 
-	return !! userId;
-    
-    },
-    update: function(userId,file) 
-    {
-	return !! userId;
-    },
-    download: function(userId, file) 
-    {
-    	return true;
-    }	
-});
-
 Meteor.methods({
+    /**
+     * Converts g into obj iles 
+     */
     convertFile:function(fileId)
     {
+	/**
+	 * 3 NPM packages sys, fs and child_process
+	 * are required for executing shell commands 
+	 * from within node
+	 */
 	var sys = Npm.require('sys'),
 	    fs = Npm.require('fs'),
 	    exec = Npm.require('child_process').exec;
 
-	var modelObj = ModelFiles.findOne(fileId);
-	var readStream = modelObj.createReadStream('modelFiles');
-	var filePath = readStream.path;
-	var objects;
-	var objPath = [];
-	var settings = OgvSettings.findOne();
-	var mgedPath = settings.mgedPath;
-	var g_objPath = settings.gobjPath;
-	var cmd = mgedPath + " -c  " + filePath +" ls -a 2>&1";
-	console.log (cmd);
-	var uploadDirPath = filePath.substring(0, filePath.lastIndexOf("/")); 
+	var modelObj = ModelFiles.findOne(fileId),
+	    readStream = modelObj.createReadStream('modelFiles'),
+	    filePath = readStream.path,
+	    objects,
+	    objPath = [],
+	    settings = OgvSettings.findOne(),
+	    mgedPath = settings.mgedPath,
+	    g_objPath = settings.gobjPath,
+	    cmd = mgedPath + " -c  " + filePath +" ls -a 2>&1",
+	    uploadDirPath = filePath.substring(0, filePath.lastIndexOf("/")); 
 	
+	/**
+	 * exec() function executes system commands and Meteor.BindEnvironment binds it
+	 * meteor environment so that they can share each other's variables
+	 */
 	child = exec(cmd, Meteor.bindEnvironment (function (error, stdout, stderr) {
+		/**
+		 * the command in cmd returns a list of obj files which are then converted into
+		 * array , which is hence traversed to store each OBJ file in database
+		 */
 		sys.print('stdout' + stdout);
 		objects = stdout.split(" ");
 		console.log(objects);
@@ -89,6 +68,7 @@ Meteor.methods({
 		if (error != null) {
 		    console.log('exec error: ' + error);
 	    	} else {
+
 		    for (i = 1; i < objects.length; i++) {
 			var counter = 0;
 			(function(i) {
@@ -109,6 +89,11 @@ Meteor.methods({
 					     counter = counter + 1;
 					     var convertPercentage =  (counter/(objects.length - 2)) *100; 
 					     console.log("done " + convertPercentage + " %");
+					    /**
+					     * The acceptance rate for succesfull conversion is at least 70%
+					     * Any model with conversion less than that is not said to be 
+					     * converted and is not shown across the website.
+					     */
 					     if (convertPercentage > 70) { 
 						modelObj.update({$set: {converted: true}});
 						console.log(modelObj);
@@ -117,9 +102,9 @@ Meteor.methods({
 				    });	
 			        }    
 	   	            }));
-		        })(i);
-			
+		        })(i);	
 		    }
+
 	    }       
 	}));
     }

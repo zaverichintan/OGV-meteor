@@ -60,6 +60,25 @@ ModelFiles = new FS.Collection("modelFiles", {
 });
 
 
+ModelFiles.allow({
+    insert: function(userId, file) 
+    {
+	if ((file.extension() == 'g') || (file.extension() == 'obj')) {	
+	    return true;
+	} else {
+	    return false;
+	}
+    },
+    update: function(userId,file) 
+    {
+	return userId == file.owner;
+    },
+    download: function(userId, file) 
+    {
+    	return true;
+    }	
+});
+
 /**
  * OBJFiles is a collection for all the obj files that get generated
  * after conversion from g file.
@@ -71,6 +90,21 @@ OBJFiles = new FS.Collection ("objFiles", {
     ]
 });
 
+OBJFiles.allow({
+    insert: function(userId, file) 
+    { 
+	return !! userId;
+    
+    },
+    update: function(userId,file) 
+    {
+	return !! userId;
+    },
+    download: function(userId, file) 
+    {
+    	return true;
+    }	
+});
 
 /**
  * ThumbFiles is a collection for image previews that user may use

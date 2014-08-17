@@ -20,49 +20,58 @@
  */
 
 /** @file OGV/client/views/model_viewer.js
- * Renders model into modelViewer.html
- * Loads the model after the template has been rendered
+ * Events, helpers and other logic required to render 3d models in
+ * model Viewer. 
  */
 
 Template.modelViewer.events({
-    'click #sm-item-love':function(){
+    'click #sm-item-love':function()
+    {
         var love = {
             postId: this._id
         };
  	Meteor.call('love', love, function(error, loveId) {
-	    if (error){
+	    if (error) {
 		throwError(error.reason);
 	    }
 	});
     },
-    'click #sm-item-embed':function(){
+
+    'click #sm-item-embed':function() 
+    {
 	generateEmbedCode();
     },
-    'click #sm-item-comment':function() {
-	console.log('clocked');
+
+    'click #sm-item-comment':function() 
+    {
 	$('#overlay-comments').css({'bottom':'0px'});
     },
-    'click #comments-close-button':function() {
+
+    'click #comments-close-button':function() 
+    {
 	$('#overlay-comments').css({'bottom':'-10000px'});
     }
 });
 
 Template.modelViewer.helpers({
-    lovers: function(){
-        loversObj = Lovers.findOne({postId: this._id});
-        if(loversObj){
-        loversArray = loversObj.lovers;
-        return loversArray.length;
-        } else{
+    lovers: function() 
+    {
+	loversObj = Lovers.findOne({postId: this._id});
+	if (loversObj) {
+	    loversArray = loversObj.lovers;
+	    return loversArray.length;
+        } else {
             return 0;
         }
     },
-    comments: function() {
+
+    comments: function() 
+    {
 	return Comments.find({postId: this._id});
     },
-    model: function() {
-	console.log("url check");
-	console.log(this.url());
+
+    model: function() 
+    {
 	return this.data;
     }
 });
@@ -79,7 +88,7 @@ Template.modelViewer.rendered = function()
 }
 
 /**
- * Get OBJ files for the current .g database
+ * Get list of OBJ files for the current .g database
  */
 
 function getObjFiles(model) 
@@ -222,7 +231,10 @@ function animate()
     render();
 
 }
-
+/**
+ * Generate embed code for the current model, this iframe can
+ * be added on any webpage to view the model.
+ */
 function generateEmbedCode()
 {
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;

@@ -50,7 +50,7 @@ Router.map(function() {
     this.route('cfsUploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
     this.route('forgotPassword', {path : 'forgot-password'});
-    this.route('filemanager', {path : 'filemanager'});
+    //this.route('ogv-filemanager', {path : 'filemanager'});
     this.route('dashboard',{
 	path: 'dashboard',
 	waitOn: function() {
@@ -76,7 +76,7 @@ Router.map(function() {
 	}
     });
 
-    this.route('filemanager',{
+    this.route('ogv-filemanager',{
 	path: '/my-models',
 	data: function()
 	{
@@ -93,8 +93,9 @@ Router.map(function() {
 var validateUser = function(pause) {
     if (Meteor.user()) {
 	if (Meteor.user().emails[0].verified) {
-	    this.render();
-	} else {
+	    this.next();
+	}
+	 else {
 	    this.render('notVerified');
         }
     } else if (Meteor.loggingIn()) {
@@ -102,7 +103,6 @@ var validateUser = function(pause) {
     } else {
 	this.render('logIn');
     }
-    pause();
 }
 
 
@@ -113,11 +113,10 @@ var validateUser = function(pause) {
 var actionReady = function(pause) 
 {
     if (this.ready()) {
-	this.render();
+	this.next();
     } else {
-	this.render('preloader'); 
+	this.render('preloader');
     }
-    pause();
 }
 
 /**
@@ -129,16 +128,15 @@ var loggingIn = function(pause) {
 	this.render('preloader');
     }
     else {
-	this.render();
+	this.next();
     }
-    pause();
 }
 
 /**
  * Remove notifactions and error messages that have been seen
  * everytime a route is changed 
 */
-Router.onBeforeAction(function() { clearNotifications(); });
-Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});
+Router.onBeforeAction(function() { clearNotifications(); this.next(); });
+Router.onBeforeAction(validateUser,{only:['cfsUploader','ogv-filemanager','dashboard','modelMeta']});
 Router.onBeforeAction(actionReady, {only:['index', 'modelViewer']});
 Router.onBeforeAction(loggingIn);

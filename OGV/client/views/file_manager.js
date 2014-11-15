@@ -24,7 +24,7 @@
  *  Searches for all the models that belong to the current user and 
  *  returns them.
  */
-Template.filemanager.helpers({
+Template.ogv-filemanager.helpers({
     models: function() 
     {
 	return ModelFiles.find({'owner' : Meteor.userId()});

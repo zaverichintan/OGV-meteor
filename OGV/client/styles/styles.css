@@ -5,6 +5,9 @@ body {
 	background:#f3f3f3;
 	font-family:'open sans', sans-serif;
 	font-size:16px;
+    overflow-x: hidden;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased !important;
 }
 
 a {
@@ -22,14 +25,29 @@ h2 {
 	font-weight:300;
 }
 
+.font-thin {
+    font-weight: 200;
+    color: #fafafa;
+}
+
+.font-semibold {
+    font-weight: 600;
+    color: #fafafa;
+}
+
+.font-light {
+    font-weight: 300;
+    color: #fafafa;
+}
+
 .page-container {
-	max-width:900px;
+	/*max-width:900px;*/
 	margin:auto;
 }
 
-#main {
+/*#main {
 	padding-top:50px;
-}
+}*/
 
 .wrapper {
 	margin-top:20px;
@@ -49,7 +67,7 @@ h2 {
 	padding:5px 5px;
 	display:inline-block;
 	background:#e74c3c;
-	height: 40px;
+	height: 52px;
 	font-size:24px;
 	line-height: 45px;
 	color:#fff;
@@ -117,8 +135,7 @@ h2 {
 .notifications {
 	max-width:700px;
 	position:relative;
-	margin:auto;
-	margin-top:60px;
+	margin:40px auto auto;
 	z-index:1100;
 	word-wrap:break-word;	
 }
@@ -560,3 +577,94 @@ input:focus {
 .clear {
     float:none;
 }
+
+/* 
+ * L A N D I N G - P A G E . C S S 
+ */
+.slide {
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding-bottom: 65px;
+    padding-top: 50px;
+    text-align: center;    
+}
+
+#slide-4 {
+    background-color: #19B5FE;
+    color: #fafafa;;
+    padding-top: 90px;
+}
+
+    .title-row {
+        font-size: 45px;
+        padding-bottom: 50px;
+    }
+    
+    .line-row .hr {
+        background-color: #fafafa;;
+        height: 5px;
+        margin: 0 auto;
+        width: 33%;
+    }
+    
+    .subtitle-row {
+        font-size: 35px;
+        padding-bottom: 40px;
+        padding-top: 40px;
+    }
+    
+    .content-row {
+        padding-top: 45px;
+    }
+    
+    .content-row i,
+    #about-row-5 i {
+        display: block;
+        margin: 0 auto;
+        max-height: 100%;
+        max-width: 100%;
+    }
+    
+    .content-row h2 {
+        font-size: 28px;
+        padding-bottom: 40px;
+    }
+    
+    .content-row h4 {
+        font-size: 20px;
+        font-weight: 300;
+    }
+    
+    i {
+        font-size: 80px;
+        color: color: #fafafa;;
+    }
+    
+
+@media (max-width: 767px) {
+    .title-row {
+        font-size: 34px;
+        padding-bottom: 33px;
+    }
+    
+    .subtitle-row {
+        font-size: 26px;
+        padding-bottom: 26px;
+        padding-top: 26px;
+    }
+    
+    .content-row {
+        padding-top: 29px;
+    }
+    
+    .content-row h2 {
+        font-size: 24px;
+        padding-bottom: 26px;
+    }
+    
+    .content-row h4 {
+        font-size: 20px;
+    }
+}
+
+

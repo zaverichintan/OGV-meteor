@@ -34,7 +34,7 @@
  * @return reset password token
  */
    
-Template.index.helpers({
+Template.models.helpers({
     resetPasswordToken: function()
     {
 	return Session.get('resetPasswordToken');

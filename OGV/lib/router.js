@@ -42,9 +42,8 @@ Router.configure({
  * Mapping urls to template names
  */
 Router.map(function() {
-    this.route('index', {
-	path : '/'	
-    });
+    this.route('landingPage', {path: '/'});
+    this.route('models', {path : '/models'});
     this.route('signUp', {path : 'sign-up'});
     this.route('logIn', {path : 'log-in'});
     this.route('cfsUploader', {path : 'upload'});
@@ -76,7 +75,7 @@ Router.map(function() {
 	}
     });
 
-    this.route('ogv-filemanager',{
+  this.route('filemanager',{
 	path: '/my-models',
 	data: function()
 	{
@@ -137,6 +136,6 @@ var loggingIn = function(pause) {
  * everytime a route is changed 
 */
 Router.onBeforeAction(function() { clearNotifications(); this.next(); });
-Router.onBeforeAction(validateUser,{only:['cfsUploader','ogv-filemanager','dashboard','modelMeta']});
+Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});
 Router.onBeforeAction(actionReady, {only:['index', 'modelViewer']});
 Router.onBeforeAction(loggingIn);

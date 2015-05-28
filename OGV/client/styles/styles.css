@@ -1,6 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Megrim);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
+
+/*
+ * Helpers Start
+ */
+
 body {
 	background:#f3f3f3;
 	font-family:'open sans', sans-serif;
@@ -52,6 +57,15 @@ h2 {
 .wrapper {
 	margin-top:20px;
 }
+
+.mt {
+    margin-top: 45px;
+    margin-bottom: 40px;
+}
+
+/*
+ * Helpers Over
+ */
 
 .universal-header {
 	width:100%;
@@ -589,6 +603,45 @@ input:focus {
     text-align: center;    
 }
 
+
+#slide-2 {
+    background-color: #F27A67;
+    color: #fafafa;
+    padding: 3.8em;
+}
+    .heading-size {
+        font-size: 50px;
+    }
+
+@media (max-width: 767px) {
+    #slide-2 {
+        padding: 1em;
+    }
+    .mt {
+        margin-bottom: 8px;
+    }
+    .heading-size {
+        font-size: 25px;
+    }
+    .subHeading-size {
+        font-weight: 200;
+        font-size: 15px;
+    }
+    .mobile-view-plane {
+        width: 50px;
+        height: 50px;
+    }
+    .mobile-view-cube {
+        width: 50px;
+        height: 50px;
+    }
+    .mobile-view-rocket{
+        width: 50px;
+        height: 50px;        
+    }
+}
+
+
 #slide-4 {
     background-color: #19B5FE;
     color: #fafafa;;
@@ -665,6 +718,22 @@ input:focus {
     .content-row h4 {
         font-size: 20px;
     }
+    .mobile-view-fileUpload{
+        width: 90px;
+        height: 90px;        
+    }
+    .mobile-view-computer{
+        width: 90px;
+        height: 90px;        
+    }
+    .mobile-view-share{
+        width: 90px;
+        height: 90px;        
+    }
+    .mobile-view-download{
+        width: 90px;
+        height: 90px;        
+    }                
 }
 
 

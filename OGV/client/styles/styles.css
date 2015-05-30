@@ -7,7 +7,7 @@
  */
 
 body {
-	background:#f3f3f3;
+	background:#fafafa;
 	font-family:'open sans', sans-serif;
 	font-size:16px;
     overflow-x: hidden;
@@ -31,17 +31,17 @@ h2 {
 
 .font-thin {
     font-weight: 200;
-    color: #fafafa;
+    color: #FDFDFE;
 }
 
 .font-semibold {
     font-weight: 600;
-    color: #fafafa;
+    color: #FDFDFE;
 }
 
 .font-light {
     font-weight: 300;
-    color: #fafafa;
+    color: #FDFDFE;
 }
 
 .page-container {
@@ -603,11 +603,11 @@ input:focus {
 }
 
 #slide-1 {
-    background: url(tasveer/black-1.png) no-repeat center fixed;
-    margin-top: -92px;
-    padding-top: 225px;
+    background: url(tasveer/slide-1-background.gif) no-repeat center fixed;
+    margin-top: -90px;
+    padding-top: 275px;
     text-align: center;
-    min-height: 585px;
+    min-height: 750px;
     width: 100%;
     
     -webkit-background-size: 100%;
@@ -628,6 +628,7 @@ input:focus {
         letter-spacing: 4px;
         font-size: 68px;
         font-weight: bold;
+        cursor: progress;
     }
 
     #slide-1 h2 {
@@ -639,7 +640,7 @@ input:focus {
         line-height: 2rem;
         font-size: 1.4em;
         background: #EE3B5B none repeat scroll 0% 0%;
-        color: #fafafa;
+        color: #FDFDFE;
         border: 0px none;
         width: 300px;
         text-align: center;
@@ -651,12 +652,15 @@ input:focus {
     }
 
     #slide-1-subPart {
-        background-color: #fafafa;
+        background-color: #FFFFE0;
         padding: 1.75em;
     }
     #slide-1-subPart h3 {
         font-size: 50px;
         font-weight: 200;
+    }
+    .subPart-para {
+        padding: 1em;
     }
 
     @media (min-width: 768px) and (max-width: 990px) {
@@ -680,12 +684,17 @@ input:focus {
 
         }
         #slide-1-subPart {
-            background-color: #fafafa;
+            background-color: #FFFFE0;
             padding: 1em;
         }        
         #slide-1-subPart h3 {
             font-size: 25px;
-            font-weight: 200;
+            font-weight: 600;
+        }
+        .subPart-para {
+            font-size: 15px;
+            padding: 0.2em;
+            text-align: left;
         }
         .btn {
             height: 5rem;
@@ -694,12 +703,17 @@ input:focus {
     }
 
 #slide-2 {
-    background-color: #F27A67;
-    color: #fafafa;
-    padding: 3.8em;
+    background-color: #FDFDFE;
+    color: #2C2B34;
+    padding: 1em;
 }
     .heading-size {
         font-size: 50px;
+        color: #2C2B34;
+    }
+    .description {
+        color: #2C2B34;
+        padding-bottom: 0.5em;   
     }
 
     @media (max-width: 767px) {
@@ -738,10 +752,32 @@ input:focus {
         }
     }
 
+#slide-3 {
+    background-color: #FFFFE0;
+    padding: 4em;
+}
+
+    #slide-3 h1 {
+        font-size: 65px;
+    }
+    #slide-3 h3 {
+        font-size: 35px;
+        font-weight: 200;
+        font-family:'open sans';
+    }
+
+        @media (max-width: 767px) { 
+            #slide-3 h1 {
+                font-size: 29px;
+            }
+            #slide-3 h3 {
+                font-size: 18px;
+            }            
+        }
 
 #slide-4 {
-    background-color: #19B5FE;
-    color: #fafafa;;
+    background-color: #FDFDFE;
+    color: #2C2B34;
     padding-top: 90px;
 }
 
@@ -749,9 +785,19 @@ input:focus {
         font-size: 45px;
         padding-bottom: 50px;
     }
-    
+
+    .heading-slide-4 {
+        color: #2C2B34;        
+    }
+    .subHeading-slide-4 {
+        color: #2C2B34;
+    }
+    .semibold {
+        color: #2C2B34;    
+    }
+
     .line-row .hr {
-        background-color: #fafafa;;
+        background-color: #2C2B34;
         height: 5px;
         margin: 0 auto;
         width: 33%;
@@ -776,18 +822,20 @@ input:focus {
     }
     
     .content-row h2 {
+        color: #2C2B34;
         font-size: 28px;
         padding-bottom: 40px;
     }
     
     .content-row h4 {
+        color: #2C2B34;
         font-size: 20px;
         font-weight: 300;
     }
     
     i {
         font-size: 80px;
-        color: color: #fafafa;;
+        color: color: #FDFDFE;
     }
     
 
@@ -820,6 +868,7 @@ input:focus {
         .heading-slide-4 {
             font-weight: 400;
             font-size: 20px;
+
         }
 
         .subHeading-slide-4 {
@@ -847,4 +896,13 @@ input:focus {
         }                
     }
 
-
+#footer {
+    background-color: #111;   
+    width:100%;
+    min-height: 100px;
+}
+    #footer p {
+        color: #F03B5B;
+        font-size: 16px;
+        padding: 2.8em;
+    }

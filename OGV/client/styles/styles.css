@@ -628,7 +628,6 @@ input:focus {
         letter-spacing: 4px;
         font-size: 68px;
         font-weight: bold;
-        cursor: progress;
     }
 
     #slide-1 h2 {
@@ -652,7 +651,7 @@ input:focus {
     }
 
     #slide-1-subPart {
-        background-color: #FFFFE0;
+        background-color: #48D1CC;
         padding: 1.75em;
     }
     #slide-1-subPart h3 {
@@ -684,7 +683,6 @@ input:focus {
 
         }
         #slide-1-subPart {
-            background-color: #FFFFE0;
             padding: 1em;
         }        
         #slide-1-subPart h3 {
@@ -703,7 +701,7 @@ input:focus {
     }
 
 #slide-2 {
-    background-color: #FDFDFE;
+    background-color: #F6F8F8;
     color: #2C2B34;
     padding: 1em;
 }
@@ -753,7 +751,7 @@ input:focus {
     }
 
 #slide-3 {
-    background-color: #FFFFE0;
+    background-color: #48D1CC;
     padding: 4em;
 }
 
@@ -903,6 +901,6 @@ input:focus {
 }
     #footer p {
         color: #F03B5B;
-        font-size: 16px;
+        font-size: 17.2px;
         padding: 2.8em;
     }

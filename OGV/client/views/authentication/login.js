@@ -56,5 +56,50 @@ Template.logIn.events({
 	return false;
 	
     },
- 
+
+    'click img#loginGoogle': function(e, t) 
+    {
+    e.preventDefault();
+    Meteor.loginWithGoogle(function(err){
+        requestOfflineToken: 'true'
+        if(err) {
+        	throwError(err.reason);
+        	console.log(err);
+        } else {
+        	throwNotification('Welcome back');
+        	Router.go('/upload');
+		}
+	});
+	},
+
+	'click img#loginGithub': function(e, t) 
+    {
+    e.preventDefault();
+    Meteor.loginWithGithub(function(err){
+        requestOfflineToken: 'true'
+        if(err) {
+        	throwError(err.reason);
+        	console.log(err);
+        } else {
+        	throwNotification('Welcome back');
+        	Router.go('/upload');
+		}
+	});
+	},
+
+	'click img#loginFacebook': function(e, t) 
+    {
+    e.preventDefault();
+    Meteor.loginWithFacebook(function(err){
+        requestOfflineToken: 'true'
+        if(err) {
+        	throwError(err.reason);
+        	console.log(err);
+        } else {
+        	throwNotification('Welcome back');
+        	Router.go('/upload');
+		}
+	});
+	}
+
 });	    

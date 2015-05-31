@@ -91,12 +91,7 @@ Router.map(function() {
  */
 var validateUser = function(pause) {
     if (Meteor.user()) {
-	if (Meteor.user().emails[0].verified) {
-	    this.next();
-	}
-	 else {
-	    this.render('notVerified');
-        }
+    	this.next();
     } else if (Meteor.loggingIn()) {
 	this.render('preloader');
     } else {

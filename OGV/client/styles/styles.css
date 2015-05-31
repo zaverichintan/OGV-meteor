@@ -79,7 +79,7 @@ h2 {
 	font-family:'Megrim',cursive;
 	padding:5px 5px;
 	display:inline-block;
-	background:#e74c3c;
+	background:#F03B5B;
 	height: 52px;
 	font-size:24px;
 	line-height: 45px;
@@ -89,6 +89,7 @@ h2 {
 
 #header-logo:hover {
 	text-decoration:none;
+    height: 54px;
 }
 .right-menu {
 	float:right;
@@ -96,7 +97,7 @@ h2 {
 }
 
 .rm-item:hover {
-	background: #e74c3c;
+	background: #F03B5B;
 }
 
 .rm-item {

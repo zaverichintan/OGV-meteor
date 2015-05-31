@@ -3871,8 +3871,9 @@ button.close {
 .alert {
   padding: 15px 35px 15px 15px;
   margin-bottom: 20px;
-  color: #c09853;
-  background-color: #fcf8e3;
+  color: #333;
+  text-align: center;
+  background-color: #DFF0D8;
   border: 1px solid #fbeed5;
   border-radius: 4px;
 }

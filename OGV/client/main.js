@@ -33,7 +33,7 @@
  * session variable resetPasswordToken which is set in function
  * @return reset password token
  */
-      
+   
 Template.index.helpers({
     resetPasswordToken: function()
     {
@@ -48,10 +48,27 @@ Template.index.helpers({
  * variable resetPasswordToken accordingly. Such token shall be 
  * sent to user's email-id along with the link. 
  */
-/*if (Accounts._resetPasswordToken) {
+if (Accounts._resetPasswordToken) {
     Session.set('resetPasswordToken', Accounts._resetPasswordToken);
 }
-*/
+
+/**
+ * Verifies email 
+ *
+ * It checks if verify email token is set or not and verifies the 
+ * email ID accordingly. Such token shall be sent to user's email-id
+ * along with a "verify your email" link.
+ */ 
+if (Accounts._verifyEmailToken) {
+    Accounts.verifyEmail(Accounts._verifyEmailToken, function(err) {
+	if (err) {
+	    Session.set('alert',err.message);
+	} else {
+	    Session.set('alert','Your email is verified');
+	}
+    });
+}
+
 /**
  * Subscribe to various collections
  *

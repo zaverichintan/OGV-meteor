@@ -61,9 +61,14 @@ if (Meteor.users.find().fetch().length === 0) {
     });
 } 
 
+
+/**
+ * Intended to Delete/Remove users who have not verified their Emails in hrs hours
+ */
+var hrs = 1;
 Meteor.setInterval(function() {
     Meteor.users.find({'emails.0.verified': false}).forEach(function(user) {
         //Do action with 'user' that has not verified email for 3 days
         Meteor.users.remove({_id: user._id}, true);
     });
-}, 60000);
+}, (3600000 * hrs));

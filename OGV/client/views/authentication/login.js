@@ -34,7 +34,7 @@ Template.logIn.events({
 	    email = trimInput(logInForm.find('#log-in-email').val().toLowerCase()),
 	    password = logInForm.find('#log-in-password').val();
         
-        /**
+     /**
  	 * If login fails show the error message else go to /upload 
 	 */
 
@@ -56,7 +56,10 @@ Template.logIn.events({
 	return false;
 	
     },
-
+	
+	/**
+	* Things done after clocking on google image on login.html
+	*/
     'click img#loginGoogle': function(e, t) 
     {
     e.preventDefault();
@@ -72,6 +75,9 @@ Template.logIn.events({
 	});
 	},
 
+	/**
+	 * Things done after clocking on github image on login.html
+	*/
 	'click img#loginGithub': function(e, t) 
     {
     e.preventDefault();
@@ -87,6 +93,9 @@ Template.logIn.events({
 	});
 	},
 
+	/**
+	 * Things done after clocking on facebook image on login.html
+	*/
 	'click img#loginFacebook': function(e, t) 
     {
     e.preventDefault();

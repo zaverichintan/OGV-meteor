@@ -50,7 +50,7 @@ Template.modelMeta.events({
         	
 	ThumbFiles.insert(fsFile,function(err,thumbFile) {
 	    if (err) {
-		throwError(err.reason);
+		throwError("No image or invalid image format selected");
 	    } else {
 		throwNotification("Image has been Uploaded" );
 		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {

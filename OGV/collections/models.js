@@ -119,15 +119,7 @@ ThumbFiles = new FS.Collection ("thumbFiles", {
 	allow: {
 	    contentTypes: ['image/png', 'image/jpeg', 'image/jpg']
 	    // extensions: ['jpg']
-	},
-    onInvalid: function(message) {
-        if (Meteor.isClinet) 
-        {
-            alert("Wrong file");
-        } else {
-            console.log("message");
-        }
-    }
+	}
     }	
 });
 

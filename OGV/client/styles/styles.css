@@ -7,7 +7,7 @@
  */
 
 body {
-	background:#fafafa;
+	background:#FAF9F9;
 	font-family:'open sans', sans-serif;
 	font-size:16px;
     overflow-x: hidden;
@@ -31,17 +31,17 @@ h2 {
 
 .font-thin {
     font-weight: 200;
-    color: #FDFDFE;
+    color: #FAF9F9;
 }
 
 .font-semibold {
     font-weight: 600;
-    color: #FDFDFE;
+    color: #FAF9F9;
 }
 
 .font-light {
     font-weight: 300;
-    color: #FDFDFE;
+    color: #FAF9F9;
 }
 
 .page-container {
@@ -606,9 +606,9 @@ input:focus {
 #slide-1 {
     background: url(tasveer/slide-1-background.gif) no-repeat center fixed;
     margin-top: -90px;
-    padding-top: 275px;
+    padding-top: 200px;
     text-align: center;
-    min-height: 750px;
+    min-height: 600px;
     width: 100%;
     
     -webkit-background-size: 100%;
@@ -623,12 +623,13 @@ input:focus {
 }
 
     #slide-1 h1 {
-        color:#F03B5B;
+        color:#FAF9F9;
         padding-top: 5px;
         padding-bottom: 5px;
         letter-spacing: 4px;
         font-size: 68px;
         font-weight: bold;
+        font-family: "Megrim",cursive;
     }
 
     #slide-1 h2 {
@@ -640,7 +641,7 @@ input:focus {
         line-height: 2rem;
         font-size: 1.4em;
         background: #EE3B5B none repeat scroll 0% 0%;
-        color: #FDFDFE;
+        color: #FAF9F9;
         border: 0px none;
         width: 300px;
         text-align: center;
@@ -652,12 +653,14 @@ input:focus {
     }
 
     #slide-1-subPart {
-        background-color: #48D1CC;
+        background-color: #FAF9F9;
         padding: 1.75em;
+        border-bottom: 1px dashed #D2D7D3;
     }
     #slide-1-subPart h3 {
         font-size: 50px;
         font-weight: 200;
+        color: #F03B5B;
     }
     .subPart-para {
         padding: 1em;
@@ -702,82 +705,10 @@ input:focus {
     }
 
 #slide-2 {
-    background-color: #F6F8F8;
-    color: #2C2B34;
-    padding: 1em;
-}
-    .heading-size {
-        font-size: 50px;
-        color: #2C2B34;
-    }
-    .description {
-        color: #2C2B34;
-        padding-bottom: 0.5em;   
-    }
-
-    @media (max-width: 767px) {
-        #slide-2 {
-            padding: 1em;
-        }
-        .mt {
-            margin-bottom: 8px;
-        }
-        .heading-size {
-            font-size: 25px;
-        }
-        .subHeading-size {
-            font-weight: 200;
-            font-size: 15px;
-        }
-        .content h2 {
-            font-size: 30px;
-            padding-bottom: 8px;
-        }    
-        .content h4 {
-            font-size: 17px;
-            padding-bottom: 20px;          
-        }
-        .mobile-view-plane {
-            width: 50px;
-            height: 50px;
-        }
-        .mobile-view-cube {
-            width: 50px;
-            height: 50px;
-        }
-        .mobile-view-rocket{
-            width: 50px;
-            height: 50px;        
-        }
-    }
-
-#slide-3 {
-    background-color: #48D1CC;
-    padding: 4em;
-}
-
-    #slide-3 h1 {
-        font-size: 65px;
-    }
-    #slide-3 h3 {
-        font-size: 35px;
-        font-weight: 200;
-        font-family:'open sans';
-    }
-
-        @media (max-width: 767px) { 
-            #slide-3 h1 {
-                font-size: 29px;
-            }
-            #slide-3 h3 {
-                font-size: 18px;
-            }            
-        }
-
-#slide-4 {
-    background-color: #FDFDFE;
+    background-color: #FAF9F9;
     color: #2C2B34;
     padding-top: 90px;
+    border-bottom: 1px dashed #D2D7D3;
 }
 
     .title-row {
@@ -785,14 +716,13 @@ input:focus {
         padding-bottom: 50px;
     }
 
-    .heading-slide-4 {
-        color: #2C2B34;        
+    .heading-slide-2 {
+        font-size: 50px;
+        color: #F03B5B;        
     }
-    .subHeading-slide-4 {
+
+    .subHeading-slide-2 {
         color: #2C2B34;
-    }
-    .semibold {
-        color: #2C2B34;    
     }
 
     .line-row .hr {
@@ -834,7 +764,7 @@ input:focus {
     
     i {
         font-size: 80px;
-        color: color: #FDFDFE;
+        color: color: #FAF9F9;
     }
     
 
@@ -864,13 +794,13 @@ input:focus {
             padding-bottom: 20px;        
         }
         
-        .heading-slide-4 {
-            font-weight: 400;
-            font-size: 20px;
+        .heading-slide-2 {
+            font-weight: 600;
+            font-size: 25px;
 
         }
 
-        .subHeading-slide-4 {
+        .subHeading-slide-2 {
             font-size: 18px;
         }
 
@@ -893,6 +823,43 @@ input:focus {
             width: 90px;
             height: 90px;        
         }                
+    }
+
+#slide-3 {
+    background-color: #FAF9F9;
+    padding: 4em;
+}
+
+    .heading-slide-3 {
+        font-size: 50px;
+        color: #F03B5B;
+    }
+
+    #slide-3 h1 {
+        font-size: 65px;
+        color: #F03B5B;
+    }
+
+    #slide-3 h3 {
+        font-size: 35px;
+        font-weight: 200;
+        font-family:'open sans';
+    }
+    
+    
+    @media (max-width: 767px) {
+        .heading-slide-3 {
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        #slide-3 h1 {
+            font-size: 29px;
+        }
+
+        #slide-3 h3 {
+            font-size: 18px;
+        }            
     }
 
 #footer {

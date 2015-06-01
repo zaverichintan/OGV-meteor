@@ -3868,7 +3868,7 @@ button.close {
   content: " ";
 }
 
-.alert {
+/*.alert {
   padding: 15px 35px 15px 15px;
   margin-bottom: 20px;
   color: #333;
@@ -3948,7 +3948,7 @@ button.close {
 
 .alert-info .alert-link {
   color: #2d6987;
-}
+}*/
 
 .thumbnail,
 .img-thumbnail {

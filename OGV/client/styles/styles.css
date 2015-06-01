@@ -691,7 +691,7 @@ input:focus {
         }        
         #slide-1-subPart h3 {
             font-size: 25px;
-            font-weight: 600;
+            font-weight: 400;
         }
         .subPart-para {
             font-size: 15px;
@@ -707,17 +707,18 @@ input:focus {
 #slide-2 {
     background-color: #FAF9F9;
     color: #2C2B34;
-    padding-top: 90px;
+    padding-top: 35px;
     border-bottom: 1px dashed #D2D7D3;
 }
 
     .title-row {
         font-size: 45px;
-        padding-bottom: 50px;
+        padding-bottom: 55px;
     }
 
     .heading-slide-2 {
-        font-size: 50px;
+        font-size: 55px;
+        font-weight: 400;
         color: #F03B5B;        
     }
 
@@ -727,7 +728,7 @@ input:focus {
 
     .line-row .hr {
         background-color: #2C2B34;
-        height: 5px;
+        height: 3px;
         margin: 0 auto;
         width: 33%;
     }
@@ -795,8 +796,8 @@ input:focus {
         }
         
         .heading-slide-2 {
-            font-weight: 600;
-            font-size: 25px;
+            font-weight: 400;
+            font-size: 33px;
 
         }
 
@@ -831,7 +832,7 @@ input:focus {
 }
 
     .heading-slide-3 {
-        font-size: 50px;
+        font-size: 55px;
         color: #F03B5B;
     }
 
@@ -841,7 +842,7 @@ input:focus {
     }
 
     #slide-3 h3 {
-        font-size: 35px;
+        font-size: 30px;
         font-weight: 200;
         font-family:'open sans';
     }
@@ -850,7 +851,7 @@ input:focus {
     @media (max-width: 767px) {
         .heading-slide-3 {
             font-size: 25px;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         #slide-3 h1 {

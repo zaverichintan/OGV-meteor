@@ -24,6 +24,7 @@
  * model Viewer. 
  */
 
+
 Template.modelViewer.events({
     'click #sm-item-love':function()
     {
@@ -50,6 +51,16 @@ Template.modelViewer.events({
     'click #comments-close-button':function() 
     {
 	$('#overlay-comments').css({'bottom':'-10000px'});
+    },
+
+    'click #sm-item-wireframe':function() 
+    {
+        getWireframe();
+    },
+
+    'click #sm-item-grid':function() 
+    {
+        getGrid();   
     }
 });
 
@@ -106,6 +117,72 @@ function getObjFiles(model)
 /**
  * Initializes the model viewer
  */
+var targetRotationX = 0;
+var targetRotationOnMouseDownX = 0;
+ 
+var targetRotationY = 0;
+var targetRotationOnMouseDownY = 0;
+ 
+var mouseX = 0;
+var mouseXOnMouseDown = 0;
+ 
+var mouseY = 0;
+var mouseYOnMouseDown = 0;
+
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+
+var finalRotationY
+
+var keyboard = new KeyboardState();
+
+
+function getGrid(){
+    axes = new THREE.AxisHelper(10000);
+    group.add(axes);
+
+    grid = new THREE.GridHelper(3000, 100);
+    group.add(grid);     
+    scene.add(group);
+
+    render();
+}
+
+function getWireframe(){
+    for (i in objList) {
+        loader.load( objList[i], function(object) {
+            var OBJMaterial = new THREE.MeshPhongMaterial({color: 0x000000, wireframe:true, transparent: true, wireframeLinewidth: 1});
+            object.traverse(function(child) {
+            if (child instanceof THREE.Mesh) {
+                child.material  = OBJMaterial;
+            }
+            });
+            object.position.y = 0.1;
+            object.rotation.z =  90 * Math.PI/180;
+            object.rotation.x = -90 * Math.PI/180;
+            group.add(object);
+            scene.add(group);
+        });
+    }
+
+    for (i in objList) {
+    loader.load( objList[i], function(object) {
+        var OBJMaterial = new THREE.MeshPhongMaterial({color: 0x000000});
+        object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+            child.material  = OBJMaterial;
+        }
+        });
+        object.position.y = 0.1;
+        object.rotation.z =  90 * Math.PI/180;
+        object.rotation.x = -90 * Math.PI/180;
+        group.add(object);
+        scene.add(group);
+    });
+    }
+}
+
+
 
 function init() 
 {
@@ -129,18 +206,15 @@ function init()
     
     ambient = new THREE.AmbientLight(0x555555);
     scene.add(ambient);
+ 
     directionalLight = new THREE.PointLight(0xaaaaaa);
     directionalLight.position = camera.position;
     scene.add(directionalLight);
    
     /** Axes */
-    axes = new THREE.AxisHelper(10000);
-    scene.add(axes);
-
+    
     /** Grid */
-    grid = new THREE.GridHelper(3000, 100);
-    scene.add(grid); 	 
-
+    
     /**
      * Loader Managerial tasks
      */
@@ -155,7 +229,7 @@ function init()
      * Adds the model to the viewer aka loads OBJ files 
      * using OBJ-Loader
      */
-
+    group = new THREE.Object3D();
     loader = new THREE.OBJLoader(manager);
 
     /**
@@ -164,7 +238,7 @@ function init()
      */
     for (i in objList) {
 	loader.load( objList[i], function(object) {
-	    var OBJMaterial = new THREE.MeshPhongMaterial({color: 0xeeeeee});
+	    var OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0x00f000});
 	    object.traverse(function(child) {
 		if (child instanceof THREE.Mesh) {
 		    child.material  = OBJMaterial;
@@ -173,7 +247,8 @@ function init()
 	    object.position.y = 0.1;
 	    object.rotation.z =  90 * Math.PI/180;
 	    object.rotation.x = -90 * Math.PI/180;
-	    scene.add(object);
+	    group.add(object);
+        scene.add(group);
 	});
     }
 
@@ -190,7 +265,7 @@ function init()
      * Sets size and color to renderer
      */
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x555555, 1); 
+    renderer.setClearColor(0xffffff, 1); 
     container.appendChild(renderer.domElement);
 
     
@@ -199,10 +274,12 @@ function init()
      */
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.addEventListener('change', render);    
-	 
-    window.addEventListener('resize', onWindowResize, false);
 
-    animate();
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+    document.addEventListener( 'touchmove', onDocumentTouchMove, false ); 
+
+    window.addEventListener('resize', onWindowResize, false);
 
 }
 
@@ -220,16 +297,37 @@ function onWindowResize()
     render();
 }
 
+
 function render() 
 {
-    renderer.render(scene, camera);
+    //horizontal rotation   
+    group.rotation.y += ( targetRotationX - group.rotation.y ) * 0.1;
+ 
+     //vertical rotation 
+    finalRotationY = (targetRotationY - group.rotation.x); 
+    group.rotation.x += finalRotationY * 0.01;
+ 
+    finalRotationY = (targetRotationY - group.rotation.x);  
+    if (group.rotation.x  <= 1 && group.rotation.x >= -1 ) {
+         group.rotation.x += finalRotationY * 0.1;
+    }
+    if (group.rotation.x  > 1 ) {
+        group.rotation.x = 1
+    }
+ 
+    if (group.rotation.x  < -1 ) {
+
+        group.rotation.x = -1
+    }
+    
+    renderer.render( scene, camera );
+
 }
 
 function animate() 
 {
     requestAnimationFrame( animate );
     render();
-
 }
 /**
  * Generate embed code for the current model, this iframe can
@@ -241,4 +339,79 @@ function generateEmbedCode()
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
     throwNotification(embedCode);
     return embedCode;
+}
+
+
+function onDocumentMouseDown( event ) {
+ 
+        event.preventDefault();
+ 
+        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+        document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+        document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+ 
+        mouseXOnMouseDown = event.clientX - windowHalfX;
+        targetRotationOnMouseDownX = targetRotationX;
+ 
+        mouseYOnMouseDown = event.clientY - windowHalfY;
+        targetRotationOnMouseDownY = targetRotationY;
+ 
+}
+ 
+function onDocumentMouseMove( event ) {
+ 
+        mouseX = event.clientX - windowHalfX;
+        mouseY = event.clientY - windowHalfY;
+ 
+        targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * 0.02;
+        targetRotationX = targetRotationOnMouseDownX + (mouseX - mouseXOnMouseDown) * 0.02;
+ 
+}
+ 
+function onDocumentMouseUp( event ) {
+ 
+        document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+        document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+        document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+ 
+}
+ 
+function onDocumentMouseOut( event ) {
+ 
+        document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+        document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+        document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+ 
+}
+
+function onDocumentTouchStart( event ) { 
+    
+    if ( event.touches.length == 1 ) {
+
+            event.preventDefault();
+
+            mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
+            targetRotationOnMouseDownX = targetRotationX;
+
+            mouseYOnMouseDown = event.touches[ 0 ].pageY - windowHalfY;
+            targetRotationOnMouseDownY = targetRotationY;
+    
+    }
+
+}
+ 
+function onDocumentTouchMove( event ) {
+ 
+        if ( event.touches.length == 1 ) {
+ 
+                event.preventDefault();
+ 
+                mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                targetRotationX = targetRotationOnMouseDownX + ( mouseX - mouseXOnMouseDown ) * 0.05;
+ 
+                mouseY = event.touches[ 0 ].pageY - windowHalfY;
+                targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * 0.05;
+ 
+        }
+ 
 }

@@ -1,0 +1,22 @@
+<template name="feedBack">
+<h2>Got a Problem?</h2>
+<h4>Tell us what you think.</h4>
+Love us / have suggestions / ideas / feature requests? <br>
+Tell us how we can improve our website <br>
+<br>
+<form action="//formspree.io/shubham13099@iiitd.ac.in" method="POST" id="feedForm">
+    <strong>Email</strong> <br><input type="email" name="email" style="width: 300px;"><br>
+    <strong>Category</strong><br>
+    <select name="category" form="feedForm">
+	    <option value="num1">Improve this Page</option>
+	    <option value="num2">Suggest new features/ideas</option>
+	    <option value="num3">Pinpoint bug</option>
+	    <option value="num4">User Experience</option>
+	    <option value="num5">I love OGV</option>
+	    <option value="num6">Others - General Feedback</option>
+	</select><br>
+    <strong>Message</strong> <br><input type="text" name="message" style="width: 300px; height:100px"><br>    
+	<p style="font-size:80%">*All fields are compulsory to fill</p>
+    <button class="btn primary-btn btn-default" type="submit">Send</button>
+</form>
+</template>

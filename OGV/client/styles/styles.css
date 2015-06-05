@@ -605,10 +605,10 @@ input:focus {
 
 #slide-1 {
     background: url(tasveer/slide-1-background.gif) no-repeat center fixed;
-    margin-top: -90px;
-    padding-top: 200px;
+    margin-top: -100px;
+    padding-top: 195px;
     text-align: center;
-    min-height: 600px;
+    min-height: 570px;
     width: 100%;
     
     -webkit-background-size: 100%;

@@ -31,3 +31,17 @@ Template.filemanager.helpers({
     }
 });
 
+/*check here*/
+Template.filemanager.events({
+	"click .delete": function () {
+		var txt;
+		var r = confirm("Are you sure, you want to delete your model?");
+		if (r == true) {
+		    var mdl = ModelFiles.findOne(this._id);
+		    ThumbFiles.remove(mdl.thumbnail);
+		    ModelFiles.remove(mdl._id);
+		    throwNotification("Model permanently deleted");
+		}
+  	}
+
+});

@@ -47,13 +47,19 @@ Template.modelMeta.events({
 	
 	var fsFile = new FS.File(e.target[2].files[0]);
 	fsFile.gFile = modelId;
-        	
+
+    var currentModel = ModelFiles.findOne(modelId);	
+    var prevThumbnail = ThumbFiles.findOne(mdl.thumbnail);
+    if(typeof prevThumbnail != 'undefined'){
+		ThumbFiles.remove(currentModel.thumbnail);
+    }
+
 	ThumbFiles.insert(fsFile,function(err,thumbFile) {
 	    if (err) {
 		throwError(err.reason);
 	    } else {
 		throwNotification("Image has been Uploaded" );
-		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {
+		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:fsFile._id}}, function(error, res) {
 		    if (error) {
 			throwError(error.reason);
 		    } else {

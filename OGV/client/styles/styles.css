@@ -62,6 +62,11 @@ h2 {
     margin-bottom: 40px;
 }
 
+.form-control::-webkit-input-placeholder { color: #000; font-size: 1.6em; font-weight: 200; }
+.form-control:-moz-placeholder { color: #000; font-size: 1.6em; font-weight: 200; }
+.form-control::-moz-placeholder { color: #000; font-size: 1.6em; font-weight: 200; }
+.form-control:-ms-input-placeholder { color: #000; font-size: 1.6em; font-weight: 200; }
+
 /*
  * Helpers Over
  */
@@ -202,7 +207,7 @@ textarea {
 
 .primary-btn:hover {
 	color:#fff;
-	background:#e75c4c;
+	background:#2C2B34;
 }
 
 .secondary-btn {
@@ -717,9 +722,10 @@ input:focus {
     }
 
     .heading-slide-2 {
-        font-size: 55px;
+        font-size: 57px;
         font-weight: 400;
-        color: #F03B5B;        
+        color: #F03B5B;
+        padding-bottom: 1em;        
     }
 
     .subHeading-slide-2 {
@@ -829,6 +835,7 @@ input:focus {
 #slide-3 {
     background-color: #FAF9F9;
     padding: 4em;
+    border-bottom: 1px dashed #D2D7D3;    
 }
 
     .heading-slide-3 {
@@ -863,6 +870,32 @@ input:focus {
         }            
     }
 
+#slide-4 {
+    background-color: #FAF9F9;
+    padding: 4em;
+    border-bottom: 1px dashed #D2D7D3;    
+}
+
+    .image-row {
+        padding-top: 3.7em;
+    }
+
+/*    .circular {
+        width: 220px;
+        height: 220px;
+        border-radius: 150px;
+        -webkit-border-radius: 150px;
+        -moz-border-radius: 150px;
+    }*/    
+    #email {
+        height: 40px;
+    }
+    #category {
+        height: 40px;
+        font-size: 1.2em; 
+        font-weight: 200;
+    }
+
 #footer {
     background-color: #111;   
     width:100%;
@@ -872,4 +905,4 @@ input:focus {
         color: #F03B5B;
         font-size: 17.2px;
         padding: 2.8em;
-    }
+    }    

@@ -68,53 +68,53 @@
 
 
     <!-- Slide 4 Start -->
-    <section class="slide" id="slide-4" data-slide="4">
-        <div class="container">
-            <div class="col-lg-12 col-md-12 col-sm-12 ">
-                <div class="heading-slide-2">Feedback</div>
+    <!-- Container -->
+    <div class="container slide" id="slide-4" data-slide="4">
+        <div class="col-lg-12 col-md-12 col-sm-12 ">
+            <div class="heading-slide-2">Feedback</div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 ">
+            <div class="row image-row">
+                <p><img class="circular" src="/icons/feedback.png"/></p>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 ">
-                <div class="row image-row">
-                    <p><img class="circular" src="/icons/Message1.png"/></p>
-                </div>
+        </div>
+        <!-- For Space -->
+        <div class="col-lg-3 col-md-3 col-sm-3 ">
+        </div>            
+        <!-- Form -->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="row">
+                <!-- Enter your email address at the place of <email_here> in order to recieve feedback via emails to your account -->
+                <form action="//formspree.io/deeky.sharma@gmail.com" method="POST" id="feedForm" onsubmit="notify()">
+                    <div class="form-group">
+                        <!-- <label for="email">Email address</label> -->
+                        <input type="email" class="form-control text-center" id="email" name="email" placeholder="Email Address">
+                    </div><br>
+                    <div class="form-group">
+                        <!-- <label for="email">Category</label> -->
+                        <select name="category" class="form-control text-center" id="category" form="feedForm">
+                            <option selected="selected">Please select reason</option>
+                            <option value="Improve this Page">Improve this Page</option>
+                            <option value="Suggest new features/ideas">Suggest new features/ideas</option>
+                            <option value="Pinpoint bug">Pinpoint bug</option>
+                            <option value="User Experience">User Experience</option>
+                            <option value="I love OGV">I love OGV</option>
+                            <option value="Others - General Feedback">Others - General Feedback</option>
+                        </select>
+                    </div><br>
+                    <div class="form-group">
+                        <!-- <label for="email">Message</label>                             -->
+                        <textarea class="form-control" name="message" form="feedForm" placeholder="Message"></textarea>
+                    </div>    
+                    <p>*All fields are compulsory to fill</p>
+                    <button class="btn primary-btn btn-default form-control" type="submit">Send</button>
+                    <input type="hidden" name="_next" value="//localhost:3000" />
+                    <input type="hidden" name="_subject" value="[OGV] feedback Submission" />
+                </form>
             </div>
-            <!-- For Space -->
-            <div class="col-lg-3 col-md-3 col-sm-3 ">
-            </div>            
-            <!-- Form -->
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="row">
-                    <!-- Enter your email address at the place of <email_here> in order to recieve feedback via emails to your account -->
-                    <form action="//formspree.io/deeky.sharma@gmail.com" method="POST" id="feedForm" onsubmit="notify()">
-                        <div class="form-group">
-                            <!-- <label for="email">Email address</label> -->
-                            <input type="email" class="form-control text-center" id="email" name="email" placeholder="Email Address">
-                        </div><br>
-                        <div class="form-group">
-                            <!-- <label for="email">Category</label> -->
-                            <select name="category" class="form-control text-center" id="category" form="feedForm">
-                                <option selected="selected">Please select reason</option>
-                                <option value="Improve this Page">Improve this Page</option>
-                                <option value="Suggest new features/ideas">Suggest new features/ideas</option>
-                                <option value="Pinpoint bug">Pinpoint bug</option>
-                                <option value="User Experience">User Experience</option>
-                                <option value="I love OGV">I love OGV</option>
-                                <option value="Others - General Feedback">Others - General Feedback</option>
-                            </select>
-                        </div><br>
-                        <div class="form-group">
-                            <!-- <label for="email">Message</label>                             -->
-                            <textarea class="form-control" name="message" form="feedForm" placeholder="Message"></textarea>
-                        </div>    
-                        <p>*All fields are compulsory to fill</p>
-                        <button class="btn primary-btn btn-default form-control" type="submit">Send</button>
-                        <input type="hidden" name="_next" value="//localhost:3000/feedback_thanks" />
-                        <input type="hidden" name="_subject" value="[OGV] feedback Submission" />
-                    </form>
-                </div>
-            </div> <!-- Form End -->
-        </div><!-- Container End -->
-    </section>
+        </div> <!-- Form End -->
+    </div><!-- Container End -->
+
     <!-- Slide 4 Over -->
 
     <!-- Footer Start -->

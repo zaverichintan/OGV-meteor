@@ -880,13 +880,6 @@ input:focus {
         padding-top: 3.7em;
     }
 
-/*    .circular {
-        width: 220px;
-        height: 220px;
-        border-radius: 150px;
-        -webkit-border-radius: 150px;
-        -moz-border-radius: 150px;
-    }*/    
     #email {
         height: 40px;
     }
@@ -894,6 +887,17 @@ input:focus {
         height: 40px;
         font-size: 1.2em; 
         font-weight: 200;
+    }
+
+    @media (max-width: 767px) {
+        .image-row {
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
+        .circular {
+            width: 90px;
+            height: 90px;
+        }
     }
 
 #footer {

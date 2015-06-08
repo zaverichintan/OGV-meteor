@@ -162,14 +162,7 @@ ThumbFiles.allow({
     },
 
     remove: function (userId, file) {
-      /*var owner = ModelFiles.findOne(file.gFile).owner;
-        if(userID == owner) {
-            return true;
-        } else {
-            return false;
-        } 
-      */
-      return true;  
+        return true;  
     }	
     
 });

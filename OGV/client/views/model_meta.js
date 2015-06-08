@@ -48,8 +48,13 @@ Template.modelMeta.events({
 	var fsFile = new FS.File(e.target[2].files[0]);
 	fsFile.gFile = modelId;
 
+	/**
+	* Delete any thumbnail association with the model.
+	* Thumbnail will be deleted before updating
+	* No thumbnail deletion will happen if there is no thumbnail present yet.
+	*/
     var currentModel = ModelFiles.findOne(modelId);	
-    var prevThumbnail = ThumbFiles.findOne(mdl.thumbnail);
+    var prevThumbnail = ThumbFiles.findOne(currentModel.thumbnail);
     if(typeof prevThumbnail != 'undefined'){
 		ThumbFiles.remove(currentModel.thumbnail);
     }

@@ -15,17 +15,17 @@ body {
 }
 
 a {
-	color:#e74c3c;
+	color:#F03B5B;
 }
 
 a:hover {
 	color:#f74c3c;
 	text-decoration: none;
-	border-bottom: 1px dashed #e74c3c;
+	border-bottom: 1px dashed #F03B5B;
 }
 
 h2 {
-	color:#e74c3c;
+	color:#F03B5B;
 	font-weight:300;
 }
 
@@ -137,7 +137,7 @@ h2 {
 }
 
 .sm-item:hover > .sm-menu-text{
-	color:#e74c3c;
+	color:#F03B5B;
 }
 
 .ogv-status{
@@ -197,7 +197,7 @@ textarea {
 }
 
 .primary-btn {
-	background:#e74c3c;
+	background:#F03B5B;
 	font-size: 20px;
 	padding:0px 0px;
 	color: #fff;
@@ -211,7 +211,7 @@ textarea {
 }
 
 .secondary-btn {
-    background:#e74c3c;
+    background:#F03B5B;
     font-size:16px;
     color:#fff;
     height:32px;
@@ -222,7 +222,7 @@ textarea {
 }
 
 .secondary-btn:hover{
-    background:#e74c3c;
+    background:#F03B5B;
     color:#fff;
 }
     
@@ -294,7 +294,7 @@ input:focus {
 }
 
 .model-meta-love:hover {
-	color:#e74c3c;
+	color:#F03B5B;
 }
 
 .spinner {
@@ -364,13 +364,16 @@ input:focus {
 }
 
 .dropzone{
-	background: #fff url('/icons/upload-big.png') no-repeat center;
-	border: 5px dotted #f7f7f7;
+	background: #DCDCDC url('/icons/upload-big.png') no-repeat center;
+	border: 2px solid #333;
 }
 
 #fileInput{
-	float: right;
-	margin-top: -40px;
+    background: #FAF9F9 none repeat scroll 0% 0%;
+    float: right;
+    margin-top: -48px;
+    border: 1px solid #333;
+    padding-bottom: 36px;
 }
 
 .rm-log-out{
@@ -541,7 +544,7 @@ input:focus {
 	color:#fff;
 	text-align:center;
 	line-height:25px;
-	background:#e74c3c;
+	background:#F03B5B;
 	width:25px;
 	height:25px;
 	float:right;

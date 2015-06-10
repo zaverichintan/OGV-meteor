@@ -53,11 +53,6 @@ Template.modelViewer.events({
 	$('#overlay-comments').css({'bottom':'-10000px'});
     },
 
-    'click #sm-item-wireframe':function() 
-    {
-        getWireframe();
-    },
-
     'click #sm-item-grid':function() 
     {
         getGrid();   
@@ -133,7 +128,7 @@ var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
 var finalRotationY
-var guiControls;
+var guiControls, OBJMaterial;
 var keyboard = new KeyboardState();
 
 function getGrid(){
@@ -144,26 +139,6 @@ function getGrid(){
     group.add(grid);     
     scene.add(group);
 }
-
-function getWireframe(){
-    for (i in objList) {
-        loader.load( objList[i], function(object) {
-            var OBJMaterial = new THREE.MeshPhongMaterial({color: 0x000000, wireframe:true});
-            object.traverse(function(child) {
-            if (child instanceof THREE.Mesh) {
-                child.material  = OBJMaterial;
-            }
-            });
-            object.position.y = 0.1;
-            object.rotation.z =  90 * Math.PI/180;
-            object.rotation.x = -90 * Math.PI/180;
-            group.add(object);
-            scene.add(group);
-        });
-
-    }
-}
-
 
 function init() 
 {
@@ -215,9 +190,9 @@ function init()
      * how the model shall look 
      */
      
+    OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0x00f000}); 
     for (i in objList) {
 	loader.load( objList[i], function(object) {
-	    var OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0x00f000});
 	    object.traverse(function(child) {
 		if (child instanceof THREE.Mesh) {
 		    child.material  = OBJMaterial;
@@ -232,18 +207,23 @@ function init()
         scene.add(group);
 	});
     }
-    
+
     guiControls = new function() {
-        this.rotationX = 0.0;
-        this.rotationY = 0.0;
-        this.rotationZ = 0.0;
+        this.opacity = OBJMaterial.opacity;
+        this.transparent = OBJMaterial.transparent;
+        this.wireframe = OBJMaterial.wireframe;
     }
 
     datGUI = new dat.GUI({autoPlace:false});
-    datGUI.add(guiControls, 'rotationX', 0, 1);
-    datGUI.add(guiControls, 'rotationY', 0, 1);
-    datGUI.add(guiControls, 'rotationZ', 0, 1);
-    
+    datGUI.add(guiControls, 'opacity', 0, 1).onChange(function (e) {
+        OBJMaterial.opacity = e;
+    });
+    datGUI.add(guiControls, 'transparent').onChange(function (e) {
+        OBJMaterial.transparent = e;
+    });
+    datGUI.add(guiControls, 'wireframe').onChange(function (e) {
+        OBJMaterial.wireframe = e;
+    });
 
     /**
      * If webgl is there then use it otherwise use canvas
@@ -294,7 +274,7 @@ function onWindowResize()
 
 function render() 
 {
-/*    //horizontal rotation   
+    //horizontal rotation   
     group.rotation.y += ( targetRotationX - group.rotation.y ) * 0.1;
  
      //vertical rotation 
@@ -313,14 +293,8 @@ function render()
 
         group.rotation.x = -1
     }
-*/
-    group.rotation.x += guiControls.rotationX;
-    group.rotation.y += guiControls.rotationY;
-    group.rotation.z += guiControls.rotationZ;
 
     renderer.render(scene, camera);    
-    
-
 }
 
 function animate() 

@@ -15,7 +15,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this file; see the file named COPYING for more
+     * License along with this file; see the file named COPYING for more
  * information.
  */
 
@@ -93,7 +93,7 @@ Template.modelViewer.rendered = function()
     model = this.data;
     objList = getObjFiles(model);	
     console.log(objList);
-     
+  
     init();
     animate();
 }
@@ -133,9 +133,8 @@ var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
 var finalRotationY
-
+var guiControls;
 var keyboard = new KeyboardState();
-
 
 function getGrid(){
     axes = new THREE.AxisHelper(10000);
@@ -144,14 +143,12 @@ function getGrid(){
     grid = new THREE.GridHelper(3000, 100);
     group.add(grid);     
     scene.add(group);
-
-    render();
 }
 
 function getWireframe(){
     for (i in objList) {
         loader.load( objList[i], function(object) {
-            var OBJMaterial = new THREE.MeshPhongMaterial({color: 0x000000, wireframe:true, transparent: true, wireframeLinewidth: 1});
+            var OBJMaterial = new THREE.MeshPhongMaterial({color: 0x000000, wireframe:true});
             object.traverse(function(child) {
             if (child instanceof THREE.Mesh) {
                 child.material  = OBJMaterial;
@@ -163,25 +160,9 @@ function getWireframe(){
             group.add(object);
             scene.add(group);
         });
-    }
 
-    for (i in objList) {
-    loader.load( objList[i], function(object) {
-        var OBJMaterial = new THREE.MeshPhongMaterial({color: 0x000000});
-        object.traverse(function(child) {
-        if (child instanceof THREE.Mesh) {
-            child.material  = OBJMaterial;
-        }
-        });
-        object.position.y = 0.1;
-        object.rotation.z =  90 * Math.PI/180;
-        object.rotation.x = -90 * Math.PI/180;
-        group.add(object);
-        scene.add(group);
-    });
     }
 }
-
 
 
 function init() 
@@ -191,8 +172,10 @@ function init()
      * Grabs the model-container div from template into a variable
      * named container, and sets up the scene 
      */
+
     container = document.getElementById('model-container');
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 100000);
+    controller = document.getElementById('controller');
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100000);
     camera.position.z = 1000;
     camera.position.x = 1000;
     camera.position.y = 1000;
@@ -203,7 +186,6 @@ function init()
     /**
      * Light up the scene 
      */
-    
     ambient = new THREE.AmbientLight(0x555555);
     scene.add(ambient);
  
@@ -211,14 +193,10 @@ function init()
     directionalLight.position = camera.position;
     scene.add(directionalLight);
    
-    /** Axes */
-    
-    /** Grid */
     
     /**
      * Loader Managerial tasks
      */
-
     manager = new THREE.LoadingManager();
     manager.onProgress = function(item, loaded, total) 
     {
@@ -231,11 +209,12 @@ function init()
      */
     group = new THREE.Object3D();
     loader = new THREE.OBJLoader(manager);
-
+    
     /**
      * Adds material to the model, which hence controls 
      * how the model shall look 
      */
+     
     for (i in objList) {
 	loader.load( objList[i], function(object) {
 	    var OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0x00f000});
@@ -244,13 +223,27 @@ function init()
 		    child.material  = OBJMaterial;
 		}
 	    });
-	    object.position.y = 0.1;
+
+        object.position.y = 0.1;
 	    object.rotation.z =  90 * Math.PI/180;
 	    object.rotation.x = -90 * Math.PI/180;
+
 	    group.add(object);
         scene.add(group);
 	});
     }
+    
+    guiControls = new function() {
+        this.rotationX = 0.0;
+        this.rotationY = 0.0;
+        this.rotationZ = 0.0;
+    }
+
+    datGUI = new dat.GUI({autoPlace:false});
+    datGUI.add(guiControls, 'rotationX', 0, 1);
+    datGUI.add(guiControls, 'rotationY', 0, 1);
+    datGUI.add(guiControls, 'rotationZ', 0, 1);
+    
 
     /**
      * If webgl is there then use it otherwise use canvas
@@ -266,8 +259,9 @@ function init()
      */
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xffffff, 1); 
+    
+    controller.appendChild(datGUI.domElement);
     container.appendChild(renderer.domElement);
-
     
     /**
      * orbitControls for zoom in/ zoom out and other basic controls
@@ -300,7 +294,7 @@ function onWindowResize()
 
 function render() 
 {
-    //horizontal rotation   
+/*    //horizontal rotation   
     group.rotation.y += ( targetRotationX - group.rotation.y ) * 0.1;
  
      //vertical rotation 
@@ -319,16 +313,23 @@ function render()
 
         group.rotation.x = -1
     }
+*/
+    group.rotation.x += guiControls.rotationX;
+    group.rotation.y += guiControls.rotationY;
+    group.rotation.z += guiControls.rotationZ;
+
+    renderer.render(scene, camera);    
     
-    renderer.render( scene, camera );
 
 }
 
 function animate() 
 {
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
     render();
 }
+
+
 /**
  * Generate embed code for the current model, this iframe can
  * be added on any webpage to view the model.

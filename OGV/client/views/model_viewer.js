@@ -53,10 +53,6 @@ Template.modelViewer.events({
 	$('#overlay-comments').css({'bottom':'-10000px'});
     },
 
-    'click #sm-item-grid':function() 
-    {
-        getGrid();   
-    }
 });
 
 Template.modelViewer.helpers({
@@ -128,8 +124,10 @@ var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
 var finalRotationY
-var guiControls, OBJMaterial;
+var guiControls, OBJMaterial, OBJMaterialOver;
 var keyboard = new KeyboardState();
+var renderColour = 0xafa8a8;
+
 
 function getGrid(){
     axes = new THREE.AxisHelper(10000);
@@ -191,11 +189,12 @@ function init()
      */
      
     OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0x00f000}); 
+    OBJMaterialOver = new THREE.MeshPhongMaterial({color: 0x000000, visible: false}); 
     for (i in objList) {
 	loader.load( objList[i], function(object) {
 	    object.traverse(function(child) {
 		if (child instanceof THREE.Mesh) {
-		    child.material  = OBJMaterial;
+		    child.material = OBJMaterial;
 		}
 	    });
 
@@ -207,24 +206,90 @@ function init()
         scene.add(group);
 	});
     }
+    
+    for (i in objList) {
+    loader.load( objList[i], function(object) {
+        object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = OBJMaterialOver;
+        }
+        });
 
+        object.position.y = 0.1;
+        object.rotation.z =  90 * Math.PI/180;
+        object.rotation.x = -90 * Math.PI/180;
+
+        group.add(object);
+        scene.add(group);
+    });
+    }
+   
+    /**
+    * datGUI variable initializations
+    */
     guiControls = new function() {
         this.opacity = OBJMaterial.opacity;
         this.transparent = OBJMaterial.transparent;
+        this.ambient = OBJMaterial.ambient.getHex();
+        this.emissive = OBJMaterial.emissive.getHex();
         this.wireframe = OBJMaterial.wireframe;
+        this.wireframeLinewidth = OBJMaterial.wireframeLinewidth;
+        this.shininess = OBJMaterial.shininess;
+        this.visible = OBJMaterial.visible;
+        
+        this.visible = OBJMaterialOver.visible;
+        this.wireframe = OBJMaterialOver.wireframe;
+        this.wireframeLinewidth = OBJMaterialOver.wireframeLinewidth;
     }
 
+    //Initialize dat.GUI
     datGUI = new dat.GUI({autoPlace:false});
-    datGUI.add(guiControls, 'opacity', 0, 1).onChange(function (e) {
+    
+    /**
+    * Add folders/sub categories in controls
+    */
+    var sceneGui = datGUI.addFolder("Scene");                   //consisting of changes to be shown in renderer or scene
+    var modelGui = datGUI.addFolder("Model");                   //consisting of changes to be shown in the model
+    var overmodelGui = datGUI.addFolder("WireFrame + Model");   //activated OBJMAterialOver that overlaps the existing model
+
+    /** 
+    * datGUI GUI and of variables defined above functionality
+    */
+    modelGui.add(guiControls, 'visible').onChange(function (e) {
+        OBJMaterial.visible = e;
+    });
+    modelGui.add(guiControls, 'opacity', 0, 1).onChange(function (e) {
         OBJMaterial.opacity = e;
     });
-    datGUI.add(guiControls, 'transparent').onChange(function (e) {
+    modelGui.add(guiControls, 'transparent').onChange(function (e) {
         OBJMaterial.transparent = e;
     });
-    datGUI.add(guiControls, 'wireframe').onChange(function (e) {
+    modelGui.addColor(guiControls, 'ambient').onChange(function (e) {
+        OBJMaterial.ambient = new THREE.Color(e);
+    });
+    modelGui.addColor(guiControls, 'emissive').onChange(function (e) {
+        OBJMaterial.emissive = new THREE.Color(e);
+    });
+    modelGui.add(guiControls, 'wireframe').onChange(function (e) {        
         OBJMaterial.wireframe = e;
     });
+    modelGui.add(guiControls, 'wireframeLinewidth', 0, 10).onChange(function (e) {
+        OBJMaterial.wireframeLinewidth = e;
+    });
+    modelGui.add(guiControls, 'shininess', 0, 100).onChange(function (e) {
+        OBJMaterial.shininess = e;
+    });
 
+    overmodelGui.add(guiControls, 'visible').onChange(function (e) {
+        OBJMaterialOver.visible = e;
+    });
+    overmodelGui.add(guiControls, 'wireframe').onChange(function (e) {        
+        OBJMaterialOver.wireframe = e;
+    });
+    overmodelGui.add(guiControls, 'wireframeLinewidth', 0, 10).onChange(function (e) {
+        OBJMaterialOver.wireframeLinewidth = e;
+    });
+    
     /**
      * If webgl is there then use it otherwise use canvas
      */
@@ -274,6 +339,10 @@ function onWindowResize()
 
 function render() 
 {
+    /**
+    * Smooth mouse movements
+    */
+
     //horizontal rotation   
     group.rotation.y += ( targetRotationX - group.rotation.y ) * 0.1;
  

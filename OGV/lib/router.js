@@ -71,11 +71,12 @@ Router.map(function() {
 	path: '/description/:_id',
 	data: function() 
 	{
-	 	if(ModelFiles.findOne({'owner' : Meteor.user()})){
-	 		return ModelFiles.findOne(this.params._id);	
-	 	} else {
+		var model = ModelFiles.findOne({'owner' : Meteor.user()._id});
+	 	if( model == null ){
 	 		Router.go('/upload');
 	 		return;
+	 	} else {
+	 		return ModelFiles.findOne(this.params._id);	
 	 	}
 	  
 	}

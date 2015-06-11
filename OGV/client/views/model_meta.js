@@ -63,16 +63,16 @@ Template.modelMeta.events({
 	    if (err) {
 		throwError(err.reason);
 	    } else {
-		//throwNotification("Image has been Uploaded" );
-		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:fsFile._id}}, function(error, res) {
-		    if (error) {
-			throwError(error.reason);
-		    } else {
-			throwNotification("Data about model has been saved");
-		    }
-		});
-		Router.go('/my-models');
-  		throwNotification("Data about model has been saved");
+			throwNotification("Thumbnail Image has been Uploaded" );
+			ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:fsFile._id}}, function(error, res) {
+			    if (error) {
+				throwError(error.reason);
+			    } else {
+				throwNotification("Data about model has been saved");
+			    }
+			});
+			Router.go('/my-models');
+	  		throwNotification("Data about model has been saved");
 	    }
 	}); 
 	}    

@@ -53,9 +53,9 @@ Template.dashboard.events({
   
       Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: picId} }}, function(error, res) {
     if (error) {
-        throwError(error.reason);
+        sAlert.error(error.reason);
         } else {
-        throwNotification("Settings saved");
+        sAlert.success("Settings saved", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});  
     }
       });
   }
@@ -67,10 +67,10 @@ Template.dashboard.events({
   
       ProfilePictures.insert(fsFile, function(err, dpFile) {
     if (err) {
-        throwError("Error: Invalid file format");
+        sAlert.error("Error: Invalid file format", {effect: 'genie', onRouteClose: false, stack: false, timeout: 8000, position: 'top'});
         } else {
-        throwNotification('Profile pic uploaded');
-            saveSettings(dpFile._id);
+        sAlert.success("Profile pic uploaded", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});        
+          saveSettings(dpFile._id);
     } 
       });
   } else {
@@ -103,9 +103,9 @@ Template.dashboard.events({
       }
   }, function(error, res) {
       if (error) {
-    throwError(error.reason);
+    sAlert.error(error.reason);
       } else {
-    throwNotification("Admin Settings saved");
+    sAlert.success("Admin Settings saved", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
       }
   }); 
     }

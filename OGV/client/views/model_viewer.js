@@ -32,7 +32,7 @@ Template.modelViewer.events({
         };
  	Meteor.call('love', love, function(error, loveId) {
 	    if (error) {
-		throwError(error.reason);
+		sAlert.error(error.reason);
 	    }
 	});
     },
@@ -94,7 +94,7 @@ Template.modelViewer.rendered = function()
 function getObjFiles(model) 
 {
     var objUrls = [];
-    throwNotification("getting obj files");
+    sAlert.success("getting obj files", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});    
     modelId = model._id;
     OBJFiles.find({ gFile : modelId }).forEach( function (objFile) {
 	objUrls.push(objFile.url());
@@ -247,6 +247,6 @@ function generateEmbedCode()
 {
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
-    throwNotification(embedCode);
+    sAlert.success(embedCode, {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
     return embedCode;
 }

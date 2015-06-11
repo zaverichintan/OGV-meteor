@@ -44,10 +44,10 @@ Template.logIn.events({
 	    isValidPassword(password)) {
 	    Meteor.loginWithPassword(email,password,function(err){
 	        if (err) {
-		    throwError(err.reason);
+		    sAlert.error(err.reason);
 		    console.log(err);
 		} else {
-		    throwNotification('Welcome back');
+			sAlert.info('Welcome back', {effect: 'genie', onRouteClose: true, stack: false, timeout: 4000, position: 'top'});				    
 		    Router.go('/upload');
 		}
 	    });

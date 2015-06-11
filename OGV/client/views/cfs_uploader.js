@@ -25,9 +25,9 @@ function uploadFile(event, temp)
 	
 	ModelFiles.insert(fsFile,function(err,fileObj) {
 	    if (err) {
-		throwError(err.reason);
-	     } else {
-		throwNotification( "File Uploaded, and will appear in file manager after it's converted"); 
+		sAlert.error(err.reason);
+	    } else {
+	    sAlert.info("File Uploaded, and will appear in file manager after it's converted", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'}); 	
 		Router.go("/description/" +fileObj._id);  
 	    }
 	});

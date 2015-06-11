@@ -113,15 +113,23 @@ function init()
      * Setting Up the scene: 
      * Grabs the model-container div from template into a variable
      * named container, and sets up the scene 
-     */
+     */ 
     container = document.getElementById('model-container');
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 100000);
+    
+    /** 
+     * Create a scene, that will hold all our elements such 
+     * as objects, cameras and lights
+     */
+    scene = new THREE.Scene();
+
+    /**
+     * Create a camera, which defines where we're looking at.
+     */
+    camera = new THREE.PerspectiveCamera(110, window.innerWidth / window.innerHeight, 1, 100000);
     camera.position.z = 1000;
     camera.position.x = 1000;
     camera.position.y = 1000;
- 
-
-    scene = new THREE.Scene();
+    camera.lookAt(scene.position);
     
     /**
      * Light up the scene 

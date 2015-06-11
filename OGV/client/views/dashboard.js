@@ -67,7 +67,7 @@ Template.dashboard.events({
   
       ProfilePictures.insert(fsFile, function(err, dpFile) {
     if (err) {
-        throwError(err.reason);
+        throwError("Error: Invalid file format");
         } else {
         throwNotification('Profile pic uploaded');
             saveSettings(dpFile._id);

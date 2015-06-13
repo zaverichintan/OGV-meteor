@@ -129,7 +129,8 @@ function init()
     camera.position.z = 1000;
     camera.position.x = 1000;
     camera.position.y = 1000;
-    camera.lookAt(scene.position);
+    camera.lookAt( new THREE.Vector3( 1000, 1000, 1000 ) );
+    // camera.lookAt(scene.position);
     
     /**
      * Light up the scene 
@@ -209,6 +210,7 @@ function init()
     controls.addEventListener('change', render);    
 	 
     window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener( "keydown", onKeydown, false );
 
     animate();
 
@@ -250,3 +252,22 @@ function generateEmbedCode()
     sAlert.success(embedCode, {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
     return embedCode;
 }
+
+function onKeydown( event )
+{
+    switch (event.keyCode)
+    {
+        case 84: /* T */
+            camera.position.set( 0, 2000, 0 ); // top view
+            break;
+        case 66: /* B */
+            camera.position.set( 0, -2000, 0 ); // bottom view
+            break;
+        case 70: /* F */
+            camera.position.set( 0, 0, 2000 ); // front view
+            break;
+        case 82: /* R */
+            camera.position.set( 0, 0, -2000 ); // rear view
+            break;
+    }
+} 

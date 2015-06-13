@@ -27,7 +27,7 @@ function uploadFile(event, temp)
 	    if (err) {
 		sAlert.error(err.reason);
 	    } else {
-	    sAlert.info("File Uploaded, and will appear in file manager after it's converted", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'}); 	
+	    sAlert.info("File Uploaded, and will appear in file manager after it's converted", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'}); 	
 		Router.go("/description/" +fileObj._id);  
 	    }
 	});

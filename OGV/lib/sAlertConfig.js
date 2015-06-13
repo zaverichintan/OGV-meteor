@@ -1,7 +1,7 @@
 Meteor.startup(function () {  
   if (Meteor.isClient) {
     sAlert.config({
-      effect: 'genie',
+      effect: 'flip',
       position: 'top',
       timeout: 8000,
       html: false,

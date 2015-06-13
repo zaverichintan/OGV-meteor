@@ -94,7 +94,7 @@ Template.modelViewer.rendered = function()
 function getObjFiles(model) 
 {
     var objUrls = [];
-    sAlert.success("getting obj files", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});    
+    sAlert.success("getting obj files", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});    
     modelId = model._id;
     OBJFiles.find({ gFile : modelId }).forEach( function (objFile) {
 	objUrls.push(objFile.url());
@@ -247,6 +247,6 @@ function generateEmbedCode()
 {
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
-    sAlert.success(embedCode, {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
+    sAlert.success(embedCode, {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
     return embedCode;
 }

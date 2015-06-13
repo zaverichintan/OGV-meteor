@@ -55,7 +55,7 @@ Template.dashboard.events({
     if (error) {
         sAlert.error(error.reason);
         } else {
-        sAlert.success("Settings saved", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});  
+        sAlert.success("Settings saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});  
     }
       });
   }
@@ -67,9 +67,9 @@ Template.dashboard.events({
   
       ProfilePictures.insert(fsFile, function(err, dpFile) {
     if (err) {
-        sAlert.error("Error: Invalid file format", {effect: 'genie', onRouteClose: false, stack: false, timeout: 8000, position: 'top'});
+        sAlert.error("Error: Invalid file format", {effect: 'flip', onRouteClose: false, stack: false, timeout: 8000, position: 'top'});
         } else {
-        sAlert.success("Profile pic uploaded", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});        
+        sAlert.success("Profile pic uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});        
           saveSettings(dpFile._id);
     } 
       });
@@ -105,7 +105,7 @@ Template.dashboard.events({
       if (error) {
     sAlert.error(error.reason);
       } else {
-    sAlert.success("Admin Settings saved", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
+    sAlert.success("Admin Settings saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
       }
   }); 
     }

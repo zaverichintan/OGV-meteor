@@ -50,14 +50,14 @@ Template.modelMeta.events({
         	
 	ThumbFiles.insert(fsFile,function(err,thumbFile) {
 	    if (err) {
-		sAlert.error("No image or invalid image format selected", {effect: 'genie', onRouteClose: false, stack: false, timeout: 8000, position: 'top'});
+		sAlert.error("No image or invalid image format selected", {effect: 'flip', onRouteClose: false, stack: false, timeout: 8000, position: 'top'});
 	    } else {
-		sAlert.success("Image has been Uploaded", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});		
+		sAlert.success("Image has been Uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});		
 		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {
 		    if (error) {
 			sAlert.error(error.reason);
 		    } else {
-			sAlert.success("Data about model has been saved", {effect: 'genie', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
+			sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 		    }
 		});
   

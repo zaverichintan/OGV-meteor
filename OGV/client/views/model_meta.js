@@ -56,21 +56,49 @@ Template.modelMeta.events({
 	var fsFile = new FS.File(e.target[2].files[0]);
 	fsFile.gFile = modelId;      
         	
-	ThumbFiles.insert(fsFile,function(err,thumbFile) {
-	    if (err) {
-		throwError(err.reason);
-	    } else {
-		throwNotification("Image has been Uploaded" );
-		throwNotification(category);
-		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id, categories: category}}, function(error, res) {
-		    if (error) {
-			throwError(error.reason);
-		    } else {
+	/**
+	* Delete any thumbnail association with the model.
+	* Thumbnail will be deleted before updating
+	* No thumbnail deletion will happen if there is no thumbnail present yet.
+	*/
+    var currentModel = ModelFiles.findOne(modelId);	
+    var prevThumbnail = ThumbFiles.findOne(currentModel.thumbnail);
+    if(typeof prevThumbnail != 'undefined'){
+		ThumbFiles.remove(currentModel.thumbnail);
+    }
+
+	if(document.getElementById("desc-model-thumb").files.length == 0){
+		//Givng the user the choice of leaving the thumbnail part empty
+		var x = confirm("Are you sure you don't want to add/change thumbnail of your model?");
+		if(x){
+			ModelFiles.update(modelId, {$set: {name: filename, about: description, categories: category}}, function(error, res) {
+			    if (error) {
+					throwError(error.reason);
+			    } else {
+					throwNotification("Data about model has been saved");
+			    }
+			});
+			Router.go('/my-models');
 			throwNotification("Data about model has been saved");
+		}
+	} else {
+		ThumbFiles.insert(fsFile,function(err,thumbFile) {
+		    if (err) {
+				throwError(err.reason);
+		    } else {
+				throwNotification("Thumbnail Image has been Uploaded" );
+				ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:fsFile._id, categories: category}}, function(error, res) {
+				    if (error) {
+					throwError(error.reason);
+				    } else {
+					throwNotification("Data about model has been saved");
+				    }
+				});
+				Router.go('/my-models');
+		  		throwNotification("Data about model has been saved");
 		    }
 		});
-  
-	    }
-	}); 
-    }
+	}
+	
+	}    
 });

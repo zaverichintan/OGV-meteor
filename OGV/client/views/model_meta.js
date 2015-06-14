@@ -1,4 +1,4 @@
-/*                     M O D E L _ M E T A . J S
+/**                     M O D E L _ M E T A . J S
  * BRL-CAD
  *
  * Copyright (c) 1995-2013 United States Government as represented by
@@ -43,17 +43,26 @@ Template.modelMeta.events({
 	    thumbnail,
 	    modelId = modelMetaForm.find('#model-id').val();
 	    
+	/**
+	* Adding the checkd boxes to an array named category
+	*/
+	var category = Array();
+	$("input:checkbox[name=category]:checked").each(function(){
+    	category.push($(this).val());
+	})
+
 	file = $('#desc-model-thumb')
 	
 	var fsFile = new FS.File(e.target[2].files[0]);
-	fsFile.gFile = modelId;
+	fsFile.gFile = modelId;      
         	
 	ThumbFiles.insert(fsFile,function(err,thumbFile) {
 	    if (err) {
 		throwError(err.reason);
 	    } else {
 		throwNotification("Image has been Uploaded" );
-		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {
+		throwNotification(category);
+		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id, categories: category}}, function(error, res) {
 		    if (error) {
 			throwError(error.reason);
 		    } else {
@@ -63,5 +72,5 @@ Template.modelMeta.events({
   
 	    }
 	}); 
-    } 
+    }
 });

@@ -76,7 +76,8 @@ Router.map(function() {
 	 		Router.go('/upload');
 	 		return;
 	 	} else {
-	 		return ModelFiles.findOne(this.params._id);	
+	 		Session.set('modelId', this.params._id);
+	 		return ModelFiles.findOne(this.params._id);		
 	 	}
 	  
 	}

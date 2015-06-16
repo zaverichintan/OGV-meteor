@@ -253,6 +253,11 @@ function generateEmbedCode()
     return embedCode;
 }
 
+/**
+ * onKeyDown function helps to views model from 
+ * different angles on keyboard button press.
+ */
+
 function onKeydown( event )
 {
     switch (event.keyCode)

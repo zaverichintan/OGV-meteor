@@ -130,8 +130,8 @@ function init()
     camera.position.x = 2000;
     camera.position.y = 2000;
     // camera.lookAt( new THREE.Vector3( 2000, 2000, 2000 ) );
-    scene.add(camera);
     camera.lookAt(scene.position);
+    scene.add(camera);
     
     /**
      * Light up the scene 
@@ -250,7 +250,7 @@ function generateEmbedCode()
 {
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
-    sAlert.success(embedCode, {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
+    sAlert.success(embedCode, {effect: 'flip', onRouteClose: false, stack: false, timeout: 10000, position: 'top'});
     return embedCode;
 }
 
@@ -264,16 +264,16 @@ function onKeyDown( event )
     switch (event.keyCode)
     {
         case 84: /* T */
-            camera.position.set( 0, 2000, 0 ); // top view
+            camera.position.set( 0, 3000, 0 ); // top view
             break;
         case 66: /* B */
-            camera.position.set( 0, -2000, 0 ); // bottom view
+            camera.position.set( 0, -3000, 0 ); // bottom view
             break;
         case 70: /* F */
-            camera.position.set( -2000, 0,  0); // front view
+            camera.position.set( -3000, 0,  0); // front view
             break;
         case 82: /* R */
-            camera.position.set( 2000, 0, 0 ); // rear view
+            camera.position.set( 3000, 0, 0 ); // rear view
             break;
         case 27: /* ESC */
             camera.position.set( 2000, 2000, 2000 ); // Reset view using ESC

@@ -125,12 +125,13 @@ function init()
     /**
      * Create a camera, which defines where we're looking at.
      */
-    camera = new THREE.PerspectiveCamera(110, window.innerWidth / window.innerHeight, 1, 100000);
-    camera.position.z = 1000;
-    camera.position.x = 1000;
-    camera.position.y = 1000;
-    camera.lookAt( new THREE.Vector3( 1000, 1000, 1000 ) );
-    // camera.lookAt(scene.position);
+    camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 100000);
+    camera.position.z = 2000;
+    camera.position.x = 2000;
+    camera.position.y = 2000;
+    // camera.lookAt( new THREE.Vector3( 2000, 2000, 2000 ) );
+    scene.add(camera);
+    camera.lookAt(scene.position);
     
     /**
      * Light up the scene 
@@ -210,7 +211,7 @@ function init()
     controls.addEventListener('change', render);    
 	 
     window.addEventListener('resize', onWindowResize, false);
-    window.addEventListener( "keydown", onKeydown, false );
+    window.addEventListener( 'keydown', onKeyDown, false );
 
     animate();
 
@@ -258,7 +259,7 @@ function generateEmbedCode()
  * different angles on keyboard button press.
  */
 
-function onKeydown( event )
+function onKeyDown( event )
 {
     switch (event.keyCode)
     {
@@ -269,10 +270,13 @@ function onKeydown( event )
             camera.position.set( 0, -2000, 0 ); // bottom view
             break;
         case 70: /* F */
-            camera.position.set( 0, 0, 2000 ); // front view
+            camera.position.set( -2000, 0,  0); // front view
             break;
         case 82: /* R */
-            camera.position.set( 0, 0, -2000 ); // rear view
+            camera.position.set( 2000, 0, 0 ); // rear view
             break;
+        case 27: /* ESC */
+            camera.position.set( 2000, 2000, 2000 ); // Reset view using ESC
+            break;                
     }
 } 

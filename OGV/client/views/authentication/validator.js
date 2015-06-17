@@ -18,7 +18,7 @@
  * information.
  */
 
-/** @file OGV/client/views/validator.js
+/** @file OGV/client/views/authentication/validator.js
  *  @brief Validation functions for the authentication forms
  *
  */

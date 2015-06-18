@@ -25,28 +25,8 @@
  * authenticate user credentials, shows the errors if any
  */
 
-// Template.landingPage.events({
-// 	'submit #feedForm': function (e,t)
-// 	{
-// 		e.preventDefault();
-// 		var feedbackForm = $(e.currentTarget),
-// 		email = feedbackForm.find('#email').val(),
-// 		category = feedbackForm.find('#category').val(),
-// 		message = feedbackForm.find('#message').val();
-
-// 		if (isNotEmpty(email) &&
-// 			isNotEmpty(category) &&
-// 			isNotEmpty(message)) {
-// 	    	Meteor.loginWithPassword(email,category,message, function(err){
-// 	        if (err) {
-// 		    sAlert.error(err.reason);
-// 		    console.log(err);
-// 		} else {
-// 			sAlert.info('Welcome back', {effect: 'flip', onRouteClose: true, stack: false, timeout: 4000, position: 'top'});				    
-// 		}
-// 	    });
-
-// 		}
-// 	return false;
-// 	}
-// });
+Template.landingPage.helpers({
+	isFillingForm: function () {
+		return true;
+	}
+});

@@ -129,9 +129,6 @@ function init()
     camera.position.z = 2000;
     camera.position.x = 2000;
     camera.position.y = 2000;
-    // camera.lookAt( new THREE.Vector3( 2000, 2000, 2000 ) );
-    camera.lookAt(scene.position);
-    scene.add(camera);
     
     /**
      * Light up the scene 
@@ -255,7 +252,7 @@ function generateEmbedCode()
 }
 
 /**
- * onKeyDown function helps to views model from 
+ * onKeyDown function helps to view model from 
  * different angles on keyboard button press.
  */
 
@@ -265,18 +262,23 @@ function onKeyDown( event )
     {
         case 84: /* T */
             camera.position.set( 0, 3000, 0 ); // top view
+            camera.lookAt(scene.position);
             break;
         case 66: /* B */
             camera.position.set( 0, -3000, 0 ); // bottom view
+            camera.lookAt(scene.position);
             break;
         case 70: /* F */
             camera.position.set( -3000, 0,  0); // front view
+            camera.lookAt(scene.position);
             break;
         case 82: /* R */
             camera.position.set( 3000, 0, 0 ); // rear view
+            camera.lookAt(scene.position);
             break;
         case 27: /* ESC */
             camera.position.set( 2000, 2000, 2000 ); // Reset view using ESC
+            camera.lookAt(scene.position);
             break;                
     }
 } 

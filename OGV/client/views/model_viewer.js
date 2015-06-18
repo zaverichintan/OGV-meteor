@@ -276,8 +276,8 @@ function onKeyDown( event )
             camera.position.set( 3000, 0, 0 ); // rear view
             camera.lookAt(scene.position);
             break;
-        case 27: /* ESC */
-            camera.position.set( 2000, 2000, 2000 ); // Reset view using ESC
+        case 78: /* N */
+            camera.position.set( 2000, 2000, 2000 ); // Reset view using N
             camera.lookAt(scene.position);
             break;                
     }

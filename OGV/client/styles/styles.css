@@ -502,49 +502,7 @@ input:focus {
     background-color: rgba(0,0,0,0.2);
    display:block;
 }
-/*
-.user-info, .model-info, .love-share{
-	float:left;
-	padding: 15px;
-}
 
-
-.user-info{
-	margin-left: 25px;
-	width: 100px;
-}
-
-
-
-.model-post {
-    max-width:600px;
-}
-.model-info{
-}
-
-.feed-model-preview{
-	width: 100%;
-	height: 250px;
-}
-
-.user-name{
-	margin-left: 5px;
-}
-
-.post-description{
-	width:500px;
-    margin-top:10px;
-    display:block;
-    
-}
-
-.post-description > p{
-    width:100%;
-	font-size: 14px;
-	color: #555;
-	margin-left: 5px;
-	line-height: 1.5;
-}*/
 #overlay-comments {
 	position:fixed;
 	background:rgba(255,255,255,0.5);
@@ -623,9 +581,134 @@ input:focus {
     float:none;
 }
 
+
+/* 
+ * This CSS is the part of client/templates/model_viewer.html
+ * It contains the keys for switching to the different views 
+ * such that the user on hovering it will get the information 
+ * and on pressing the keys one can switch to different views.
+ */
+
+.letter {
+    font-size: 18px;
+    background-color: #f03b5b;
+    border-radius: 1px;
+    color: #fafafa;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: text-bottom;
+    font-style: normal;
+    margin-right: .5rem;
+}
+
+.keyboard-shortcuts {
+    padding: 1em;
+}
+
+.keyboard-shortcuts .keyboard {
+    margin: 5em 0em 0em 1em;
+}
+
+.keyboard-shortcuts .keyboard .letter-text {
+    display: none;
+}
+
+.keyboard-shortcuts .keyboard #letter-text-t {
+    top: 106.5%;
+    left: 40%;
+    position: absolute;
+}
+
+.keyboard-shortcuts .keyboard #letter-text-r {
+    top: 112%;
+    left: 64.5%;
+    position: absolute;
+}
+
+.keyboard-shortcuts .keyboard #letter-text-b {
+    top: 112%;
+    left: 40%;
+    position: absolute;
+}
+
+.keyboard-shortcuts .keyboard #letter-text-f {
+    top: 112%;
+    left: 14.5%;
+    position: absolute;
+}
+
+.keyboard-shortcuts .keyboard #letter-text-n {
+    top: 117.5%;
+    left: 40%;
+    position: absolute;
+}
+
+    .keyboard-shortcuts:hover{
+        padding: 1em;
+    }
+
+    .keyboard-shortcuts:hover .keyboard{
+        margin: 2em 0em 0em 0em;
+        -webkit-transition: all 300ms cubic-bezier(0.175, 0.885, 0.335, 1.05);
+        -moz-transition: all 300ms cubic-bezier(0.175, 0.885, 0.335, 1.05);
+        -o-transition: all 300ms cubic-bezier(0.175, 0.885, 0.335, 1.05);
+        transition: all 300ms cubic-bezier(0.175, 0.885, 0.335, 1.05);
+    }
+
+    .keyboard-shortcuts:hover .letter-text {
+        display: block;
+        padding-left: 2.7em;
+        line-height: 2em;
+        color: #fafafa;
+    }
+
+    .keyboard-shortcuts:hover #letter-text-n {
+        display: block;
+        top: 92.5%;
+        left: 20%;
+        position: absolute;
+    }
+
+    .keyboard-shortcuts:hover #letter-text-t {
+        top: 69.5%;
+        left: 20%%;
+        position: absolute;
+    }
+
+    .keyboard-shortcuts:hover #letter-text-r {
+        top: 75.2%;
+        left: 20%;
+        position: absolute;
+    }
+
+    .keyboard-shortcuts:hover #letter-text-b {
+        top: 86.7%;
+        left: 20%;
+        position: absolute;
+    }
+
+    .keyboard-shortcuts:hover #letter-text-f {
+        top: 81%;
+        left: 20%;
+        position: absolute;
+    }
+
+    @media (max-width: 767px) {
+        .keyboard-shortcuts {
+            display: none;
+        }
+    }
+
 /* 
  * L A N D I N G - P A G E . C S S 
+ *
+ * This CSS is the part of file client/landingPage.html
  */
+
 .slide {
     background-position: center center;
     background-repeat: no-repeat;
@@ -633,6 +716,10 @@ input:focus {
     padding-top: 50px;
     text-align: center;    
 }
+
+/* 
+ * S L I D E - 1 
+ */
 
 #slide-1 {
     background: url(tasveer/slide-1-background.gif) no-repeat center fixed;
@@ -735,6 +822,10 @@ input:focus {
         }                           
     }
 
+/* 
+ * S L I D E - 2 
+ */
+
 #slide-2 {
     background-color: #FAF9F9;
     color: #2C2B34;
@@ -775,8 +866,7 @@ input:focus {
         padding-top: 45px;
     }
     
-    .content-row i,
-    #about-row-5 i {
+    .content-row i, #about-row-5 i {
         display: block;
         margin: 0 auto;
         max-height: 100%;
@@ -858,6 +948,10 @@ input:focus {
         }                
     }
 
+/* 
+ * S L I D E - 3 
+ */    
+
 #slide-3 {
     background-color: #FAF9F9;
     padding: 4em;
@@ -897,6 +991,11 @@ input:focus {
         }            
     }
 
+
+/* 
+ * S L I D E - 4 
+ */
+
 #slide-4 {
     background-color: #FAF9F9;
     padding-top: 35px;
@@ -926,6 +1025,10 @@ input:focus {
         }
     }
 
+/* 
+ * F O O T E R  
+ */
+
 #footer {
     background-color: #111;   
     width:100%;
@@ -935,4 +1038,8 @@ input:focus {
         color: #F03B5B;
         font-size: 17.2px;
         padding: 2.8em;
-    }    
+    }
+
+/* 
+ * L A N D I N G - P A G E  -  E N D S  
+ */

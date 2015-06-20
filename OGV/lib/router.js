@@ -33,6 +33,7 @@
 
 Router.configure({
     layoutTemplate:'layout',
+    notFoundTemplate: 'notFound',
     loadingTemplate:'preloader',
     waitOn: function() { return Meteor.subscribe('modelFiles'); },
 });

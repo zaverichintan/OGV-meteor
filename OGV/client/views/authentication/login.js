@@ -47,8 +47,8 @@ Template.logIn.events({
 		    sAlert.error(err.reason);
 		    console.log(err);
 		} else {
-			sAlert.info('Welcome back', {effect: 'flip', onRouteClose: true, stack: false, timeout: 4000, position: 'top'});				    
-		    Router.go('/');
+			// sAlert.info('Welcome back', {effect: 'flip', onRouteClose: true, stack: false, timeout: 4000, position: 'top'});
+		    Router.go('/upload');
 		}
 	    });
 	}

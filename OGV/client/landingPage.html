@@ -7,7 +7,11 @@
                     <h2 class="font-thin">BRL-CAD</h2>
                     <h1>Online Geometry Viewer</h1>
                     <h2>A social blogging platform for 3D models.</h2> <br />
-                    <a href="/log-in"><button class="btn btn-default">Sign-In</button></a>
+                    {{#unless currentUser}}
+                        <a href="/log-in"><button class="btn btn-default">Sign-In</button></a>
+                    {{else}}
+                        <a href="/models"><button class="btn btn-default">View Models</button></a>
+                    {{/unless}}                                
                 </div>
             </div>
         </div>           
@@ -116,7 +120,6 @@
             </div>
         </div> <!-- Form End -->
     </div><!-- Container End -->
-
     <!-- Slide 4 Over -->
 
     <!-- Footer Start -->

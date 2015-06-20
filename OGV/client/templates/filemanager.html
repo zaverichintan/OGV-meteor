@@ -1,12 +1,16 @@
 <template name="filemanager">
     <div class="modelsList container">
 	<h1>My models</h1>
-	<div class = "models row">
-	{{#each models}}
-		{{#if converted }}
-		{{> aboutModel}}
-		{{/if}}
-	{{/each}}
+	<div class = "models row-fluid">
+	{{#if models}}
+		{{#each models}}
+			{{#if converted }}
+				{{> aboutModel}}
+			{{/if}}
+		{{/each}}
+	{{else}}
+		<h3>OGV is hungry, <a href="/upload">feed some models</a></h3>
+	{{/if}}
 	</div>
     </div>
 </template>

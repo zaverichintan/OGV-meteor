@@ -27,7 +27,13 @@
 Template.filemanager.helpers({
     models: function() 
     {
-	return ModelFiles.find({'owner' : Meteor.userId()});
+	model = ModelFiles.find({'owner' : Meteor.userId()}, {sort:{timeUploaded:-1}});
+    if (model.count()) 
+    {
+    	return model;
+    } else {
+    	return false;
+    }
     }
 });
 

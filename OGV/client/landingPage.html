@@ -93,11 +93,11 @@
                 <form action="//formspree.io/deeky.sharma@gmail.com" method="POST" class="feedForm" id="feedForm" onsubmit="notify()">
                     <div class="form-group">
                         <!-- <label for="email">Email address</label> -->
-                        <input type="email" class="form-control text-center" id="email" name="email" placeholder="Email Address" title="Enter email address" required>
+                        <input type="email" class="form-control text-center" id="email" name="email" placeholder="Email Address" title="Enter email address" required="required">
                     </div><br>
                     <div class="form-group">
                         <!-- <label for="email">Category</label> -->
-                        <select name="category" class="form-control text-center" id="category" form="feedForm" title="Select reason" required data-errormessage-value-missing="Please, pick one">
+                        <select name="category" class="form-control text-center" id="category" form="feedForm" title="Select reason" required="required" data-errormessage-value-missing="Please, pick one">
                             <option selected disabled value="">Please select reason</option>
                             <option value="Improve this Page">Improve this Page</option>
                             <option value="Suggest new features/ideas">Suggest new features/ideas</option>
@@ -109,7 +109,7 @@
                     </div><br>
                     <div class="form-group">
                         <!-- <label for="email">Message</label>                             -->
-                        <textarea class="form-control" id="message" name="message" form="feedForm" placeholder="Message" title="Write message" required></textarea>
+                        <textarea class="form-control" id="message" name="message" form="feedForm" placeholder="Message" title="Write message" required="required"></textarea>
                     </div>    
                     <p>*All fields are compulsory to fill</p>
                     <button class="btn primary-btn btn-default form-control" type="submit">Send</button>

@@ -30,3 +30,15 @@ Template.landingPage.helpers({
 		return true;
 	}
 });
+
+$('form').submit(function() {
+  if (!attributeSupported("required") || ($.browser.safari)) {
+   $("#feedForm [required]").each(function(index) {
+    if (!$(this).val()) {
+     alert("Please fill all required fields.");
+     return false;
+    }
+   });
+  }
+  return false;
+});

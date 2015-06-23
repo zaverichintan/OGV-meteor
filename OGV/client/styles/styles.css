@@ -1043,3 +1043,24 @@ input:focus {
 /* 
  * L A N D I N G - P A G E  -  E N D S  
  */
+
+/* 
+ * 4 0 4 . c s s  
+ */
+
+.error-page {
+    background-color: #f9f9f9;    
+}
+
+.four-oh-four {
+    padding-top: 0.8em;
+    font-size: 8em;
+    text-align: center;    
+}
+
+.error-text {
+    padding-top: 1em;
+    font-family:'open sans', sans-serif;
+    text-align: center;
+    color: #333;
+}

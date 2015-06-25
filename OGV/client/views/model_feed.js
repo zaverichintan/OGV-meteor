@@ -36,14 +36,15 @@ Template.modelFeed.helpers({
      */
     models: function() 
     {
-	model = ModelFiles.find({}, {sort:{timeUploaded:-1}});
+    var currentUser = Meteor.user();
+	model = ModelFiles.find({owner: {$in: currentUser.profile.following}}, {sort:{timeUploaded:-1}});
 	if (model.count()) {
 	    return model;
 	} else {
 	    return false;
 	} 
     }
-});
+}); 
 
 
 Template.modelPost.helpers({

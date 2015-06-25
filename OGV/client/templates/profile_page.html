@@ -1,0 +1,23 @@
+<template name="profilePage">
+    <h2>{{ person.profile.name }}</h2>
+    <a href="/profile/{{ currentUser._id }}"><div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;"></div></a>
+    <br><br><strong>FOLLOWERS</strong>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <strong>FOLLOWING</strong><br>
+    <button id = "followButton">+Follow</button><br>
+    <h3>{{ person.profile.bio }} </h3>
+    <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
+
+    <script>
+    	//Button will be visible only on other user profile pages
+    	var parts = location.href.split('/');
+		var id = parts.pop();
+		var currentUser = Meteor.user();
+		if(currentUser._id == id){
+			document.getElementById("followButton").style.display="none";
+		} else {			
+			document.getElementById("followButton").style.display="block";
+		}
+    </script>
+</template>

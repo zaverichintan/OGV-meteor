@@ -33,3 +33,10 @@ Template.menu.events({
 	return false;
     }
 });
+
+Template.menu.helpers({
+	userId: function(){
+		var currentUser = Meteor.user();
+		return currentUser._id;
+	}
+})

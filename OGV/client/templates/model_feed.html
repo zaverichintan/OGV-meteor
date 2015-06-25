@@ -16,12 +16,12 @@
 <template name ="modelPost">
     <div class="feed-item model-post">
       <div class="post-section post-sidebar user-info">
-		<div class="post-item user-image" style="background:url('{{userImg}}');"></div>
+		<a href="/profile/{{ owner._id }}"><div class="post-item user-image" style="background:url('{{userImg}}');"></div></a>
 		<div class="post-item post-meta user-meta"></div>
       </div>
 	    
      <div class="post-section post-content model-info">
-		<p class="post-item post-text user-name"> {{ owner.profile.name }} posted {{ name }}</p>
+		<p class="post-item post-text user-name"> <a href="/profile/{{ owner._id }}"> {{ owner.profile.name }}</a> posted {{ name }} <br>on <em>{{uploadedAt}}</em></p>
 		<div class="post-item">
 	        {{> modelView }}	
 		<p class="post-text post-subitem"> {{ about }} </p>

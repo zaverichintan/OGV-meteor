@@ -1,6 +1,7 @@
 <template name="profilePage">
     <h2>{{ person.profile.name }}</h2>
     <a href="/profile/{{ currentUser._id }}"><div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;"></div></a>
+    
     <br><br><strong>FOLLOWERS</strong>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -31,8 +32,8 @@
                 document.getElementById("followButton").style.display="none";
                 document.getElementById("unfollowButton").style.display="none";
             } else {
-                document.getElementById("followButton").style.display="none";
-                document.getElementById("unfollowButton").style.display="block";
+                document.getElementById("followButton").style.display="block";
+                document.getElementById("unfollowButton").style.display="none";
             }        
             
         }

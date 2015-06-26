@@ -1,0 +1,39 @@
+<template name="profilePage">
+    <h2>{{ person.profile.name }}</h2>
+    <a href="/profile/{{ currentUser._id }}"><div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;"></div></a>
+    <br><br><strong>FOLLOWERS</strong>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <strong>FOLLOWING</strong><br>
+    <button id = "followButton" >+FOLLOW</button><br>
+    <button id = "unfollowButton" style="display: none;">UNFOLLOW</button><br>
+
+    <h3>{{ person.profile.bio }} </h3>
+    <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
+
+    <!-- Handling button visibility -->
+    <script>
+        //take out id from url
+        var parts = location.href.split('/');
+		var id = parts.pop();
+        //user currently logged in
+		var currentUser = Meteor.user();
+
+        var checkForUser = Meteor.users.findOne({_id: currentUser._id}, {"profile.following": id });
+
+        if( typeof checkForUser == 'undefined' ){
+            document.getElementById("followButton").style.display="block";
+            document.getElementById("unfollowButton").style.display="none";
+        } else {
+            if ( currentUser._id == id ) {
+                document.getElementById("followButton").style.display="none";
+                document.getElementById("unfollowButton").style.display="none";
+            } else {
+                document.getElementById("followButton").style.display="none";
+                document.getElementById("unfollowButton").style.display="block";
+            }        
+            
+        }
+
+    </script>
+</template>

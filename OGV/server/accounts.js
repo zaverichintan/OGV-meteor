@@ -59,8 +59,8 @@ if (Meteor.users.find().fetch().length === 0) {
 	Roles.addUsersToRoles(id, userData.roles);
     
     });
-} 
 
+} 
 
 /**
  * Intended to Delete/Remove users who have not verified their Emails in hrs hours
@@ -72,3 +72,4 @@ Meteor.setInterval(function() {
         Meteor.users.remove({_id: user._id}, true);
     });
 }, (3600000 * hrs));
+

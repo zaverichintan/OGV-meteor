@@ -51,12 +51,14 @@ Router.map(function() {
     this.route('cfsUploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
     this.route('forgotPassword', {path : 'forgot-password'});
+    
     this.route('dashboard',{
 	path: 'dashboard',
 	waitOn: function() {
 	    return Meteor.subscribe('ogvSettings');
 	}
     });
+    
     this.route('modelViewer', {
 	path: '/models/:_id',
 	data: function() 
@@ -91,8 +93,33 @@ Router.map(function() {
 	    return ModelFiles.find({'owner' : Meteor.user()});
 	}
     });
+
+    this.route('profilePage', {
+    path: '/profile/:_id',
+    waitOn:function(){
+        return Meteor.subscribe("userProfile",this.params._id);
+    },
+    data: function(){
+        var id = this.params._id;
+        personVar = Meteor.users.findOne( { _id:id } );
+        picId = personVar.profile.pic;
+        pic = ProfilePictures.findOne( { _id: picId } );
+        picUrl = pic.url();
+        
+        return {
+            userImg: picUrl,
+            person: personVar
+        }
+    }
+    })
 });
 
+// add the dataNotFound plugin, which is responsible for
+// rendering the dataNotFound template if your RouteController
+// data function returns a falsy value
+Router.plugin("dataNotFound",{
+    notFoundTemplate: "dataNotFound"
+});
 
 /**
  * Some routes are shown only when user has a valid email 

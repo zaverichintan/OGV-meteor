@@ -561,10 +561,8 @@ input:focus {
     float:none;
 }
 
-<<<<<<< HEAD
-=======
 textarea {
    resize: none;
    text-align: justify;
 }
->>>>>>> 21700e519cac5f80b2a89eb62e10a6ef96979822
+

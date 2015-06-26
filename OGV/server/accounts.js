@@ -27,14 +27,14 @@
  *  and use OGV.
  */
 
-Accounts.config({
-  sendVerificationEmail: true
-});
-
 /**
  * Create a test user without admin roles and a super user with 
  * admin roles on a fresh install (when number of users is zero)
  */
+Accounts.config({
+  sendVerificationEmail:true,
+  //forbidClientAccountCreation: false
+})
 
 if (Meteor.users.find().fetch().length === 0) {
     var users = [
@@ -59,4 +59,17 @@ if (Meteor.users.find().fetch().length === 0) {
 	Roles.addUsersToRoles(id, userData.roles);
     
     });
-}
+
+} 
+
+/**
+ * Intended to Delete/Remove users who have not verified their Emails in hrs hours
+ */
+var hrs = 1;
+Meteor.setInterval(function() {
+    Meteor.users.find({'emails.0.verified': false}).forEach(function(user) {
+        //Do action with 'user' that has not verified email for 3 days
+        Meteor.users.remove({_id: user._id}, true);
+    });
+}, (3600000 * hrs));
+

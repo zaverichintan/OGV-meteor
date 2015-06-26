@@ -61,7 +61,7 @@ Template.modelPost.helpers({
 	if (pic) {
 	    return picUrl;
         } else {
-	    return '/public/profile-pic.jpg';
+	    return '/public/icons/User.png';
 	}
     },
     owner: function()

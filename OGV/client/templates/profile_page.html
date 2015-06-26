@@ -11,6 +11,8 @@
     <h3>{{ person.profile.bio }} </h3>
     <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
 
+
+    {{> profileModelFeed}}
     <!-- Handling button visibility -->
     <script>
         //take out id from url
@@ -36,4 +38,19 @@
         }
 
     </script>
+</template>
+
+
+<template name="profileModelFeed">
+    <div class="profile-feed-wrapper">
+    {{#if models}}
+    {{#each models}}
+        {{#if converted }}
+        {{> modelPost }}
+        {{/if}}
+    {{/each}}
+    {{else}}
+    <h3>OGV is hungry, <a href="/upload">feed some models</a></h3>
+    {{/if}}
+    </div>
 </template>

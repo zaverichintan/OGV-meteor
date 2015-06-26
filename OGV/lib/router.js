@@ -96,18 +96,14 @@ Router.map(function() {
 
     this.route('profilePage', {
     path: '/profile/:_id',
-    waitOn:function(){
+    waitOn:function()
+    {
         return Meteor.subscribe("userProfile",this.params._id);
     },
     data: function(){
         var id = this.params._id;
         personVar = Meteor.users.findOne( { _id:id } );
-        picId = personVar.profile.pic;
-        pic = ProfilePictures.findOne( { _id: picId } );
-        picUrl = pic.url();
-        
         return {
-            userImg: picUrl,
             person: personVar
         }
     }

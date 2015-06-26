@@ -588,3 +588,8 @@ input:focus {
 label {
 	font-size:17px;
 }
+
+textarea {
+   resize: none;
+   text-align: justify;
+}

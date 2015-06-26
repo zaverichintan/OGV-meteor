@@ -5,19 +5,35 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <strong>FOLLOWING</strong><br>
-    <button id = "followButton">+Follow</button><br>
+    <button id = "followButton" >+FOLLOW</button><br>
+    <button id = "unfollowButton" style="display: none;">UNFOLLOW</button><br>
+
     <h3>{{ person.profile.bio }} </h3>
     <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
 
+    <!-- Handling button visibility -->
     <script>
-    	//Button will be visible only on other user profile pages
-    	var parts = location.href.split('/');
+        //take out id from url
+        var parts = location.href.split('/');
 		var id = parts.pop();
+        //user currently logged in
 		var currentUser = Meteor.user();
-		if(currentUser._id == id){
-			document.getElementById("followButton").style.display="none";
-		} else {			
-			document.getElementById("followButton").style.display="block";
-		}
+
+        var checkForUser = Meteor.users.findOne({_id: currentUser._id}, {"profile.following": id });
+
+        if( typeof checkForUser == 'undefined' ){
+            document.getElementById("followButton").style.display="block";
+            document.getElementById("unfollowButton").style.display="none";
+        } else {
+            if ( currentUser._id == id ) {
+                document.getElementById("followButton").style.display="none";
+                document.getElementById("unfollowButton").style.display="none";
+            } else {
+                document.getElementById("followButton").style.display="none";
+                document.getElementById("unfollowButton").style.display="block";
+            }        
+            
+        }
+
     </script>
 </template>

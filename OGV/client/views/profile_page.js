@@ -4,6 +4,7 @@ Template.profilePage.events({
 		var otherId = parts.pop(); //id of user whose page is being visited
 		var currentUser = Meteor.user(); //user who is using OGV at that moment
 		
+		
 		//updates "following" array of currentUser
 		Meteor.users.update(currentUser._id, {$addToSet: {"profile.following": otherId}}, function(error, res) {
 		    if (error) {
@@ -22,6 +23,7 @@ Template.profilePage.events({
 			throwNotification("Updated your followers' list");
 		    }
 		});
+
 
 		document.getElementById("unfollowButton").style.display="block";
 		document.getElementById("followButton").style.display="none";

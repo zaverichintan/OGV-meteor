@@ -15,6 +15,7 @@ bootstrap
 ishwerdas:ogv-threejs
 dbarrett:dropzonejs
 raix:ui-dropped-event
+twbs:bootstrap
 polguixe:meteor-datgui
 accounts-base
 accounts-password

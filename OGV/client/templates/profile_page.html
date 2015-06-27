@@ -1,14 +1,16 @@
 <template name="profilePage">
     <div id="profileContainer">
-        <a href="/profile/{{ currentUser._id }}"><div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;left:70px;position:relative;"></div></a>
+        <a href="/profile/{{ currentUser._id }}">
+            <div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;left:70px;position:relative;"></div>
+        </a>
         <div id="profileInfo">
             <h2>{{ person.profile.name }}</h2>
-            <strong>FOLLOWERS</strong>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <strong>FOLLOWING</strong>
+            <strong>FOLLOWERS {{followerCount}}</strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>FOLLOWING {{followingCount}}</strong><br>
             <button id = "followButton" >+FOLLOW</button><br>
-            <button id = "unfollowButton" style="display: none;">UNFOLLOW</button><br>
+            <button id = "unfollowButton" style="display: none;">UNFOLLOW</button>
 
             <h3>{{ person.profile.bio }} </h3>
             <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
@@ -19,11 +21,13 @@
         <hr>
         {{> profileModelFeed}}
     </div>
+    
     <!-- Handling button visibility -->
     <script>
         //take out id from url
         var parts = location.href.split('/');
 		var id = parts.pop();
+
         //user currently logged in
 		var currentUser = Meteor.user();
 
@@ -33,12 +37,11 @@
             document.getElementById("followButton").style.display="block";
             document.getElementById("unfollowButton").style.display="none";
         } else {
+            document.getElementById("followButton").style.display="none";
             if ( currentUser._id == id ) {
-                document.getElementById("followButton").style.display="none";
                 document.getElementById("unfollowButton").style.display="none";
             } else {
-                document.getElementById("followButton").style.display="block";
-                document.getElementById("unfollowButton").style.display="none";
+                document.getElementById("unfollowButton").style.display="block";
             }        
             
         }

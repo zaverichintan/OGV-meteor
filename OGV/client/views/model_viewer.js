@@ -130,6 +130,10 @@ var renderColour = 0xafa8a8;
 
 
 function getGrid(){
+    /**
+    * Button functionality to make the grids visible on the renderer
+    */
+
     axes = new THREE.AxisHelper(10000);
     group.add(axes);
 
@@ -206,26 +210,11 @@ function init()
         scene.add(group);
 	});
     }
-    
-    for (i in objList) {
-    loader.load( objList[i], function(object) {
-        object.traverse(function(child) {
-        if (child instanceof THREE.Mesh) {
-            child.material = OBJMaterialOver;
-        }
-        });
-
-        object.position.y = 0.1;
-        object.rotation.z =  90 * Math.PI/180;
-        object.rotation.x = -90 * Math.PI/180;
-
-        group.add(object);
-        scene.add(group);
-    });
-    }
    
     /**
     * datGUI variable initializations
+    * All these variables that have been initialized below are the ones
+    * that can be changed by the user while viewing the model.
     */
     guiControls = new function() {
         this.opacity = OBJMaterial.opacity;
@@ -248,12 +237,16 @@ function init()
     /**
     * Add folders/sub categories in controls
     */
-    var sceneGui = datGUI.addFolder("Scene");                   //consisting of changes to be shown in renderer or scene
-    var modelGui = datGUI.addFolder("Model");                   //consisting of changes to be shown in the model
-    var overmodelGui = datGUI.addFolder("WireFrame + Model");   //activated OBJMAterialOver that overlaps the existing model
+    //consisting of changes to be shown in renderer or scene
+    var sceneGui = datGUI.addFolder("Scene");               
+    //consisting of changes to be shown in the model        
+    var modelGui = datGUI.addFolder("Model");                   
+    //activated OBJMAterialOver that overlaps the existing model
+    var overmodelGui = datGUI.addFolder("WireFrame + Model");   
 
     /** 
-    * datGUI GUI and of variables defined above functionality
+    * defines the functionality of the variables for dat.GUI
+    * that were initialized above.
     */
     modelGui.add(guiControls, 'visible').onChange(function (e) {
         OBJMaterial.visible = e;

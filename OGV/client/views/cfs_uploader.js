@@ -26,9 +26,9 @@ function uploadFile(event, temp)
 	
 	ModelFiles.insert(fsFile,function(err,fileObj) {
 	    if (err) {
-		throwError(err.reason);
+		throwError("There was some error in uploading your file, please try again/later");
 	     } else {
-		throwNotification( "File Uploaded, and will appear in file manager after it's converted"); 
+		throwNotification("File Uploaded, and will appear in file manager after it's converted"); 
 		Router.go("/description/" +fileObj._id);  
 	    }
 	});

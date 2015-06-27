@@ -64,6 +64,7 @@ Template.modelPost.helpers({
 	    return '/public/icons/User.png';
 	}
     },
+    
     owner: function()
     {
 	return Meteor.users.findOne(this.owner);
@@ -72,9 +73,13 @@ Template.modelPost.helpers({
     
 
 Template.modelView.helpers({
+    /**
+    * returns thumbnail of the model from the user database, if there's no image 
+    * a default image is shown.
+    */
     thumbImg:function()
     {
         thumbImage = ThumbFiles.findOne({gFile:this._id});
-        return thumbImage;  
+        return thumbImage;
     }
 });

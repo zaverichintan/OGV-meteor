@@ -112,15 +112,16 @@ Template.dashboard.events({
 });
 
 Template.dashboard.helpers({
-/**
- * profilePic returns the url of profile picture of the user
- */
+	/**
+ 	* profilePic returns the url of profile picture of the user
+ 	*/
     profilePic : function() 
     {
 	var picId = Meteor.user().profile.pic;
 	console.log(picId);	
 	return ProfilePictures.findOne(picId).url();
     },
+
     settings: function() 
     {
 	return OgvSettings.findOne();

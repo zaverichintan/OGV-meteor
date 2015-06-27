@@ -58,9 +58,15 @@ Template.modelMeta.events({
 	fsFile.gFile = modelId;      
 	   	
 	if(document.getElementById("desc-model-thumb").files.length == 0){
-		//Givng the user the choice of leaving the thumbnail part empty
+		/**
+		* The part to be implemented when the user has left the thumbnail input field
+		* empty knowingly/unknowingly.
+		*/
 		var x = confirm("Are you sure you don't want to add/change thumbnail of your model?");
 		if(x){
+			/**
+			* If the user left the thumbnail input field empty knowingly
+			*/
 			ModelFiles.update(modelId, {$set: {name: filename, about: description}}, function(error, res) {
 			    if (error) {
 					throwError(error.reason);
@@ -77,12 +83,22 @@ Template.modelMeta.events({
 			    }
 			});
 			}
-			Router.go('/my-models');
-			throwNotification("Data about model has been saved");
+
+			var uploadedModel = ModelFiles.findOne(modelId);
+			if( uploadedModel.converted ){
+				Router.go('/my-models');
+				throwNotification("Data about model has been saved");
+			} else {
+				Router.go('/upload');
+				throwError("There was some error in converting your uploaded file");
+			}
 		 
 		}
 	} else {
-		// Delete any thumbnail association with the model. Thumbnail will be deleted before updating. No thumbnail deletion will happen if there is no thumbnail present yet.
+		/** 
+		* Delete any thumbnail association with the model. Thumbnail will be deleted before updating. 
+		* No thumbnail deletion will happen if there is no thumbnail present yet.
+		*/
     	var prevThumbnail = ThumbFiles.findOne(currentModel.thumbnail);
     	if(typeof prevThumbnail != 'undefined'){
 			ThumbFiles.remove(currentModel.thumbnail);
@@ -109,18 +125,29 @@ Template.modelMeta.events({
 			    	}
 					});
 				}
-				Router.go('/my-models');
-		  		throwNotification("Data about model has been saved");
+	
+				var uploadedModel = ModelFiles.findOne(modelId);
+				if( uploadedModel.converted ){
+					Router.go('/my-models');
+					throwNotification("Data about model has been saved");
+				} else {
+					Router.go('/upload');
+					throwError("There was some error in converting your uploaded file");
+				}
 		    }
 		});
 	}
-	
 	}
-
 	
 });
 	
-Template.modelMeta.modelCategory = function() {
-    var id = Session.get('modelId');
-	return ModelFiles.findOne({_id: id}); //like around says you don't need the fetch(), since you are only returning 1 object.
+Template.modelMeta.modelCategory = function() 
+{
+/**
+* helper to display already present categories in the model
+* Diplayed everytime when the /description/:_id page is viewed
+* Displays nothing if categories is empty.
+*/
+var id = Session.get('modelId');
+return ModelFiles.findOne({_id: id}); 
 };

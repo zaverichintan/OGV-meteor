@@ -30,6 +30,7 @@ Template.logOut.events({
     {
 	Meteor.logout(function() {
 	     throwError('Bye!, See you back soon');
+	     Router.go('/');
 	});
 	
 	return false;

@@ -593,3 +593,28 @@ textarea {
    resize: none;
    text-align: justify;
 }
+
+.profile-feed-wrapper{
+    font-size: 14px;
+	color: #555;
+	margin-left: 5px;
+	line-height: 1.5;   
+	max-width: 700px;
+    margin:50px auto 50px auto;
+}
+
+#profileInfo {
+	position: relative;
+    top:-210px;
+    left: 380px;
+    width:50%;
+}
+
+#profileModelFeedContainer {
+	position: relative;
+	top:-170px;
+}
+
+hr {
+	border-width: 5px;
+}

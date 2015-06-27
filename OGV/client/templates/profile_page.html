@@ -1,19 +1,24 @@
 <template name="profilePage">
-    <h2>{{ person.profile.name }}</h2>
-    <a href="/profile/{{ currentUser._id }}"><div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;"></div></a>
-    
-    <br><br><strong>FOLLOWERS</strong>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <strong>FOLLOWING</strong><br>
-    <button id = "followButton" >+FOLLOW</button><br>
-    <button id = "unfollowButton" style="display: none;">UNFOLLOW</button><br>
+    <div id="profileContainer">
+        <a href="/profile/{{ currentUser._id }}"><div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;left:70px;position:relative;"></div></a>
+        <div id="profileInfo">
+            <h2>{{ person.profile.name }}</h2>
+            <strong>FOLLOWERS</strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>FOLLOWING</strong>
+            <button id = "followButton" >+FOLLOW</button><br>
+            <button id = "unfollowButton" style="display: none;">UNFOLLOW</button><br>
 
-    <h3>{{ person.profile.bio }} </h3>
-    <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
+            <h3>{{ person.profile.bio }} </h3>
+            <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
+        </div>
+    </div>
 
-
-    {{> profileModelFeed}}
+    <div id="profileModelFeedContainer">
+        <hr>
+        {{> profileModelFeed}}
+    </div>
     <!-- Handling button visibility -->
     <script>
         //take out id from url
@@ -51,7 +56,7 @@
         {{/if}}
     {{/each}}
     {{else}}
-    <h3>OGV is hungry, <a href="/upload">feed some models</a></h3>
+    <h3>{{user.profile.name}} has no uploaded models</h3>
     {{/if}}
     </div>
 </template>

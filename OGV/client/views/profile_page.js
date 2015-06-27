@@ -85,5 +85,13 @@ Template.profileModelFeed.helpers({
 	} else {
 	    return false;
 	} 
+    },
+
+    user: function()
+    {
+    var parts = location.href.split('/');
+	var urlId = parts.pop(); //id of user whose page is being visited	
+    
+    return Meteor.users.findOne(urlId);
     }
 }); 

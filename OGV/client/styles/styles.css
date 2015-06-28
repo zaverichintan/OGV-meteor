@@ -1089,6 +1089,12 @@ svg {
     text-align: center;
     color: #333;
 }
+.modelPageLink {
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor:pointer;
+    z-index: 1000;
+}
 
 svg {
     max-width: 100%;
@@ -1252,6 +1258,7 @@ svg {
   right: 0;
   bottom: 0;
   overflow: hidden;
+  z-index: -1000;
   transform: translateZ(0);
 }
 
@@ -1264,15 +1271,15 @@ svg {
 }
 
 .cloud.front {
-    z-index: 9;
+    z-index: -9;
 }
 
 .cloud.distant {
-    z-index: 1;
+    z-index: -1;
 }
 
 .cloud.background {
-    z-index: 1;
+    z-index: -1;
 }
 
 .cloud.smaller {
@@ -1487,15 +1494,20 @@ svg {
   }
 }
 
-    @media (max-width: 767px) {
+    @media (max-width: 950px) {
         .plane {
             display: none;
         }
+        .space {
+            display: none;
+        }
         .four-oh-four {
+            text-align: center;
             padding-top: 0.8em;
             font-size: 10em;    
         }        
         .error-text {
+            text-align: center;
             padding-top: 0.1em;
             font-size: 20px;
         }        

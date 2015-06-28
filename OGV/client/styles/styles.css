@@ -928,23 +928,23 @@ input:focus {
         }
 
         .mobile-view-fileUpload{
-            width: 90px;
-            height: 90px;        
+            width: 170px;
+            height: 170px;        
         }
 
         .mobile-view-computer{
-            width: 90px;
-            height: 90px;        
+            width: 170px;
+            height: 170px;        
         }
 
         .mobile-view-share{
-            width: 90px;
-            height: 90px;        
+            width: 170px;
+            height: 170px;        
         }
 
         .mobile-view-download{
-            width: 90px;
-            height: 90px;        
+            width: 200px;
+            height: 200px;        
         }                
     }
 
@@ -1024,8 +1024,8 @@ input:focus {
             padding-bottom: 1em;
         }
         .circular {
-            width: 90px;
-            height: 90px;
+            width: 200px;
+            height: 200px;
         }
     }
 

@@ -835,7 +835,7 @@ input:focus {
 
     .title-row {
         font-size: 45px;
-        padding-bottom: 55px;
+        padding-bottom: 35px;
     }
 
     .heading-slide-2 {
@@ -1012,6 +1012,10 @@ input:focus {
         height: 40px;
         font-size: 1.2em; 
         font-weight: 200;
+    }
+    .circular {
+        width: 250px;
+        height: 250px;
     }
 
     @media (max-width: 767px) {

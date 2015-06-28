@@ -77,7 +77,7 @@ Template.modelView.helpers({
         if (thumbImage) {
             return thumbImage;
         } else {
-            // something
+            // return "../public/icons/rocket.png";
         }  
     }
 });

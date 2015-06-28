@@ -50,14 +50,14 @@ Template.modelMeta.events({
         	
 	ThumbFiles.insert(fsFile,function(err,thumbFile) {
 	    if (err) {
-		sAlert.error("No image or invalid image format selected", {effect: 'flip', onRouteClose: false, stack: false, timeout: 2500, position: 'top'});
+			sAlert.error("No image or invalid image format selected", {effect: 'flip', onRouteClose: false, stack: false, timeout: 2500, position: 'top'});
 	    } else {
-		sAlert.success("Image has been Uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 2500, position: 'top'});		
-		ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, res) {
+			sAlert.success("Image has been Uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 2500, position: 'top'});		
+			ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, reason) {
 		    if (error) {
-			sAlert.error(error.reason);
+				sAlert.error(error.reason);
 		    } else {
-			sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: true, stack: false, timeout: 2500, position: 'top'});
+				sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: true, stack: false, timeout: 2500, position: 'top'});
 		    }
 		});
   
@@ -65,12 +65,12 @@ Template.modelMeta.events({
 	}); 
 
 	var uploadedModel = ModelFiles.findOne(modelId);
-		if( uploadedModel.converted ){
+		if( uploadedModel.converted ) {
 			sAlert.success("Data about model saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 5000, position: 'top'});
 			Router.go('/models');
 		} else {
 			sAlert.error("There was some error in converting your uploaded file", {effect: 'flip', onRouteClose: false, stack: false, timeout: 5000, position: 'top'});			
 			Router.go('/upload');
-	}
+		}
     } 
 });

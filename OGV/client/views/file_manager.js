@@ -39,8 +39,8 @@ Template.filemanager.events({
 		if (r == true) {
 			//Removing both ThumbFiles and ModelFiles associated with the give model id
 		    var model = ModelFiles.findOne(this._id);
-
-		    //In case model is without a thumbnail
+		    var prevThumbnail = ThumbFiles.findOne(model.thumbnail);
+		    //In case model is not without a thumbnail
 		    if(typeof prevThumbnail != 'undefined'){
 				ThumbFiles.remove(model.thumbnail);
     		}

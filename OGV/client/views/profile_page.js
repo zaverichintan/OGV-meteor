@@ -10,22 +10,16 @@ Template.profilePage.events({
 		    if (error) {
 			throwError(error.reason);
 		    } else {
-			throwNotification("Updated your following list");
+		    //updates "follower" array of other user
+		    Meteor.users.update(otherId, {$addToSet: {"profile.follower": currentUser._id}}, function(error, res) {
+		    	if (error) {
+					throwError(error.reason);
+		    	} else {
+					throwNotification("You are now following this user");
+			    }
+			});
 		    }
 		});
-
-		//updates "follower" array of other user 
-		/***PROBLEM***/
-		Meteor.users.update(otherId, {$addToSet: {"profile.follower": currentUser._id}}, function(error, res) {
-		    if (error) {
-			throwError(error.reason);
-		    } else {
-			throwNotification("Updated your followers' list");
-		    }
-		});
-
-		document.getElementById("followButton").style.display="none";
-        document.getElementById("unfollowButton").style.display="block";
 	}, 
 
 	'click #unfollowButton': function(e, t)
@@ -36,26 +30,21 @@ Template.profilePage.events({
 		
 		var currentUser = Meteor.user(); //user who is using OGV at that moment
 
+		//updates "following" array of currentUser
 		Meteor.users.update(currentUser._id, {$pull: { "profile.following": otherId }}, function(error, res) {
 		    if (error) {
 			throwError(error.reason);
 		    } else {
-			throwNotification("Updated your following list");
+		    //updates "follower" array of other user
+			Meteor.users.update(otherId, {$pull: {"profile.follower": currentUser._id}}, function(error, res) {
+		    	if (error) {
+					throwError(error.reason);
+		    	} else {
+					throwNotification("You are no longer following this user");
+			    }
+			});
 		    }
 		});		
-
-		//updates "follower" array of other user 
-		/***PROBLEM***/
-		Meteor.users.update(otherId, {$pull: {"profile.following": currentUser._id}}, function(error, res) {
-		    if (error) {
-			throwError(error.reason);
-		    } else {
-			throwNotification("Updated your followers' list");
-		    }
-		});
-
-		document.getElementById("followButton").style.display="block";
-        document.getElementById("unfollowButton").style.display="none";
 	}
 });
 
@@ -137,3 +126,34 @@ Template.profileModelFeed.helpers({
     return Meteor.users.findOne(urlId);
     }
 }); 
+
+
+
+Template.profilePage.currentFollowsThis = function()
+{
+	var parts = location.href.split('/');
+	var otherId = parts.pop(); //id of user whose page is being visited	
+	var currentUser = Meteor.user();
+    var currentFollowsThis = Meteor.users.findOne({_id: currentUser._id, "profile.following": otherId});
+
+    if( currentFollowsThis ){
+        return currentFollowsThis;
+    }
+    else{
+       	return null;
+    }
+}
+
+Template.profilePage.urlUser = function()
+{
+	var parts = location.href.split('/');
+	var otherId = parts.pop(); //id of user whose page is being visited	
+	var currentUser = Meteor.user();
+
+    if( currentUser._id != otherId ){
+        return otherId;
+    }
+    else{
+       	return null;
+    }
+}

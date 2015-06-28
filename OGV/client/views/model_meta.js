@@ -89,6 +89,8 @@ Template.modelMeta.events({
 				Router.go('/my-models');
 				throwNotification("Data about model has been saved");
 			} else {
+				ModelFiles.remove(uploadedModel._id);
+				ThumbFiles.remove(uploadedModel.thumbnail);
 				Router.go('/upload');
 				throwError("There was some error in converting your uploaded file");
 			}
@@ -131,8 +133,11 @@ Template.modelMeta.events({
 					Router.go('/my-models');
 					throwNotification("Data about model has been saved");
 				} else {
+					ModelFiles.remove(uploadedModel._id);
+					ThumbFiles.remove(uploadedModel.thumbnail);
 					Router.go('/upload');
 					throwError("There was some error in converting your uploaded file");
+
 				}
 		    }
 		});

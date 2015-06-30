@@ -130,10 +130,6 @@ var renderColour = 0xafa8a8;
 
 
 function getGrid(){
-    /**
-    * Button functionality to make the grids visible on the renderer
-    */
-
     axes = new THREE.AxisHelper(10000);
     group.add(axes);
 
@@ -210,11 +206,27 @@ function init()
         scene.add(group);
 	});
     }
+    
+    for (i in objList) {
+    loader.load( objList[i], function(object) {
+        object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = OBJMaterialOver;
+        }
+        });
+
+        object.position.y = 0.1;
+        object.rotation.z =  90 * Math.PI/180;
+        object.rotation.x = -90 * Math.PI/180;
+
+        group.add(object);
+        scene.add(group);
+    });
+    }
    
+
     /**
     * datGUI variable initializations
-    * All these variables that have been initialized below are the ones
-    * that can be changed by the user while viewing the model.
     */
     guiControls = new function() {
         this.opacity = OBJMaterial.opacity;
@@ -229,6 +241,7 @@ function init()
         this.visible = OBJMaterialOver.visible;
         this.wireframe = OBJMaterialOver.wireframe;
         this.wireframeLinewidth = OBJMaterialOver.wireframeLinewidth;
+        this.color = OBJMaterialOver.color;
     }
 
     //Initialize dat.GUI
@@ -237,17 +250,14 @@ function init()
     /**
     * Add folders/sub categories in controls
     */
-    //consisting of changes to be shown in renderer or scene
-    var sceneGui = datGUI.addFolder("Scene");               
-    //consisting of changes to be shown in the model        
-    var modelGui = datGUI.addFolder("Model");                   
-    //activated OBJMAterialOver that overlaps the existing model
-    var overmodelGui = datGUI.addFolder("WireFrame + Model");   
+    var sceneGui = datGUI.addFolder("Scene");                   //consisting of changes to be shown in renderer or scene
+    var modelGui = datGUI.addFolder("Model");                   //consisting of changes to be shown in the model
+    var overmodelGui = datGUI.addFolder("WireFrame + Model");   //activated OBJMAterialOver that overlaps the existing model
 
     /** 
-    * defines the functionality of the variables for dat.GUI
-    * that were initialized above.
+    * datGUI GUI and of variables defined above functionality
     */
+
     modelGui.add(guiControls, 'visible').onChange(function (e) {
         OBJMaterial.visible = e;
     });
@@ -282,7 +292,10 @@ function init()
     overmodelGui.add(guiControls, 'wireframeLinewidth', 0, 10).onChange(function (e) {
         OBJMaterialOver.wireframeLinewidth = e;
     });
-    
+    overmodelGui.addColor(guiControls, 'color').onChange(function (e) {
+        OBJMaterialOver.color = new THREE.Color(e);
+    });
+
     /**
      * If webgl is there then use it otherwise use canvas
      */
@@ -306,11 +319,7 @@ function init()
      */
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.addEventListener('change', render);    
-
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-    document.addEventListener( 'touchmove', onDocumentTouchMove, false ); 
-
+    
     window.addEventListener('resize', onWindowResize, false);
 
 }
@@ -332,16 +341,12 @@ function onWindowResize()
 
 function render() 
 {
-    /**
-    * Smooth mouse movements
-    */
 
     //horizontal rotation   
     group.rotation.y += ( targetRotationX - group.rotation.y ) * 0.1;
- 
      //vertical rotation 
     finalRotationY = (targetRotationY - group.rotation.x); 
-    group.rotation.x += finalRotationY * 0.01;
+    group.rotation.x += finalRotationY * 0.1;
  
     finalRotationY = (targetRotationY - group.rotation.x);  
     if (group.rotation.x  <= 1 && group.rotation.x >= -1 ) {
@@ -378,77 +383,11 @@ function generateEmbedCode()
     return embedCode;
 }
 
-
-function onDocumentMouseDown( event ) {
- 
-        event.preventDefault();
- 
-        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-        document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-        document.addEventListener( 'mouseout', onDocumentMouseOut, false );
- 
-        mouseXOnMouseDown = event.clientX - windowHalfX;
-        targetRotationOnMouseDownX = targetRotationX;
- 
-        mouseYOnMouseDown = event.clientY - windowHalfY;
-        targetRotationOnMouseDownY = targetRotationY;
- 
-}
- 
-function onDocumentMouseMove( event ) {
- 
-        mouseX = event.clientX - windowHalfX;
-        mouseY = event.clientY - windowHalfY;
- 
-        targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * 0.02;
-        targetRotationX = targetRotationOnMouseDownX + (mouseX - mouseXOnMouseDown) * 0.02;
- 
-}
- 
-function onDocumentMouseUp( event ) {
- 
-        document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-        document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-        document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
- 
-}
- 
-function onDocumentMouseOut( event ) {
- 
-        document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-        document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-        document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
- 
-}
-
-function onDocumentTouchStart( event ) { 
-    
-    if ( event.touches.length == 1 ) {
-
-            event.preventDefault();
-
-            mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
-            targetRotationOnMouseDownX = targetRotationX;
-
-            mouseYOnMouseDown = event.touches[ 0 ].pageY - windowHalfY;
-            targetRotationOnMouseDownY = targetRotationY;
-    
-    }
-
-}
- 
-function onDocumentTouchMove( event ) {
- 
-        if ( event.touches.length == 1 ) {
- 
-                event.preventDefault();
- 
-                mouseX = event.touches[ 0 ].pageX - windowHalfX;
-                targetRotationX = targetRotationOnMouseDownX + ( mouseX - mouseXOnMouseDown ) * 0.05;
- 
-                mouseY = event.touches[ 0 ].pageY - windowHalfY;
-                targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * 0.05;
- 
+function handleColorChange ( color ) {
+    return function ( value ){
+        if (typeof value === "string") {
+            value = value.replace('#', '0x');
         }
- 
+        color.setHex( value );
+    };
 }

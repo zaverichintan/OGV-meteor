@@ -53,6 +53,14 @@ Template.modelViewer.events({
 	$('#overlay-comments').css({'bottom':'-10000px'});
     },
 
+    'click #sm-item-owner':function() 
+    {
+    var parts = location.href.split('/');
+    //id of user whose page is being visited
+    var ownerId = parts.pop();         
+    goToOwner(ownerId);
+    }
+
 });
 
 Template.modelViewer.helpers({
@@ -75,6 +83,15 @@ Template.modelViewer.helpers({
     model: function() 
     {
 	return this.data;
+    },
+
+    ownerId: function()
+    {
+    var parts = location.href.split('/');
+    //id of model whose page is being visited
+    var modelId = parts.pop(); 
+    var model = ModelFiles.findOne(modelId);
+    return model.owner;
     }
 });
 
@@ -250,14 +267,14 @@ function init()
     /**
     * Add folders/sub categories in controls
     */
-    var sceneGui = datGUI.addFolder("Scene");                   //consisting of changes to be shown in renderer or scene
-    var modelGui = datGUI.addFolder("Model");                   //consisting of changes to be shown in the model
-    var overmodelGui = datGUI.addFolder("WireFrame + Model");   //activated OBJMAterialOver that overlaps the existing model
+     //consisting of changes to be shown in the model
+    var modelGui = datGUI.addFolder("Model");        
+    //activated OBJMAterialOver that overlaps the existing models
+    var overmodelGui = datGUI.addFolder("WireFrame + Model");   
 
     /** 
     * datGUI GUI and of variables defined above functionality
     */
-
     modelGui.add(guiControls, 'visible').onChange(function (e) {
         OBJMaterial.visible = e;
     });
@@ -309,7 +326,7 @@ function init()
      * Sets size and color to renderer
      */
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xffffff, 1); 
+    renderer.setClearColor(0xa1a1a1, 1); 
     
     controller.appendChild(datGUI.domElement);
     container.appendChild(renderer.domElement);

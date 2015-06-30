@@ -12,6 +12,7 @@ Template.profilePage.events({
 		    } else {
 		    //updates "follower" array of other user
 		    Meteor.users.update(otherId, {$addToSet: {"profile.follower": currentUser._id}}, function(error, res) {
+		    /*Meteor.users.update(otherId, {$addToSet: {"profile.follower": currentUser._id}}, function(error, res) {*/
 		    	if (error) {
 					throwError(error.reason);
 		    	} else {

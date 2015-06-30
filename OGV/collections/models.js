@@ -73,7 +73,7 @@ ModelFiles.allow({
     {
 	return userId == file.owner;
     },
-    download: function(userId, file) 
+    download: function() 
     {
     	return true;
     },
@@ -103,7 +103,7 @@ OBJFiles.allow({
     {
 	return !! userId;
     },
-    download: function(userId, file) 
+    download: function() 
     {
     	return true;
     },
@@ -156,7 +156,7 @@ ThumbFiles.allow({
 	}
     },
 
-    download: function(userId, file) 
+    download: function() 
     {
     	return true;
     },

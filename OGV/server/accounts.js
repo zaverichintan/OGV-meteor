@@ -72,6 +72,34 @@ Accounts.onCreateUser(function(options, user) {
     return user;
 });
 
+/*Meteor.users.deny({
+    update: function(userId, fields, modifier) 
+    {   
+        if (fields.profile.following && modifier["$addToSet"] && modifier["$addToSet"].profile.following) { 
+            return false; // don't deny this
+        } 
+        else if (fields.profile.follower && modifier["$addToSet"] && modifier["$addToSet"].profile.follower) { 
+            return false; // don't deny this
+        } 
+        else if (fields.profile.following && modifier["$pull"] && modifier["$pull"].profile.following) { 
+            return false; // don't deny this
+        } 
+        else if (fields.profile.follower && modifier["$pull"] && modifier["$pull"].profile.follower) { 
+            return false; // don't deny this
+        } 
+        else {
+            return _.contains(fields, 'owner');
+        }
+    }    
+});*/
+
+
+Meteor.users.allow({
+    update: function(userId, user, fields) 
+    {
+        return true;        
+    }    
+});
 
 /**
  * Intended to Delete/Remove users who have not verified their Emails in hrs hours

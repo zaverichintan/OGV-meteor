@@ -65,6 +65,7 @@ Meteor.methods({
 	var lovers = [];
 	var alreadyLoved = false;
 	var user = Meteor.user();
+
 	lovers.push(user._id);
         
 	var post = ModelFiles.findOne(loveAttributes.postId);
@@ -99,7 +100,7 @@ Meteor.methods({
                 throw (new Meteor.Error(550,"you already love this"));
 	    } else {
 		loversArray.push(user._id);
-		return Lovers.update({postId: loveAttributes.postId},{$set: {lovers: loversArray}}); // update lovers
+		return Lovers.update({postId: loveAttributes.postId},{$set: {lovers: loversArray, countLovers: loversArray.length}}); // update lovers
             }
 
         } else {

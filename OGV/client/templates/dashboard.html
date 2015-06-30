@@ -17,8 +17,10 @@
 			<div class = "user-profile-pic" style=" background: url({{profilePic}})" > </div> 	
 			<input class="form-control profile-pic" id="dash-profile-pic" name="profilePic" type="file">
 			
-			<button class="btn primary-btn btn-default" type="submit"> Save User Settings </button>	
+			<button class="btn primary-btn btn-default" type="submit"> Save User Settings </button>	<br><br>
 		</form>
+
+
 	</div>
     {{#if isInRole 'admin' }}
 		<form action="/dashboard" class="secondary-form" id="dash-admin-form" method="post">

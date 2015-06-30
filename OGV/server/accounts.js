@@ -62,13 +62,24 @@ if (Meteor.users.find().fetch().length === 0) {
 
 } 
 
+Accounts.onCreateUser(function(options, user) {
+    if (options.profile)
+        user.profile = options.profile;
+    var followingArray = [];
+    followingArray[0] = user._id;
+    user.profile.following = followingArray;
+
+    return user;
+});
+
+
 /**
  * Intended to Delete/Remove users who have not verified their Emails in hrs hours
  */
 var hrs = 1;
 Meteor.setInterval(function() {
     Meteor.users.find({'emails.0.verified': false}).forEach(function(user) {
-        //Do action with 'user' that has not verified email for 3 days
+        //Do action with 'user' that has not verified email for 1 hour
         Meteor.users.remove({_id: user._id}, true);
     });
 }, (3600000 * hrs));

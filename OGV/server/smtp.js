@@ -43,7 +43,7 @@ Meteor.startup(function () {
 	}
 
 	Accounts.emailTemplates.verifyEmail.text = function(user, url) {
-		return 'BRL-CAD welcomes you to the community\nTo start using Online Geometry Viewer\nClick on the give link to activate your account:\n' + url + '\n\nPS: We Love You';
+		return 'BRL-CAD welcomes you to the community\nTo start using Online Geometry Viewer\nClick on the give link to activate your account:\n' + url + '\n\nThank You';
 	}
 
 	Accounts.emailTemplates.resetPassword.subject = function(user) {
@@ -51,6 +51,6 @@ Meteor.startup(function () {
 	}
 
 	Accounts.emailTemplates.resetPassword.text = function(user, url) {
-		return 'How could you do this\nWell everything\'s gonaa be fine, trust us\nJust click on the link below to change your password:\n'+url+'\n\nPS: Try remembering it this time ;)';
+		return 'How could you do this\nWell everything\'s gonaa be fine, trust us\nJust click on the link below to change your password:\n'+url+'\n\nThank You';
 	}
 });

@@ -60,6 +60,7 @@ Meteor.publish('profiles', function() {
 }); 
 
 Meteor.publish("userProfile",function(id){
+    Meteor._sleepForMs(1000);
     // try to find the user by id
     var user=Meteor.users.findOne({
         _id:id
@@ -79,10 +80,6 @@ Meteor.publish("userProfile",function(id){
         // property from the fetched document, you might want to
         // set only a nested property of the profile as private
         // instead of the whole property
-        return Meteor.users.find(user._id,{
-            fields:{
-                "profile":0
-            }
-        });
+        return Meteor.users.find(user._id);
     }
 });

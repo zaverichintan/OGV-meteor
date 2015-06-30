@@ -51,7 +51,7 @@ Template.dashboard.events({
 		picId = currentUser.profile.pic;
 	    } 
 	
-	    Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: picId} }}, function(error, res) {
+	    Meteor.users.update( currentUser._id,{ $set: {'profile.bio' : userBio, 'profile.name': userName, 'profile.pic': picId}}, function(error, res) {
 		if (error) {
 		    throwError(error.reason);
 	    	} else {

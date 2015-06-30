@@ -36,8 +36,12 @@ Template.modelFeed.helpers({
      */
     models: function() 
     {
+    var popularityIndex = 1;
+    var popularLove = Lovers.find({countLovers: {$gte: popularityIndex}}).fetch();
+    var popularLoveIds = _.pluck(popularLove, "postId");
+
     var currentUser = Meteor.user();
-	model = ModelFiles.find({owner: {$in: currentUser.profile.following}}, {sort:{timeUploaded:-1}});
+	model = ModelFiles.find( {$or: [ {owner: {$in: currentUser.profile.following}}, {_id: {$in: popularLoveIds}} ] }, {sort:{timeUploaded:-1}});
 	if (model.count()) {
 	    return model;
 	} else {

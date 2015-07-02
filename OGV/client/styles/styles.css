@@ -608,6 +608,7 @@ textarea {
     top:-210px;
     left: 380px;
     width:50%;
+    height:100%;
 }
 
 #profileModelFeedContainer {

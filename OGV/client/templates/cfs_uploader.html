@@ -26,7 +26,8 @@
 
 			<label for="uplaoder-about" class ="input-head"> <strong>About Model:</strong> </label>
 			<p class = "help-text"> Provide a short description about your model </p>
-			<textarea class="form-control secondary-textarea" id = "desc-about" cols=25 >{{ about }}</textarea>
+			<textarea class="form-control secondary-textarea" id = "desc-about" cols=25 maxlength="200" onkeyup="textCounter(this,'counter',200);">{{ about }}</textarea>
+			<p id="counter" style="color:red;font-size:10px">*200 characters left</p>
 
 			<label for="filename" class ="input-head"><strong> Model-Image</strong> </label>
 			<p class ="help-text"> An image that will be used as a thumbnail for your model, the preferred size is 500 X 300 </p>	
@@ -66,4 +67,17 @@
 		</form>
 		
 	</div>
+
+	<script>
+	function textCounter(field,field2,maxlimit)
+	{
+ 		var countfield = document.getElementById(field2);
+ 		if ( field.value.length > maxlimit ) {
+  			field.value = field.value.substring( 0, maxlimit );
+  			return false;
+ 		} else {
+  			countfield.innerHTML = "*"+(maxlimit - field.value.length)+" characters left";
+ 		}
+	}
+	</script>
 </template>

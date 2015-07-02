@@ -618,3 +618,9 @@ textarea {
 hr {
 	border-width: 5px;
 }
+
+#editModelButtons {
+	position: relative;
+	top: -43px;
+	left: 213px;
+}

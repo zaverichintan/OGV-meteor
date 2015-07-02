@@ -63,37 +63,36 @@ if (Meteor.users.find().fetch().length === 0) {
 } 
 
 Accounts.onCreateUser(function(options, user) {
-    if (options.profile)
-        user.profile = options.profile;
     var followingArray = [];
-    followingArray[0] = user._id;
-    user.profile.following = followingArray;
+    //followingArray[0] = user._id;
+    var adminUser = Meteor.users.findOne({'roles.0': "admin"});
+    followingArray[0] = adminUser._id;
+    followingArray[1] = user._id;
+
+    options.profile.following = followingArray;
+    if (options.profile){
+        user.profile = options.profile;
+    }
 
     return user;
 });
 
-/*Meteor.users.deny({
-    update: function(userId, fields, modifier) 
+/*Meteor.users.allow({
+    update: function(userId, user, fields) 
     {   
-        if (fields.profile.following && modifier["$addToSet"] && modifier["$addToSet"].profile.following) { 
-            return false; // don't deny this
-        } 
-        else if (fields.profile.follower && modifier["$addToSet"] && modifier["$addToSet"].profile.follower) { 
-            return false; // don't deny this
-        } 
-        else if (fields.profile.following && modifier["$pull"] && modifier["$pull"].profile.following) { 
-            return false; // don't deny this
-        } 
-        else if (fields.profile.follower && modifier["$pull"] && modifier["$pull"].profile.follower) { 
-            return false; // don't deny this
-        } 
-        else {
-            return _.contains(fields, 'owner');
+        if (!fields.isEqualTo(['profile.following', 'profile.follower'])) { 
+            return false; 
+        } else {
+            return true;
         }
     }    
-});*/
+});
+*/
 
 
+/**
+*  Need to allow the users to update only the follwers array of other users
+*/
 Meteor.users.allow({
     update: function(userId, user, fields) 
     {

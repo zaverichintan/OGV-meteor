@@ -80,7 +80,11 @@ Template.profilePage.helpers({
 	var currentProfile = Meteor.users.findOne(otherId);
 
 	var followings = currentProfile.profile.following;
-	return (followings.length - 1);
+	if (followings.length == 0){
+		return 0;
+	} else {
+		return (followings.length - 1);	
+	}
     },
     
     /**

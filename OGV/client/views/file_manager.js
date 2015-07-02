@@ -32,7 +32,7 @@ Template.filemanager.helpers({
 });
 
 Template.filemanager.events({
-	"click .delete": function() 
+	"click #deleteModel": function() 
 	{
 		var txt;
 		var r = confirm("Are you sure, you want to delete your model?");

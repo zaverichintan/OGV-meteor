@@ -1002,7 +1002,7 @@ input:focus {
 }
 
     .image-row {
-        padding-top: 3.7em;
+        padding-top: 1em;
     }
 
     #email {
@@ -1014,8 +1014,8 @@ input:focus {
         font-weight: 200;
     }
     .circular {
-        width: 250px;
-        height: 250px;
+        width: 300px;
+        height: 300px;
     }
 
     @media (max-width: 767px) {

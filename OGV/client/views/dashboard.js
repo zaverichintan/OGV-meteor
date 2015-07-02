@@ -117,9 +117,19 @@ Template.dashboard.helpers({
  	*/
     profilePic : function() 
     {
-	var picId = Meteor.user().profile.pic;
+	var currentUser = Meteor.user();
+	var picId = currentUser.profile.pic;
 	console.log(picId);	
-	return ProfilePictures.findOne(picId).url();
+	if( currentUser.services.google ){
+		return currentUser.services.google.picture;
+	} else {
+		return ProfilePictures.findOne(picId).url();
+	}
+    },
+
+    thisUser: function()
+    {
+    	return Meteor.user();
     },
 
     settings: function() 

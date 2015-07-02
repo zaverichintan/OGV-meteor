@@ -70,6 +70,11 @@ Accounts.onCreateUser(function(options, user) {
     followingArray[1] = user._id;
 
     options.profile.following = followingArray;
+
+    if (options.services.github) {
+        user.profile.name = options.services.github.username;
+    }
+
     if (options.profile){
         user.profile = options.profile;
     }

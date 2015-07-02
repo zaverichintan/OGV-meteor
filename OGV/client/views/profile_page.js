@@ -61,12 +61,21 @@ Template.profilePage.helpers({
 	var otherId = parts.pop(); //id of user whose page is being visited
 	var currentProfile = Meteor.users.findOne(otherId);
 	var picId = currentProfile.profile.pic;
-	if( picId == false ){
-		return "/public/icons/User.png";
-	} else {
+	if( currentProfile.services.google ){
+		return currentProfile.services.google.picture;
+	} else if ( currentProfile.services.facebook ){
+		return currentProfile.services.facebook.picture;
+	} else 	{
 		return ProfilePictures.findOne(picId).url();
 	}
-    }, 
+    },
+
+    thisUser: function()
+    {
+    var parts = location.href.split('/');
+	var otherId = parts.pop(); //id of user whose page is being visited
+	return Meteor.users.findOne(otherId);
+    },
     
     /**
      * Returns the number of people the user (whose profile is being viewed 
@@ -98,7 +107,12 @@ Template.profilePage.helpers({
 	var currentProfile = Meteor.users.findOne(otherId);
 
 	var followers = currentProfile.profile.follower;
-	return followers.length;    	
+	if ( !followers ){
+		return 0;
+	} else {
+		return (followers.length);	
+	}
+
     }
 });
 

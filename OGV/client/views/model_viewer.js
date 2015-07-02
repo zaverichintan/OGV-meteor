@@ -145,7 +145,6 @@ var guiControls, OBJMaterial, OBJMaterialOver;
 var keyboard = new KeyboardState();
 var renderColour = 0xafa8a8;
 
-
 function getGrid(){
     axes = new THREE.AxisHelper(10000);
     group.add(axes);
@@ -246,6 +245,8 @@ function init()
     * datGUI variable initializations
     */
     guiControls = new function() {
+        this.backgroundColor = "#a1a1a1";
+
         this.opacity = OBJMaterial.opacity;
         this.transparent = OBJMaterial.transparent;
         this.ambient = OBJMaterial.ambient.getHex();
@@ -267,7 +268,7 @@ function init()
     /**
     * Add folders/sub categories in controls
     */
-     //consisting of changes to be shown in the model
+    //consisting of changes to be shown in the model
     var modelGui = datGUI.addFolder("Model");        
     //activated OBJMAterialOver that overlaps the existing models
     var overmodelGui = datGUI.addFolder("WireFrame + Model");   
@@ -326,7 +327,7 @@ function init()
      * Sets size and color to renderer
      */
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xa1a1a1, 1); 
+    renderer.setClearColor(0xa1a1a1, 1);
     
     controller.appendChild(datGUI.domElement);
     container.appendChild(renderer.domElement);

@@ -3,11 +3,12 @@
         <a href="/profile/{{ person._id }}">
             <div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;left:70px;position:relative;"></div>
         </a>
+
         <div id="profileInfo">
             <h2>{{ person.profile.name }}</h2>
             <strong>FOLLOWERS {{followerCount}}</strong>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;
+            &nbsp;&nbsp;
             <strong>FOLLOWING {{followingCount}}</strong><br>
             
             {{#if urlUser}}

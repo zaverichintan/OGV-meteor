@@ -5,8 +5,8 @@
 			<h3 class="secondary-form-head"> User Settings </h3>
 			
 			<label for="user-bio" class ="input-head"> Short Bio </label>
-			<textarea class="form-control" id="dash-short-bio" name="shortBio" maxlength="200" onkeyup="textCounter(this,'counter',200);" > {{ currentUser.profile.bio }} </textarea>
-			<p id="counter" style="color:red;font-size:10px">*200 characters left</p>
+			<textarea class="form-control" id="dash-short-bio" name="shortBio" maxlength="150" onkeyup="textCounter(this,'counter',150);" > {{ currentUser.profile.bio }} </textarea>
+			<p id="counter" style="color:red;font-size:10px">*150 characters left</p>
 
 
 			<label for="username" class ="input-head"> Username </label>
@@ -15,7 +15,7 @@
 
 			<label for="profile-pic" class ="input-head"> Profile Pic </label>
 			<p class ="help-text"> Upload a photo of size not more than 300 X 300 </p>
-			<div class = "user-profile-pic" style=" background: url({{profilePic}})" > </div> 	
+			<div class="post-item user-image" style="background-image:url(&quot;{{profilePic}}&quot;); width:200px; height:200px;"></div>
 			<input class="form-control profile-pic" id="dash-profile-pic" name="profilePic" type="file">
 			
 			<button class="btn primary-btn btn-default" type="submit"> Save User Settings </button>	<br><br>

@@ -44,9 +44,9 @@ Template.signUp.events({
 		areValidPasswords(password, passwordConfirm)) {
 	        Accounts.createUser({email:email, password:password, profile: { name: username ,bio: "Greatest 3d modeller on the planet" }},function(err){
 		    if (err) {
-			throwError(err.reason);
+		    sAlert.error(err.reason, {effect: 'flip', onRouteClose: false, stack: false, timeout: 3000, position: 'top'});
 		    } else {
-			throwNotification('Congrats! Check your inbox at ' + email + ' to verify it');
+		    sAlert.success('Congrats! Check your inbox at ' + email + ' to verify it', {effect: 'flip', onRouteClose: false, stack: false, timeout: 3000, position: 'top'});
 		    }
 		});
 	    }

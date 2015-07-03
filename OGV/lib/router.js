@@ -46,6 +46,7 @@ Router.map(function() {
 	path : '/'	
     });
     this.route('signUp', {path : 'sign-up'});
+    this.route('feedbackThanks', {path : 'thanks'});
     this.route('logIn', {path : 'log-in'});
     this.route('cfsUploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});

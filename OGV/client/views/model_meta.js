@@ -41,7 +41,8 @@ Template.modelMeta.events({
 	    filename = modelMetaForm.find('#desc-filename').val().toLowerCase(),
 	    description = modelMetaForm.find('#desc-about').val(),
 	    thumbnail,
-	    modelId = modelMetaForm.find('#model-id').val();
+	    modelId = modelMetaForm.find('#model-id').val(),
+	    currentUser = Meteor.user();
 	    
 	/**
 	* Adding the checkd boxes to an array named category
@@ -56,7 +57,7 @@ Template.modelMeta.events({
 
 	var fsFile = new FS.File(e.target[2].files[0]);
 	fsFile.gFile = modelId;      
-	   	
+
 	if(document.getElementById("desc-model-thumb").files.length == 0){
 		/**
 		* The part to be implemented when the user has left the thumbnail input field
@@ -127,7 +128,7 @@ Template.modelMeta.events({
 			    	}
 					});
 				}
-	
+
 				var uploadedModel = ModelFiles.findOne(modelId);
 				if( uploadedModel.converted ){
 					Router.go('/my-models');

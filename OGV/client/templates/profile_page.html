@@ -6,10 +6,11 @@
 
         <div id="profileInfo">
             <h2>{{ person.profile.name }}</h2>
-            <strong>FOLLOWERS {{followerCount}}</strong>
-            &nbsp;&nbsp;
-            &nbsp;&nbsp;
-            <strong>FOLLOWING {{followingCount}}</strong><br>
+            <strong>MODELS: {{person.profile.countModels}}</strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>FOLLOWERS: {{followerCount}}</strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>FOLLOWING: {{followingCount}}</strong><br>
             
             {{#if urlUser}}
                 {{#if currentFollowsThis}}

@@ -370,7 +370,7 @@ input:focus {
     margin-left:10px;
 }
 
-.profile-info-section{
+.newsfeed-info-section{
     float:right;
     margin-left:20px;
     margin-top:48px;
@@ -414,7 +414,7 @@ input:focus {
     border: 1px solid #dadada;
 }
 
-.profile-info-content {
+.newsfeed-info-content {
     padding:10px 10px;
     width:300px;
     max-width:300px;

@@ -44,8 +44,9 @@ Template.filemanager.events({
 		    if(typeof prevThumbnail != 'undefined'){
 				ThumbFiles.remove(model.thumbnail);
     		}
-		    
+					    
 		    ModelFiles.remove(model._id);
+		    Meteor.users.update({_id: model.owner}, {$inc: {"profile.countModels": -1}});
 		    throwNotification("Model permanently deleted");
 		}
   	}

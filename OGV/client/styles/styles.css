@@ -23,7 +23,7 @@ h2 {
 }
 
 .page-container {
-	max-width:900px;
+	max-width:950px;
 	margin:auto;
 }
 
@@ -351,16 +351,17 @@ input:focus {
 }
 
 .feed-wrapper{
-     font-size: 14px;
+    font-size: 14px;
 	color: #555;
 	margin-left: 5px;
 	line-height: 1.5;   
 	max-width: 700px;
-    margin:50px auto 50px auto;
+    /*top, right, bottom, left*/
+    margin:10px auto 50px -10px;
 }
 
 .feed-item {
-    margin:10px 0px 10px 0px;
+    margin:20px 0px 10px 0px;
     overflow:hidden;
 }
 
@@ -369,7 +370,11 @@ input:focus {
     margin-left:10px;
 }
 
-
+.profile-info-section{
+    float:right;
+    margin-left:20px;
+    margin-top:48px;
+}
 
 .post-meta {
     padding:5px 5px;
@@ -410,6 +415,15 @@ input:focus {
     border: 1px solid #dadada;
 }
 
+.profile-info-content {
+    padding:10px 10px;
+    width:300px;
+    max-width:300px;
+    background:#fff;
+    border-radius:5px;
+    margin-top:20px;
+    border: 1px solid #dadada;
+}
 
 .model-preview {
     margin: 10px 0px 10px 0px;
@@ -678,5 +692,5 @@ hr {
 {
 	background-color: white;
 	padding:5% 5% 5% 5%;
-	 border-radius: 15px;
+	border-radius: 15px;
 }

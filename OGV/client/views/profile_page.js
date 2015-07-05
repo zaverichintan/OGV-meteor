@@ -70,7 +70,7 @@ Template.profilePage.helpers({
 	}
     },
 
-    thisUser: function()
+    person: function()
     {
     var parts = location.href.split('/');
 	var otherId = parts.pop(); //id of user whose page is being visited

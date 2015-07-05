@@ -13,7 +13,7 @@
             
             {{#if urlUser}}
                 {{#if currentFollowsThis}}
-                    <button class="btn primary-btn btn-default" id="unfollowButton"> UNFOLLOW </button>
+                    <button class="btn primary-btn btn-default" id="unfollowButton" onmouseover="changeText()" onmouseout="changeback()">FOLLOWING</button>
                 {{else}}
                     <button class="btn primary-btn btn-default" id="followButton"> + FOLLOW </button>
                 {{/if}}
@@ -28,6 +28,21 @@
         <hr>
         {{> profileModelFeed}}
     </div>
+
+    <script>
+        function changeText()
+        {
+            var display = document.getElementById('unfollowButton');
+            display.innerHTML = "";
+            display.innerHTML = "UNFOLLOW";
+        }
+          function changeback()
+        {
+            var display = document.getElementById('unfollowButton');
+            display.innerHTML = "";
+            display.innerHTML = "FOLLOWING";
+        }
+    </script>
 </template>
 
 

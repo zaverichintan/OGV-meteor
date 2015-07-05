@@ -50,7 +50,7 @@ Template.dashboard.events({
 	    if (!picId) {
 		picId = currentUser.profile.pic;
 	    } 
-	
+
 	    Meteor.users.update( currentUser._id,{ $set: {'profile.bio' : userBio, 'profile.name': userName, 'profile.pic': picId}}, function(error, res) {
 		if (error) {
 		    throwError(error.reason);
@@ -64,7 +64,12 @@ Template.dashboard.events({
 	    var fsFile = new FS.File(e.target[2].files[0]);
 	    console.log(fsFile);
 	    fsFile.user = currentUser._id;
-	
+		
+		var prevProfilePicture = ProfilePictures.findOne({user: currentUser._id});
+		if(typeof prevProfilePicture != 'undefined'){
+	   		ProfilePictures.remove(prevProfilePicture._id);
+	   	}
+
 	    ProfilePictures.insert(fsFile, function(err, dpFile) {
 		if (err) {
 		    throwError(err.reason);

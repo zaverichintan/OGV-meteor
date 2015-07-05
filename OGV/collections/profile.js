@@ -54,5 +54,8 @@ ProfilePictures.allow({
     download: function(userId, file) 
     {
     	return true;
-    }	
+    },
+    remove: function (userId, file) {
+        return userId && file.user === userId;
+    }
 });

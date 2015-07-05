@@ -27,7 +27,9 @@ Template.profileSidebar.helpers({
     suggestedModel: function()
     {
         return ModelFiles.find( {}, {sort:{timeUploaded:-1}});
-    }
+    },
+
+    
 }); 
 
 

@@ -53,9 +53,13 @@ Template.newsfeedSidebar.helpers({
         return ProfilePictures.find({user: {$in :picIds}});
     },
 
+    /**
+    * Returns models based on popularity be seeing the number of views.
+    */
     suggestedModel: function()
     {
-        return ModelFiles.find({}, {sort:{timeUploaded:-1}});
+        var currentUser = Meteor.user();
+        return ModelFiles.find({owner: {$not: currentUser._id}}, {sort:{viewsCount:-1}});
     },
 
     

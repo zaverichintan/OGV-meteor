@@ -247,6 +247,10 @@ input:focus {
 	background:url('/icons/love.png') no-repeat;
 }
 
+.meta-view-icon{
+	background:url('/icons/views.png') no-repeat;
+}
+
 .meta-comment-icon{
 	background:url('/icons/Chat.png') no-repeat;
 }
@@ -642,7 +646,7 @@ hr {
 {
 	z-index: 1400;
 	position:fixed;
-    top:50%;
+    top:45%;
     right: -10px;
 	color:#333;
 	height:5px;

@@ -99,9 +99,9 @@ Accounts.onCreateUser(function(options, user) {
 *  Need to allow the users to update only the follwers array of other users
 */
 Meteor.users.allow({
-    update: function(userId, user, fields) 
+    update: function(userId, user, fieldNames, modifier) 
     {
-        return true;        
+        return true;
     }    
 });
 

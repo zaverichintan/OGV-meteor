@@ -69,9 +69,9 @@ ModelFiles.allow({
 	    return false;
 	}
     },
-    update: function(userId,file) 
+    update: function(userId,file, fieldNames, modifier) 
     {
-	return userId == file.owner;
+	   return (userId && file.owner === userId) || modifier.$inc.viewsCount !== userId;
     },
     download: function() 
     {

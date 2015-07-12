@@ -1,3 +1,6 @@
+/**
+* Comments and its backend implementation
+*/
 Template.comment.helpers({
     submittedText: function() {
 	return new Date(this.submitted).toString();
@@ -19,8 +22,12 @@ Template.commentSubmit.events({
 		    throwError(error.reason);
 		} else {
 		    $body.val('');
+		    var commentOnModel = Comments.findOne(commentId);
+	    	ModelFiles.update(commentOnModel.postId, {$inc: {commentsCount: 1}});
 		}
+	   	
 	   });
+	    
     }
 });
 
@@ -50,17 +57,20 @@ Template.comments.events({
     }
 });
 
-        
+  
+/**
+* Likes and its backend implementation
+*/      
 Template.lovemeter.events({
     'click .lovemeter-wrapper':function(){
         var love = {
             postId: this._id
         };
-     Meteor.call('love', love, function(error, loveId) {
+     	Meteor.call('love', love, function(error, loveId) {
 		if (error){
 		    throwError(error.reason);
 		}
-	   });
+	   	});
     }
 });
 

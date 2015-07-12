@@ -24,6 +24,7 @@
  */
 
 Meteor.publish('modelFiles', function() {
+    Meteor._sleepForMs(1000);
     return ModelFiles.find();
 });
 

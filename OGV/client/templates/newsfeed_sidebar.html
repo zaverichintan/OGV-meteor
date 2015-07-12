@@ -1,7 +1,7 @@
 <template name="newsfeedSidebar">
     <div class="newsfeed-info-section">
+	
 		<!-- About the current User -->
-		
 		<div class="newsfeed-info-content">
 			<p style="color:#ccc;font-size: 15px;text-transform:upperCase"> {{myInfo.myUser.profile.name}}, that's you! </p>
 			<a href="/profile/{{ currentUser._id }}">
@@ -19,7 +19,7 @@
 			<p style="color:#ccc;font-size: 15px;"> SUGGESTED USERS </p>
 			{{#each suggestownerImg}}
 			<a href="/profile/{{ this.user }}">
-		        <div class="post-item user-image" style="background-image:url(&quot;{{this.url}}&quot;); width:50px; height:50px;"></div>
+		        <div class="post-item user-image" style="background-image:url(&quot;{{this.url}}&quot;); width:40px; height:40px;"></div>
 		    </a>
 		    {{/each}}
 
@@ -28,23 +28,30 @@
 				<button class="btn primary-btn btn-default" id="followButton" onclick="followUser('{{this._id}}')"> + FOLLOW </button>
 			<br>
 			{{/each}}
-		    
 	    </div>
-
 
 	    <!-- About popular models -->
 		<div class="newsfeed-info-content">
 			<p style="color:#ccc;font-size: 15px;"> SUGGESTED MODELS </p>
 			{{#each suggestedModel}}
-				<div style="transform:scale(0.9,0.9);">
-					{{this.name}}<br>
-					{{> modelView}}
+				<div id="suggestModel-body">
+					<div id="suggestModel-left">
+						<strong>{{this.name}}</strong><br>
+						<img src="/icons/views.png" style="height:40px;width:40px">
+		        		{{this.viewsCount}}
+						<div class="post-item love-wrapper" style="float:left;">
+		            		{{> lovemeter }}
+		        		</div>
+					 </div>
+					<div id="suggestedModel-right" style="transform:scale(0.45,0.45);transform-origin:0 0;margin-bottom:-120px;margin-top:-5%">
+						{{> modelView}}
+					</div>
+					
 				</div>
 			{{/each}}
 	    </div>
 
-	</div>
-
+	    </div>
 	<style>
 		.primary-btn
 		{

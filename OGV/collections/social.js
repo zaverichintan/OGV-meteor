@@ -30,7 +30,7 @@ Meteor.methods({
     /**
      * Adds new comment to post 
      */
-     comment: function(commentAttributes) {
+    comment: function(commentAttributes) {
 	var user = Meteor.user();
 	var post = ModelFiles.findOne(commentAttributes.postId);
 	
@@ -108,7 +108,6 @@ Meteor.methods({
 		lovers: lovers,
 		submitted: new Date().getTime()
 	    });
-
 	    return Lovers.insert(love);
         }
     }

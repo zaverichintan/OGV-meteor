@@ -204,8 +204,8 @@ function init()
      * how the model shall look 
      */
      
-    OBJMaterial = new THREE.MeshPhongMaterial({color: Math.random() * 0x00f000}); 
-    OBJMaterialOver = new THREE.MeshPhongMaterial({color: 0x000000, visible: false}); 
+    OBJMaterial = new THREE.MeshPhongMaterial(); 
+    OBJMaterialOver = new THREE.MeshPhongMaterial({visible: false}); 
     for (i in objList) {
 	loader.load( objList[i], function(object) {
 	    object.traverse(function(child) {

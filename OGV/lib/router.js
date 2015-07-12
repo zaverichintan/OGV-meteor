@@ -61,13 +61,22 @@ Router.map(function() {
     
     this.route('modelViewer', {
 	path: '/models/:_id',
-	data: function() 
+    waitOn: function() {
+        return Meteor.subscribe('modelFiles');
+    },
+    data: function() 
 	{ 
 	    return ModelFiles.findOne (this.params._id);
 	},
-	action : function () {
+	action : function () 
+    {
    	     if (this.ready()) this.render();
-	}
+	},
+    onRun: function()
+    {
+        ModelFiles.update(this.params._id, {$inc: {viewsCount: 1}});
+        this.next();
+    }
     });
 
     this.route('modelMeta', {

@@ -22,7 +22,8 @@ function uploadFile(event, temp)
 	fsFile.timeUploaded = new Date();
 	fsFile.about = "The model " + fsFile.name() + " was uploaded on " + fsFile.timeUploaded;
 	fsFile.thumbnail = new FS.File();
-	fsFile.lovers = [];
+	fsFile.commentsCount = 0;
+	fsFile.viewsCount = 0;
 	var currentUser = Meteor.user();
 
 	ModelFiles.insert(fsFile,function(err,fileObj) {

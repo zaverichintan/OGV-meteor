@@ -1,3 +1,8 @@
+var handle1; 
+Deps.autorun(function(){
+    handle1 = Meteor.subscribeWithPagination('modelFiles', 2);
+});
+
 Template.newsfeedSidebar.events({
     /**
     * Follow button functionality for suggested Users.
@@ -25,6 +30,11 @@ Template.newsfeedSidebar.events({
             });
             }
         });
+    }, 
+
+    'click #showMoreModels': function(e, t)
+    {
+        handle1.loadNextPage();
     }
 });
 
@@ -39,7 +49,7 @@ Template.newsfeedSidebar.helpers({
     suggestownerInfo: function()
     {
         var currentUser = Meteor.user();
-        return Meteor.users.find( {$and: [{"profile.follower": {$not: currentUser._id}}, {_id: {$not: currentUser._id}}]}, {sort:{"profile.countModels":-1}});
+        return Meteor.users.find( {$and: [{"profile.follower": {$not: currentUser._id}}, {_id: {$not: currentUser._id}}]}, {sort:{"profile.countModels":-1}, $limit: 1});
     },
 
     /**
@@ -50,7 +60,7 @@ Template.newsfeedSidebar.helpers({
         var currentUser = Meteor.user();
         var otherUser = Meteor.users.find( {$and: [{"profile.follower": {$not: currentUser._id}}, {_id: {$not: currentUser._id}}]}, {sort:{createdAt:-1}}).fetch();
         var picIds = _.pluck(otherUser, "_id");
-        return ProfilePictures.find({user: {$in :picIds}});
+        return ProfilePictures.find({user: {$in :picIds}}, {$limit: 1});
     },
 
     /**

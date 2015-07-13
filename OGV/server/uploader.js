@@ -68,7 +68,7 @@ Meteor.methods({
 				sys.print(stdout);
    	    	});
    	    	
-   	    	var cmd_color = "wmater " + uploadFilePath + " " + uploadDirPath + objects[i] ;
+   	    	var cmd_color = mgedPath + " wmater " + uploadDirPath + objects[i]+ " " + uploadFilePath;
    	    	console.log(cmd_color); 
    	    	child = exec(cmd_color, function (error, stdout, stderr) {
 				sys.print(stdout);

@@ -29,6 +29,12 @@
  * various social elements which are taken care of in other files such as
  * OGV/clients/views/social.js 
  */
+
+var handle;
+Deps.autorun(function(){
+    handle = Meteor.subscribeWithPagination('modelFiles', 1);
+});
+
 Template.modelFeed.helpers({
     /**
      * models helper finds all the models from the database and then sorts
@@ -41,7 +47,7 @@ Template.modelFeed.helpers({
     var popularLoveIds = _.pluck(popularLove, "postId");*/
     var currentUser = Meteor.user();
 	/*model = ModelFiles.find( {$or: [ {owner: {$in: currentUser.profile.following} }, {_id: {$in: popularLoveIds}} ] }, {sort:{timeUploaded:-1}});*/
-	model = ModelFiles.find( {owner: {$in: currentUser.profile.following} }, {sort:{timeUploaded:-1}});
+	model = ModelFiles.find( {owner: {$in: currentUser.profile.following}});
     if (model.count()) {
 	    return model;
 	} else {
@@ -85,5 +91,15 @@ Template.modelView.helpers({
     {
         thumbImage = ThumbFiles.findOne({gFile:this._id});
         return thumbImage;
+    }
+});
+
+Template.modelFeed.events({
+    /**
+    * Follow button functionality for suggested Users.
+    */
+    'click #loadMoreButton': function()
+    {
+        handle.loadNextPage();
     }
 });

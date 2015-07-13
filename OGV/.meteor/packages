@@ -26,4 +26,5 @@ accounts-google
 accounts-facebook
 mizzao:user-status
 tmeasday:publish-counts
+tmeasday:paginated-subscription
 

@@ -23,9 +23,9 @@
  *  @brief publishes data from server to client
  */
 
-Meteor.publish('modelFiles', function() {
+Meteor.publish('modelFiles', function(limit) {
     Meteor._sleepForMs(1000);
-    return ModelFiles.find();
+    return ModelFiles.find({}, {sort:{timeUploaded:-1} ,limit: limit});
 });
 
 Meteor.publish('objFiles', function() {

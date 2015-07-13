@@ -34,7 +34,6 @@
 Router.configure({
     layoutTemplate:'layout',
     loadingTemplate:'preloader',
-    waitOn: function() { return Meteor.subscribe('modelFiles'); },
 });
 
 
@@ -43,7 +42,7 @@ Router.configure({
  */
 Router.map(function() {
     this.route('index', {
-	path : '/'	
+    path : '/'
     });
     this.route('signUp', {path : 'sign-up'});
     this.route('feedbackThanks', {path : 'thanks'});
@@ -97,7 +96,7 @@ Router.map(function() {
 
     this.route('filemanager',{
 	path: '/my-models',
-	data: function()
+    data: function()
 	{
 	    return ModelFiles.find({'owner' : Meteor.user()});
 	}

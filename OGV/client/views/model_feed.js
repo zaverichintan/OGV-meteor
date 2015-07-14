@@ -32,7 +32,7 @@
 
 var handle;
 Deps.autorun(function(){
-    handle = Meteor.subscribeWithPagination('modelFiles', 1);
+    handle = Meteor.subscribeWithPagination('modelFiles', 3);
 });
 
 Template.modelFeed.helpers({
@@ -47,7 +47,7 @@ Template.modelFeed.helpers({
     var popularLoveIds = _.pluck(popularLove, "postId");*/
     var currentUser = Meteor.user();
 	/*model = ModelFiles.find( {$or: [ {owner: {$in: currentUser.profile.following} }, {_id: {$in: popularLoveIds}} ] }, {sort:{timeUploaded:-1}});*/
-	model = ModelFiles.find( {owner: {$in: currentUser.profile.following}});
+	model = ModelFiles.find( {owner: {$in: currentUser.profile.following}}, {sort: {timeUploaded: -1}});
     if (model.count()) {
 	    return model;
 	} else {

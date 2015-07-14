@@ -36,7 +36,6 @@ Router.configure({
     loadingTemplate:'preloader',
 });
 
-
 /**
  * Mapping urls to template names
  */
@@ -80,7 +79,10 @@ Router.map(function() {
 
     this.route('modelMeta', {
 	path: '/description/:_id',
-	data: function() 
+	waitOn: function() {
+        return Meteor.subscribe('modelFiles');
+    },
+    data: function() 
 	{
 		var model = ModelFiles.findOne({'owner' : Meteor.user()._id});
 	 	if( model == null ){
@@ -96,6 +98,9 @@ Router.map(function() {
 
     this.route('filemanager',{
 	path: '/my-models',
+    waitOn: function() {
+        return Meteor.subscribe('modelFiles');
+    },
     data: function()
 	{
 	    return ModelFiles.find({'owner' : Meteor.user()});

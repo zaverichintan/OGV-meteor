@@ -24,8 +24,7 @@
  */
 
 Meteor.publish('modelFiles', function(limit) {
-    Meteor._sleepForMs(1000);
-    return ModelFiles.find({}, {sort:{timeUploaded:-1} ,limit: limit});
+    return ModelFiles.find({}, {sort: {timeUploaded: -1}, limit: limit});
 });
 
 Meteor.publish('objFiles', function() {

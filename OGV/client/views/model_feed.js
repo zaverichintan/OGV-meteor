@@ -30,11 +30,6 @@
  * OGV/clients/views/social.js 
  */
 
-var handle;
-Deps.autorun(function(){
-    handle = Meteor.subscribeWithPagination('modelFiles', 3);
-});
-
 Template.modelFeed.helpers({
     /**
      * models helper finds all the models from the database and then sorts
@@ -91,15 +86,5 @@ Template.modelView.helpers({
     {
         thumbImage = ThumbFiles.findOne({gFile:this._id});
         return thumbImage;
-    }
-});
-
-Template.modelFeed.events({
-    /**
-    * Follow button functionality for suggested Users.
-    */
-    'click #loadMoreButton': function()
-    {
-        handle.loadNextPage();
     }
 });

@@ -28,6 +28,9 @@ Template.newsfeedSidebar.events({
     }
 });
 
+Template.newsfeedSidebar.items = function() {
+  return popular_Models();
+};
 
 Template.newsfeedSidebar.helpers({
     /**
@@ -56,15 +59,16 @@ Template.newsfeedSidebar.helpers({
     /**
     * Returns models based on popularity be seeing the number of views.
     */
-/*    suggestedModel: function()
+    suggestedModel: function()
     {
         var currentUser = Meteor.user();
-        return ModelFiles.find({owner: {$not: currentUser._id}}, {sort:{viewsCount: -1}, limit: 4});
-    },*/
+        return ModelFiles.find({owner: {$not: currentUser._id}});
+    },
 
     
 }); 
 
+Meteor.subscribe('popular_Models');
 
 /**
 * returns details about the current user to be displayed on the newsfeed

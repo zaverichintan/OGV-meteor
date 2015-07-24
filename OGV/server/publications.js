@@ -23,8 +23,8 @@
  *  @brief publishes data from server to client
  */
 
-Meteor.publish('modelFiles', function(limit) {
-    return ModelFiles.find({}, {sort: {timeUploaded: -1}, limit: limit});
+Meteor.publish('modelFiles', function() {
+    return ModelFiles.find();
 });
 
 Meteor.publish('objFiles', function() {

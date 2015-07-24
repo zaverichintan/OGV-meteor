@@ -39,9 +39,13 @@ Router.configure({
 /**
  * Mapping urls to template names
  */
+
 Router.map(function() {
     this.route('index', {
-    path : '/'
+    path : '/',
+    waitOn:function(){
+        Meteor.subscribe('modelFiles');
+    }
     });
     this.route('signUp', {path : 'sign-up'});
     this.route('feedbackThanks', {path : 'thanks'});
@@ -49,6 +53,7 @@ Router.map(function() {
     this.route('cfsUploader', {path : 'upload'});
     this.route('notVerified', {path : 'not-verified'});
     this.route('forgotPassword', {path : 'forgot-password'});
+    this.route('home', {path : 'home'});
     
     this.route('dashboard',{
 	path: 'dashboard',
@@ -111,7 +116,9 @@ Router.map(function() {
     path: '/profile/:_id',
     waitOn:function()
     {
-        return Meteor.subscribe("userProfile",this.params._id);
+        return [Meteor.subscribe("userProfile",this.params._id),
+                Meteor.subscribe('modelFiles')];
+        
     },
     data: function(){
         var id = this.params._id;
@@ -120,7 +127,14 @@ Router.map(function() {
             person: personVar
         }
     }
-    })
+    });
+
+    this.route('explore', {
+        path:'/explore',
+        waitOn:function(){
+            Meteor.subscribe('modelFiles');
+        }
+    });
 });
 
 // add the dataNotFound plugin, which is responsible for
@@ -176,6 +190,6 @@ var loggingIn = function(pause) {
  * everytime a route is changed 
 */
 Router.onBeforeAction(function() { clearNotifications(); this.next(); });
-Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta']});
-Router.onBeforeAction(actionReady, {only:['index', 'modelViewer']});
+Router.onBeforeAction(validateUser,{only:['cfsUploader','filemanager','dashboard','modelMeta', 'newsfeedSidebar', 'modelFeed', 'explore', 'profilePage', 'index']});
+Router.onBeforeAction(actionReady, {only:['index', 'modelViewer', 'profilePage', 'explore']});
 Router.onBeforeAction(loggingIn);

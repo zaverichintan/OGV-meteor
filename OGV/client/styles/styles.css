@@ -697,3 +697,20 @@ hr {
 	padding:5% 5% 5% 5%;
 	border-radius: 15px;
 }
+
+#search-box, #search-user-box {
+  padding: 10px;
+  width: 49%;
+  height: 50px;
+  border: 1px solid #eee;
+  outline: 0;
+  font-size: 15px;
+}
+
+#view-model-options:hover {
+	background: #F2F2F2;
+}
+
+.filter-select {
+	padding:2px;
+}

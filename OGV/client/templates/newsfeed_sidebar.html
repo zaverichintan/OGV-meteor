@@ -22,7 +22,6 @@
 		        <div class="post-item user-image" style="background-image:url(&quot;{{this.url}}&quot;); width:40px; height:40px;"></div>
 		    </a>
 		    {{/each}}
-
 			{{#each suggestownerInfo}}
 			    <a href="/profile/{{ this._id }}">{{profile.name}}</a>
 				<button class="btn primary-btn btn-default" id="followButton" onclick="followUser('{{this._id}}')"> + FOLLOW </button>
@@ -31,7 +30,7 @@
 	    </div>
 
 	    <!-- About popular models -->
-<!-- 		<div class="newsfeed-info-content">
+		<div class="newsfeed-info-content">
 			<p style="color:#ccc;font-size: 15px;"> SUGGESTED MODELS </p>
 			{{#each suggestedModel}}
 				<div id="suggestModel-body">
@@ -49,7 +48,7 @@
 				</div>
 			{{/each}}
 			<a href="#"><button class="btn primary-btn btn-default" id="showMoreModels"> SHOW MORE </button></a>
-	    </div> -->
+	    </div>
 	    
 	    </div>
 	<style>

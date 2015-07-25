@@ -46,7 +46,7 @@ Meteor.methods({
 		    model._id = Models.insert(model);
 		}
 		
-		fs.mkdirSync(uploadDirPath);
+		/*fs.mkdirSync(uploadDirPath);
 		console.log("directory created");
 		fs.writeFileSync(uploadFilePath, blob, encoding);
 		fileUploaded = true;
@@ -70,7 +70,7 @@ Meteor.methods({
 	    }
 	    model._id = Models.insert(model);
 	}
-	
+	*/
 	function gToObj()
 	{
 	    var objects;

@@ -41,7 +41,6 @@ Template.dashboard.events({
       
   var currentUser = Meteor.user();
 
-<<<<<<< HEAD
 	var saveSettings = function(picId)
 	{   
  	    /**
@@ -82,13 +81,14 @@ Template.dashboard.events({
 	} else {
 	    saveSettings();
 	}
-=======
+  
+	/*
   var saveSettings = function(picId)
   {   
       /**
        * If user has not changed the profile picture then use
        * existing profile pic.
-       */
+       
       if (!picId) {
     picId = currentUser.profile.pic;
       } 
@@ -118,8 +118,7 @@ Template.dashboard.events({
   } else {
       saveSettings();
   }
->>>>>>> e1b6bd09e8fbca13e3b9b518a7bbf52d4c769dc6
-    },
+    */},
 
     /**
      * When admin form is submitted, get the values form the form

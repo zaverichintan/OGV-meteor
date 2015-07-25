@@ -170,10 +170,9 @@ Template.modelMeta.events({
 		} else {
 			sAlert.error("There was some error in converting your uploaded file", {effect: 'flip', onRouteClose: false, stack: false, timeout: 5000, position: 'top'});			
 			Router.go('/upload');
-		}
+*/		}
     } 
 });
-*/
 
 /**
 * helper to display already present categories in the model

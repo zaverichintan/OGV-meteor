@@ -84,7 +84,11 @@ Template.modelView.helpers({
     */
     thumbImg:function()
     {
-        thumbImage = ThumbFiles.findOne({gFile:this._id});
-        return thumbImage;
+    	thumbImage = ThumbFiles.findOne({gFile:this._id});
+        if (thumbImage) {
+            return thumbImage;
+        } else {
+            // return test;
+        }  
     }
 });

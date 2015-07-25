@@ -123,8 +123,8 @@ ThumbFiles = new FS.Collection ("thumbFiles", {
     ],
     filter: {
 	allow: {
-	    contentTypes: ['image/*'],
-	    extensions: ['jpg']
+	    contentTypes: ['image/png', 'image/jpeg', 'image/jpg']
+	    // extensions: ['jpg']
 	}
     }	
 });

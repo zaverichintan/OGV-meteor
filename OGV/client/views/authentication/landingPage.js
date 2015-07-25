@@ -1,5 +1,5 @@
-
-/*                     L O G O U T . J S
+/**
+/*                    	L A N D I N G  P A G E . J S
  * BRL-CAD
  *
  * Copyright (c) 1995-2013 United States Government as represented by
@@ -19,22 +19,14 @@
  * information.
  */
 
-/** @file OGV/client/views/logout.js
- *  @brief deals with logout.html
+/** @file OGV/client/views/authentication/landingPage.js
+ *  @brief Helper for landingPage.html
  *
- *  Logs the user out
+ * authenticate user credentials, shows the errors if any
  */
 
-Template.logOut.events({
-    'click #log-out':function(e,t)
-    {
-	Meteor.logout(function() {
-	     throwError('Bye!, See you back soon');
-	     Router.go('/');
-	    /*sAlert.info('Bye!, See you back soon', {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
-	    Router.go("/"); */
-	});
-	
-	return false;
-    }
+Template.landingPage.helpers({
+	isFillingForm: function () {
+		return true;
+	}
 });

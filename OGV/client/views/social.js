@@ -19,7 +19,7 @@ Template.commentSubmit.events({
     
 	    Meteor.call('comment', comment, function(error, commentId) {
 		if (error){
-		    throwError(error.reason);
+		    sAlert.error(error.reason);
 		} else {
 		    $body.val('');
 		    var commentOnModel = Comments.findOne(commentId);
@@ -68,7 +68,7 @@ Template.lovemeter.events({
         };
      	Meteor.call('love', love, function(error, loveId) {
 		if (error){
-		    throwError(error.reason);
+		    sAlert.error(error.reason);
 		}
 	   	});
     }

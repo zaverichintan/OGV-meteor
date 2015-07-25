@@ -31,6 +31,9 @@ function uploadFile(event, temp)
 		throwError("There was some error in uploading your file, please try again/later");
 	     } else {
 		throwNotification("File Uploaded, and will appear in file manager after it's converted"); 
+		/*sAlert.error("Upload .g or .obj file only");
+	    } else {
+	    sAlert.info("File Uploaded, and will appear in file manager after it's converted", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});*/
 		Router.go("/description/" +fileObj._id);  
 	    }
 	});

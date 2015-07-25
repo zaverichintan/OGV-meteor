@@ -33,7 +33,7 @@ Template.modelViewer.events({
         };
  	Meteor.call('love', love, function(error, loveId) {
 	    if (error) {
-		throwError(error.reason);
+		sAlert.error(error.reason);
 	    }
 	});
     },
@@ -113,7 +113,7 @@ Template.modelViewer.rendered = function()
 function getObjFiles(model) 
 {
     var objUrls = [];
-    throwNotification("getting obj files");
+    sAlert.success("Getting obj files", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});    
     modelId = model._id;
     OBJFiles.find({ gFile : modelId }).forEach( function (objFile) {
 	objUrls.push(objFile.url());
@@ -170,7 +170,20 @@ function init()
     camera.position.y = 1000;
  
 
+    
+    /** 
+     * Create a scene, that will hold all our elements such 
+     * as objects, cameras and lights
+     */
     scene = new THREE.Scene();
+
+    /**
+     * Create a camera, which defines where we're looking at.
+     */
+    camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 100000);
+    camera.position.z = 2000;
+    camera.position.x = 2000;
+    camera.position.y = 2000;
     
     /**
      * Light up the scene 
@@ -339,6 +352,7 @@ function init()
     controls.addEventListener('change', render);    
     
     window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener( 'keydown', onKeyDown, false );
 
 }
 
@@ -397,7 +411,7 @@ function generateEmbedCode()
 {
     var thisURL = Meteor.absoluteUrl() + "/models/" + model._id;
     embedCode = "<iframe width=\"500\" height=\"250\" src=\"" + thisURL + "\" frameborder=\"0\"></iframe>";
-    throwNotification(embedCode);
+    sAlert.success(embedCode, {effect: 'flip', onRouteClose: false, stack: false, timeout: 10000, position: 'top'});
     return embedCode;
 }
 
@@ -409,3 +423,34 @@ function handleColorChange ( color ) {
         color.setHex( value );
     };
 }
+/**
+ * onKeyDown function helps to view model from 
+ * different angles on keyboard button press.
+ */
+
+function onKeyDown( event )
+{
+    switch (event.keyCode)
+    {
+        case 84: /* T */
+            camera.position.set( 0, 3000, 0 ); // top view
+            camera.lookAt(scene.position);
+            break;
+        case 66: /* B */
+            camera.position.set( 0, -3000, 0 ); // bottom view
+            camera.lookAt(scene.position);
+            break;
+        case 70: /* F */
+            camera.position.set( -3000, 0,  0); // front view
+            camera.lookAt(scene.position);
+            break;
+        case 82: /* R */
+            camera.position.set( 3000, 0, 0 ); // rear view
+            camera.lookAt(scene.position);
+            break;
+        case 78: /* N */
+            camera.position.set( 2000, 2000, 2000 ); // Reset view using N
+            camera.lookAt(scene.position);
+            break;                
+    }
+} 

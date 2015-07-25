@@ -142,18 +142,46 @@ Template.modelMeta.events({
 				}
 		    }
 		});
-	}
-	}
 	
+	
+/*
+	fsFile.gFile = modelId;
+        	
+	ThumbFiles.insert(fsFile,function(err,thumbFile) {
+	    if (err) {
+			sAlert.error("No image or invalid image format selected", {effect: 'flip', onRouteClose: false, stack: false, timeout: 2500, position: 'top'});
+	    } else {
+			sAlert.success("Image has been Uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 2500, position: 'top'});		
+			ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:thumbFile._id}}, function(error, reason) {
+		    if (error) {
+				sAlert.error(error.reason);
+		    } else {
+				sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: true, stack: false, timeout: 2500, position: 'top'});
+		    }
+		});
+  
+	    }
+	}); 
+
+	var uploadedModel = ModelFiles.findOne(modelId);
+		if( uploadedModel.converted ) {
+			sAlert.success("Data about model saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 5000, position: 'top'});
+			Router.go('/models');
+		} else {
+			sAlert.error("There was some error in converting your uploaded file", {effect: 'flip', onRouteClose: false, stack: false, timeout: 5000, position: 'top'});			
+			Router.go('/upload');
+		}
+    } 
 });
-	
-Template.modelMeta.modelCategory = function() 
-{
+*/
+
 /**
 * helper to display already present categories in the model
 * Diplayed everytime when the /description/:_id page is viewed
 * Displays nothing if categories is empty.
 */
-var id = Session.get('modelId');
-return ModelFiles.findOne({_id: id}); 
+Template.modelMeta.modelCategory = function() 
+{
+    var id = Session.get('modelId');
+    return ModelFiles.findOne({_id: id}); 
 };

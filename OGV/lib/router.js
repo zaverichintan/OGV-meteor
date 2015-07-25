@@ -33,6 +33,7 @@
 
 Router.configure({
     layoutTemplate:'layout',
+    notFoundTemplate: 'notFound',
     loadingTemplate:'preloader',
 });
 
@@ -42,11 +43,13 @@ Router.configure({
 
 Router.map(function() {
     this.route('index', {
-    path : '/',
-    waitOn:function(){
-        Meteor.subscribe('modelFiles');
-    }
+	path : '/',
+	waitOn:function(){
+	    Meteor.subscribe('modelFiles');
+	}
     });
+    /*this.route('landingPage', {path: '/'}); */
+    this.route('models', {path : '/models'});
     this.route('signUp', {path : 'sign-up'});
     this.route('feedbackThanks', {path : 'thanks'});
     this.route('logIn', {path : 'log-in'});
@@ -103,8 +106,8 @@ Router.map(function() {
 
     this.route('filemanager',{
 	path: '/my-models',
-    waitOn: function() {
-        return Meteor.subscribe('modelFiles');
+	waitOn: function() {
+	    return Meteor.subscribe('modelFiles');
     },
     data: function()
 	{

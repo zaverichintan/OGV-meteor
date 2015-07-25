@@ -12,15 +12,40 @@ Meteor.methods({
 	    userId = Meteor.userId(),
 	    fileUploaded = false;
 
-	userDirPath = appRoot + userId + '/';
-	uploadDirPath = userDirPath + name + '/';
-	uploadFilePath = uploadDirPath + name;
-	console.log(uploadDirPath);	
-	if (ext == '.obj') {
-	    if (!fs.existsSync(uploadDirPath)) {
-		if (!fs.existsSync(userDirPath)) {
-		    fs.mkdirSync(userDirPath);
+		userDirPath = appRoot + userId + '/';
+		uploadDirPath = userDirPath + name + '/';
+		uploadFilePath = uploadDirPath + name;
+		console.log(uploadDirPath);	
+		if (ext == '.obj') {
+		    if (!fs.existsSync(uploadDirPath)) {
+			if (!fs.existsSync(userDirPath)) {
+			    fs.mkdirSync(userDirPath);
+			}
+			fs.mkdirSync(uploadDirPath);
+			console.log("directory created");
+			fs.writeFileSync(uploadFilePath, blob, encoding);
+			fileUploaded = true;
+		    } else if (fs.existsSync(uploadFilePath)) {
+		    	throw (new Meteor.Error(409, 'File Already Exists'));
+		    } else {
+			fs.writeFileSync(uploadFilePath, blob, encoding);
+			fileUploaded = true;
+		    }	
+	         } else {
+		     throw (new Meteor.Error (409,'File type not supported'));
+		 }	
+		
+		if (fileUploaded) {
+		    var model = {
+		    	name: name,
+		    	userId: userId,
+			path: uploadFilePath,
+		  	lovemeter: 0,
+			lovers: []
+		    }
+		    model._id = Models.insert(model);
 		}
+		
 		fs.mkdirSync(uploadDirPath);
 		console.log("directory created");
 		fs.writeFileSync(uploadFilePath, blob, encoding);
@@ -79,18 +104,17 @@ Meteor.methods({
 
 
 	}
+		function cleanPath(str) 
+		{
+		    if (str) {
+			return str.replace(/\.\./g,'').replace(/\/+/g,'').replace(/^\/+/,'').replace(/\/+$/,'');
+		    }
+		}
 
-	function cleanPath(str) 
-	{
-	    if (str) {
-		return str.replace(/\.\./g,'').replace(/\/+/g,'').replace(/^\/+/,'').replace(/\/+$/,'');
-	    }
-	}
-
-	function cleanName(str) 
-	{
-	    return str.replace(/\.\./g,'').replace(/\//g,'');
-	}	
+		function cleanName(str) 
+		{
+		    return str.replace(/\.\./g,'').replace(/\//g,'');
+		}	
     }
 });
     

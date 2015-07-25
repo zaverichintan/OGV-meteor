@@ -33,14 +33,15 @@ Template.dashboard.events({
      */
     'submit #dash-user-form' : function(e, t) 
     {
-	e.preventDefault();
+  e.preventDefault();
 
-	var userDash = $(e.currentTarget),
-	    userBio = userDash.find('#dash-short-bio').val(),
-	    userName = userDash.find('#dash-username').val();
-	    
-	var currentUser = Meteor.user();
+  var userDash = $(e.currentTarget),
+      userBio = userDash.find('#dash-short-bio').val(),
+      userName = userDash.find('#dash-username').val();
+      
+  var currentUser = Meteor.user();
 
+<<<<<<< HEAD
 	var saveSettings = function(picId)
 	{   
  	    /**
@@ -81,6 +82,43 @@ Template.dashboard.events({
 	} else {
 	    saveSettings();
 	}
+=======
+  var saveSettings = function(picId)
+  {   
+      /**
+       * If user has not changed the profile picture then use
+       * existing profile pic.
+       */
+      if (!picId) {
+    picId = currentUser.profile.pic;
+      } 
+  
+      Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: picId} }}, function(error, res) {
+    if (error) {
+        sAlert.error(error.reason);
+        } else {
+        sAlert.success("Settings saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});  
+    }
+      });
+  }
+  
+  if (e.target[2].files[0]) {
+      var fsFile = new FS.File(e.target[2].files[0]);
+      console.log(fsFile);
+      fsFile.user = currentUser._id;
+  
+      ProfilePictures.insert(fsFile, function(err, dpFile) {
+    if (err) {
+        sAlert.error("Error: Invalid file format", {effect: 'flip', onRouteClose: false, stack: false, timeout: 8000, position: 'top'});
+        } else {
+        sAlert.success("Profile pic uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});        
+          saveSettings(dpFile._id);
+    } 
+      });
+  } else {
+      saveSettings();
+  }
+>>>>>>> e1b6bd09e8fbca13e3b9b518a7bbf52d4c769dc6
     },
 
     /**
@@ -89,30 +127,30 @@ Template.dashboard.events({
      */
     'submit #dash-admin-form' : function(e,t) 
     {
-	e.preventDefault();
-	
-	var adminDash = $(e.currentTarget),
-	    primaryBranding = adminDash.find('#dash-primary-branding').val(),
-	    mailUrl = adminDash.find ('#dash-mail-url').val(),
-	    mgedPath = adminDash.find('#dash-mged-path').val(),
-	    gobjPath = adminDash.find('#dash-g-obj-path').val();
-	
-	settings = OgvSettings.findOne();
+  e.preventDefault();
+  
+  var adminDash = $(e.currentTarget),
+      primaryBranding = adminDash.find('#dash-primary-branding').val(),
+      mailUrl = adminDash.find ('#dash-mail-url').val(),
+      mgedPath = adminDash.find('#dash-mged-path').val(),
+      gobjPath = adminDash.find('#dash-g-obj-path').val();
+  
+  settings = OgvSettings.findOne();
 
-	OgvSettings.update( settings._id, { 
-	    $set: { 
-		siteName: primaryBranding, 
-		mailUrl : mailUrl, 
-		mgedPath : mgedPath, 
-		gobjPath :gobjPath 
-	    }
-	}, function(error, res) {
-	    if (error) {
-		throwError(error.reason);
-	    } else {
-		throwNotification("Admin Settings saved");
-	    }
-	});	
+  OgvSettings.update( settings._id, { 
+      $set: { 
+    siteName: primaryBranding, 
+    mailUrl : mailUrl, 
+    mgedPath : mgedPath, 
+    gobjPath :gobjPath 
+      }
+  }, function(error, res) {
+      if (error) {
+    sAlert.error(error.reason, {effect: 'flip', onRouteClose: false, stack: false, timeout: 3000, position: 'top'});
+      } else {
+    sAlert.success("Admin Settings saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 3000, position: 'top'});
+      }
+  }); 
     }
 });
 
@@ -139,6 +177,6 @@ Template.dashboard.helpers({
 
     settings: function() 
     {
-	return OgvSettings.findOne();
+  return OgvSettings.findOne();
     }
 });

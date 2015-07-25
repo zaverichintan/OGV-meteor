@@ -50,8 +50,8 @@ Template.dashboard.events({
 	    if (!picId) {
 		picId = currentUser.profile.pic;
 	    } 
-	
-	    Meteor.users.update( currentUser._id,{ $set: {profile: {bio : userBio, name : userName, pic: picId} }}, function(error, res) {
+
+	    Meteor.users.update( currentUser._id,{ $set: {'profile.bio' : userBio, 'profile.name': userName, 'profile.pic': picId}}, function(error, res) {
 		if (error) {
 		    throwError(error.reason);
 	    	} else {
@@ -64,7 +64,12 @@ Template.dashboard.events({
 	    var fsFile = new FS.File(e.target[2].files[0]);
 	    console.log(fsFile);
 	    fsFile.user = currentUser._id;
-	
+		
+		var prevProfilePicture = ProfilePictures.findOne({user: currentUser._id});
+		if(typeof prevProfilePicture != 'undefined'){
+	   		ProfilePictures.remove(prevProfilePicture._id);
+	   	}
+
 	    ProfilePictures.insert(fsFile, function(err, dpFile) {
 		if (err) {
 		    throwError(err.reason);
@@ -112,15 +117,26 @@ Template.dashboard.events({
 });
 
 Template.dashboard.helpers({
-/**
- * profilePic returns the url of profile picture of the user
- */
+	/**
+ 	* profilePic returns the url of profile picture of the user
+ 	*/
     profilePic : function() 
     {
-	var picId = Meteor.user().profile.pic;
+	var currentUser = Meteor.user();
+	var picId = currentUser.profile.pic;
 	console.log(picId);	
-	return ProfilePictures.findOne(picId).url();
+	if( currentUser.services.google ){
+		return currentUser.services.google.picture;
+	} else {
+		return ProfilePictures.findOne(picId).url();
+	}
     },
+
+    thisUser: function()
+    {
+    	return Meteor.user();
+    },
+
     settings: function() 
     {
 	return OgvSettings.findOne();

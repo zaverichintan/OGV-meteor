@@ -23,7 +23,7 @@ h2 {
 }
 
 .page-container {
-	max-width:900px;
+	max-width:950px;
 	margin:auto;
 }
 
@@ -247,6 +247,10 @@ input:focus {
 	background:url('/icons/love.png') no-repeat;
 }
 
+.meta-view-icon{
+	background:url('/icons/views.png') no-repeat;
+}
+
 .meta-comment-icon{
 	background:url('/icons/Chat.png') no-repeat;
 }
@@ -316,7 +320,6 @@ input:focus {
 	left:0;
 	top:0;
 	z-index: 900;
-
 }
 
 .dropzone-text{
@@ -352,16 +355,17 @@ input:focus {
 }
 
 .feed-wrapper{
-     font-size: 14px;
+    font-size: 14px;
 	color: #555;
 	margin-left: 5px;
 	line-height: 1.5;   
 	max-width: 700px;
-    margin:50px auto 50px auto;
+    /*top, right, bottom, left*/
+    margin:10px auto 50px -10px;
 }
 
 .feed-item {
-    margin:10px 0px 10px 0px;
+    margin:20px 0px 10px 0px;
     overflow:hidden;
 }
 
@@ -370,7 +374,11 @@ input:focus {
     margin-left:10px;
 }
 
-
+.newsfeed-info-section{
+    float:right;
+    margin-left:20px;
+    margin-top:48px;
+}
 
 .post-meta {
     padding:5px 5px;
@@ -387,10 +395,9 @@ input:focus {
 	width: 70px;
 	height:70px;
 	background: #333;
-	border: 1px solid #333;
+	border: 0.5px solid #333;
 	background-size:cover !important;
-	background-position: center !important;	
-	border-radius:50%;
+	background-position: center !important;
 }    
 
 .user-profile-pic {
@@ -411,6 +418,15 @@ input:focus {
     border: 1px solid #dadada;
 }
 
+.newsfeed-info-content {
+    padding:10px 10px;
+    width:300px;
+    max-width:300px;
+    background:#fff;
+    border-radius:5px;
+    margin-top:20px;
+    border: 1px solid #dadada;
+}
 
 .model-preview {
     margin: 10px 0px 10px 0px;
@@ -561,7 +577,140 @@ input:focus {
     float:none;
 }
 
+.item {
+	white-space: nowrap;
+	display:inline;  
+}
+
+#check1, #check2, #check3, #check4, #check5, #check6, #check7, #check8, #check9, #check10, #check11, #check12 
+{
+	margin-top: 0px;
+	width: 20px;
+	min-height: 0px;
+	float: left;
+}
+
+#checkform-left {
+	width:50%;
+	float: left;
+}
+
+#checkform-right {
+	width:50%;
+	float: right;
+	margin-bottom:20px;
+}
+
+label {
+	font-size:17px;
+}
+
 textarea {
    resize: none;
    text-align: justify;
+}
+
+.profile-feed-wrapper{
+    font-size: 14px;
+	color: #555;
+	margin-left: 5px;
+	line-height: 1.5;   
+	max-width: 700px;
+    margin:50px auto 50px auto;
+}
+
+#profileInfo {
+	position: relative;
+    top:-210px;
+    left: 380px;
+    width:50%;
+    height:100%;
+}
+
+#profileModelFeedContainer {
+	position: relative;
+	top:-170px;
+}
+
+hr {
+	border-width: 5px;
+}
+
+#editModelButtons {
+	position: relative;
+	top: -43px;
+	left: 213px;
+}
+
+#feedbackDiv
+{
+	z-index: 1400;
+	position:fixed;
+    top:45%;
+    right: -10px;
+	color:#333;
+	height:5px;
+	width:90px;
+	background-color: blue;
+    transform: rotate(270deg);	
+}
+
+#feedbackDiv a h4
+{
+	color:white;
+	position:relative;
+	bottom:8px;
+}
+
+/*feedback*/
+.cbp-spmenu {
+	position: fixed;
+	right:100px;
+}
+
+.cbp-spmenu-vertical {
+	height: 50%;
+	top: 10%;
+	z-index: 1200;
+}
+
+/* Vertical menu that slides from the left or right */
+.cbp-spmenu-right {
+	right: -500px;
+}
+
+.cbp-spmenu-right.cbp-spmenu-open {
+	right: 25px;
+}
+
+
+/* Transitions */
+.cbp-spmenu{
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+#feedbackContainer
+{
+	background-color: white;
+	padding:5% 5% 5% 5%;
+	border-radius: 15px;
+}
+
+#search-box, #search-user-box {
+  padding: 10px;
+  width: 49%;
+  height: 50px;
+  border: 1px solid #eee;
+  outline: 0;
+  font-size: 15px;
+}
+
+#view-model-options:hover {
+	background: #F2F2F2;
+}
+
+.filter-select {
+	padding:2px;
 }

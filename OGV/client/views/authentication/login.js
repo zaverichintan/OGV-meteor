@@ -58,11 +58,12 @@ Template.logIn.events({
     },
 	
 	/**
-	* Things done after clocking on google image on login.html
+	* Things done after clicking on google image on login.html
 	*/
     'click img#loginGoogle': function(e, t) 
     {
     e.preventDefault();
+    
     Meteor.loginWithGoogle(function(err){
         requestOfflineToken: 'true'
         if(err) {
@@ -76,11 +77,12 @@ Template.logIn.events({
 	},
 
 	/**
-	 * Things done after clocking on github image on login.html
+	 * Things done after clicking on github image on login.html
 	*/
 	'click img#loginGithub': function(e, t) 
     {
     e.preventDefault();
+    
     Meteor.loginWithGithub(function(err){
         requestOfflineToken: 'true'
         if(err) {
@@ -94,11 +96,12 @@ Template.logIn.events({
 	},
 
 	/**
-	 * Things done after clocking on facebook image on login.html
+	 * Things done after clicking on facebook image on login.html
 	*/
 	'click img#loginFacebook': function(e, t) 
     {
     e.preventDefault();
+    
     Meteor.loginWithFacebook(function(err){
         requestOfflineToken: 'true'
         if(err) {

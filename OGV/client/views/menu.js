@@ -33,3 +33,14 @@ Template.menu.events({
 	return false;
     }
 });
+
+Template.menu.helpers({
+	/**
+	* returning logged in user's information 
+	*/
+	userId: function()
+	{
+		var currentUser = Meteor.user();
+		return currentUser._id;
+	}
+})

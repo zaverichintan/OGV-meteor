@@ -1,5 +1,4 @@
-
-/*                     L O G O U T . J S
+/*                F I X T U R E S . J S
  * BRL-CAD
  *
  * Copyright (c) 1995-2013 United States Government as represented by
@@ -19,20 +18,17 @@
  * information.
  */
 
-/** @file OGV/client/views/logout.js
- *  @brief deals with logout.html
- *
- *  Logs the user out
+/**
+ * This file contains inital settings that are entered into database
+ * during the first installation of the software 
  */
-
-Template.logOut.events({
-    'click #log-out':function(e,t)
-    {
-	Meteor.logout(function() {
-	     throwError('Bye!, See you back soon');
-	     Router.go('/');
-	});
-	
-	return false;
-    }
-});
+if (OgvSettings.find().count() === 0) 
+{
+   OgvSettings.insert({
+	settingSwitch: true,
+	siteName :"Online Geometry Viewer",
+	mailUrl : "http://username:password@example.com",
+	gobjPath : "/usr/brlcad/dev-7.25.0/bin/g-obj",
+	mgedPath : "/usr/brlcad/dev-7.25.0/bin/mged"
+    }); 
+}

@@ -8,6 +8,7 @@ Template.cfsUploader.events({
     {
 	 uploadFile(event, temp);
     }
+
 });
 
 function uploadFile(event, temp)
@@ -21,15 +22,25 @@ function uploadFile(event, temp)
 	fsFile.timeUploaded = new Date();
 	fsFile.about = "The model " + fsFile.name() + " was uploaded on " + fsFile.timeUploaded;
 	fsFile.thumbnail = new FS.File();
-	fsFile.lovers = [];
-	
+	fsFile.commentsCount = 0;
+	fsFile.viewsCount = 0;
+	var currentUser = Meteor.user();
+
 	ModelFiles.insert(fsFile,function(err,fileObj) {
 	    if (err) {
-		throwError(err.reason);
+		throwError("There was some error in uploading your file, please try again/later");
 	     } else {
-		throwNotification( "File Uploaded, and will appear in file manager after it's converted"); 
+		throwNotification("File Uploaded, and will appear in file manager after it's converted"); 
 		Router.go("/description/" +fileObj._id);  
 	    }
+	});
+
+    Meteor.users.update(currentUser._id, {$inc:{"profile.countModels": 1}}, function(error, res) {
+		if (error) {
+			throwError(error.reason);
+		} else {
+		throwNotification("Updated number of models for user");
+		}
 	});
 
     });

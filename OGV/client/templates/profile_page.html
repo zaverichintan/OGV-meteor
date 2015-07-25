@@ -1,0 +1,62 @@
+<template name="profilePage">
+    <div id="profileContainer">
+        <a href="/profile/{{ person._id }}">
+            <div class="post-item user-image" style="background-image:url(&quot;{{userImg}}&quot;); width:200px; height:200px;left:70px;position:relative;"></div>
+        </a>
+
+        <div id="profileInfo">
+            <h2>{{ person.profile.name }}</h2>
+            <strong>MODELS: {{person.profile.countModels}}</strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>FOLLOWERS: {{followerCount}}</strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>FOLLOWING: {{followingCount}}</strong><br>
+            
+            {{#if urlUser}}
+                {{#if currentFollowsThis}}
+                    <button class="btn primary-btn btn-default" id="unfollowButton" onmouseover="changeText()" onmouseout="changeback()">FOLLOWING</button>
+                {{else}}
+                    <button class="btn primary-btn btn-default" id="followButton"> + FOLLOW </button>
+                {{/if}}
+            {{/if}}
+            <br>
+            <br><h4><strong>{{ person.profile.bio }} </strong></h4>
+            <strong>Here Since:</strong> <em>{{ person.createdAt }}</em> <br>
+        </div>
+    </div>
+
+    <div id="profileModelFeedContainer">
+        <hr>
+        {{> profileModelFeed}}
+    </div>
+
+    <script>
+        function changeText()
+        {
+            var display = document.getElementById('unfollowButton');
+            display.innerHTML = "";
+            display.innerHTML = "UNFOLLOW";
+        }
+          function changeback()
+        {
+            var display = document.getElementById('unfollowButton');
+            display.innerHTML = "";
+            display.innerHTML = "FOLLOWING";
+        }
+    </script>
+</template>
+
+
+<template name="profileModelFeed">
+    <div class="profile-feed-wrapper">
+    {{#if models}}
+    {{#each models}}
+        {{#if converted }}
+        {{> modelPost }}
+        {{/if}}
+    {{/each}}
+    {{else}}
+    <h3>{{user.profile.name}} has no uploaded models</h3>
+    {{/if}}
+    </div>
+</template>

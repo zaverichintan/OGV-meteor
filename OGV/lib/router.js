@@ -42,7 +42,7 @@ Router.configure({
  */
 
 Router.map(function() {
-    this.route('index', {
+    this.route('landingPage', {
 	path : '/',
 	waitOn:function(){
 	    Meteor.subscribe('modelFiles');

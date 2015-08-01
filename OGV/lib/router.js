@@ -134,7 +134,7 @@ Router.map(function() {
 
     this.route('models', {
         path : '/newsfeed',
-        waitOne: function() {
+        waitOn: function() {
             Meteor.subscribe('modelFiles');
         }
     });

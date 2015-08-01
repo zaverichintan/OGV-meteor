@@ -33,7 +33,6 @@
 
 Router.configure({
     layoutTemplate:'layout',
-    notFoundTemplate: 'notFound',
     loadingTemplate:'preloader',
 });
 
@@ -42,14 +41,9 @@ Router.configure({
  */
 
 Router.map(function() {
-    this.route('index', {
-	path : '/',
-	waitOn:function(){
-	    Meteor.subscribe('modelFiles');
-	}
+    this.route('landingPage', {
+    path : '/'
     });
-    /*this.route('landingPage', {path: '/'}); */
-    this.route('models', {path : '/models'});
     this.route('signUp', {path : 'sign-up'});
     this.route('feedbackThanks', {path : 'thanks'});
     this.route('logIn', {path : 'log-in'});
@@ -59,25 +53,25 @@ Router.map(function() {
     this.route('home', {path : 'home'});
     
     this.route('dashboard',{
-	path: 'dashboard',
-	waitOn: function() {
-	    return Meteor.subscribe('ogvSettings');
-	}
+    path: 'dashboard',
+    waitOn: function() {
+        return Meteor.subscribe('ogvSettings');
+    }
     });
     
     this.route('modelViewer', {
-	path: '/models/:_id',
+    path: '/models/:_id',
     waitOn: function() {
         return Meteor.subscribe('modelFiles');
     },
     data: function() 
-	{ 
-	    return ModelFiles.findOne (this.params._id);
-	},
-	action : function () 
+    { 
+        return ModelFiles.findOne (this.params._id);
+    },
+    action : function () 
     {
-   	     if (this.ready()) this.render();
-	},
+         if (this.ready()) this.render();
+    },
     onRun: function()
     {
         ModelFiles.update(this.params._id, {$inc: {viewsCount: 1}});
@@ -86,33 +80,32 @@ Router.map(function() {
     });
 
     this.route('modelMeta', {
-	path: '/description/:_id',
-	waitOn: function() {
+    path: '/description/:_id',
+    waitOn: function() {
         return Meteor.subscribe('modelFiles');
     },
     data: function() 
-	{
-		var model = ModelFiles.findOne({'owner' : Meteor.user()._id});
-	 	if( model == null ){
-	 		Router.go('/upload');
-	 		return;
-	 	} else {
-	 		Session.set('modelId', this.params._id);
-	 		return ModelFiles.findOne(this.params._id);		
-	 	}
-	  
-	}
+    {
+        var model = ModelFiles.findOne({'owner' : Meteor.user()._id});
+        if( model == null ){
+            Router.go('/upload');
+            return;
+        } else {
+            Session.set('modelId', this.params._id);
+            return ModelFiles.findOne(this.params._id);     
+        }     
+    }
     });
 
     this.route('filemanager',{
-	path: '/my-models',
-	waitOn: function() {
-	    return Meteor.subscribe('modelFiles');
+    path: '/my-models',
+    waitOn: function() {
+        return Meteor.subscribe('modelFiles');
     },
     data: function()
-	{
-	    return ModelFiles.find({'owner' : Meteor.user()});
-	}
+    {
+        return ModelFiles.find({'owner' : Meteor.user()});
+    }
     });
 
     this.route('profilePage', {
@@ -138,6 +131,13 @@ Router.map(function() {
             Meteor.subscribe('modelFiles');
         }
     });
+
+    this.route('models', {
+        path : '/newsfeed',
+        waitOn: function() {
+            Meteor.subscribe('modelFiles');
+        }
+    });
 });
 
 // add the dataNotFound plugin, which is responsible for
@@ -153,11 +153,11 @@ Router.plugin("dataNotFound",{
  */
 var validateUser = function(pause) {
     if (Meteor.user()) {
-    	this.next();
+        this.next();
     } else if (Meteor.loggingIn()) {
-	this.render('preloader');
+    this.render('preloader');
     } else {
-	this.render('logIn');
+    this.render('logIn');
     }
 }
 
@@ -169,9 +169,9 @@ var validateUser = function(pause) {
 var actionReady = function(pause) 
 {
     if (this.ready()) {
-	this.next();
+    this.next();
     } else {
-	this.render('preloader');
+    this.render('preloader');
     }
 }
 
@@ -181,10 +181,10 @@ var actionReady = function(pause)
  */
 var loggingIn = function(pause) {
     if (Meteor.loggingIn()) {
-	this.render('preloader');
+    this.render('preloader');
     }
     else {
-	this.next();
+    this.next();
     }
 }
 

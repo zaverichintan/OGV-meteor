@@ -7,27 +7,5 @@
 			{{> yield}}
 		</div>
 	</div>
-
-	<div class="" id="feedbackDiv">
-    	<a class="feedbackButton btn" style="background-color:#333;">
-       		<h4 id="showRight">F e e d b a c k</h4>
-	    </a>
-	</div>
-	
-	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-	{{> feedBack}}
-	</nav>
-			
-	<script>
-		var	menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-			showRight = document.getElementById( 'showRight' ),
-			body = document.body;
-
-		showRight.onclick = function() {
-			classie.toggle( this, 'active' );
-			classie.toggle( menuRight, 'cbp-spmenu-open' );
-			
-		};
-	</script>
 </template>
 

@@ -218,10 +218,14 @@ textarea {
 }
 
 
+.upload-text {
+    padding-top: 15px;
+}
+
 .help-text {
     font-size: 14px;
     font-style: italic;
-    color: #ccc;
+    color: #444;
 }
 
 .primary-btn {
@@ -392,6 +396,7 @@ input:focus {
 }
 
 .dropzone{
+    min-height: 360px;
     background: #DCDCDC url('/icons/upload-big.png') no-repeat center;
     border: 2px solid #333;
 }
@@ -399,7 +404,7 @@ input:focus {
 #fileInput{
     background: #FAF9F9 none repeat scroll 0% 0%;
     float: right;
-    margin-top: -48px;
+    margin-top: -63px;
     border: 1px solid #333;
     padding-bottom: 36px;
 }

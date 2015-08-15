@@ -7,15 +7,14 @@
 				<a class="rm-item" id="upload-icon" title="Upload" href ="/upload"> <img src="/icons/upload.png" width="30px" height="30px"/></a>
 				<a class="rm-item" id="dashboard-icon" title="Settings" href ="/dashboard"> <img src="/icons/Settings.png" width="30px" height="30px"/></a>   
 				{{#unless currentUser}}
-				<a class="rm-item rm-log-in" id="log-in" href="/log-in">Login</a>
+					<a class="rm-item rm-log-in" id="log-in" href="/log-in">Login</a>
 				{{else}}
 					<a class="rm-item" id="models-icon" title="Models" href ="/newsfeed"> <img src="/icons/collection.png" width="30px" height="30px"/></a>  
-					<a href="/profile/{{ userId }}">{{ currentUser.profile.name }}</a>
-					&nbsp;&nbsp;<a href="/explore">Explore</a>
+					<a href="/explore" class="rm-item" id="upload-icon" title="Explore models and users"><img src="/icons/explore.png"/></a>
 					<button class="rm-item rm-log-out" id="log-out" title="Log out"><img src="/icons/logout.png" width="30px" height="30px"></button>
+					<a href="/profile/{{ userId }}">{{ currentUser.profile.name }}</a>					
 				{{/unless}}
 			</span>
-
 		</div>	
 	</header>
 </template>

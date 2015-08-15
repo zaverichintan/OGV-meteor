@@ -8,15 +8,15 @@ Template.profilePage.events({
 		//updates "following" array of currentUser
 		Meteor.users.update(currentUser._id, {$addToSet: {"profile.following": otherId}}, function(error, res) {
 		    if (error) {
-			throwError(error.reason);
+			sAlert.error(error.reason);
 		    } else {
 		    //updates "follower" array of other user
 		    Meteor.users.update(otherId, {$addToSet: {"profile.follower": currentUser._id}}, function(error, res) {
 		    /*Meteor.users.update(otherId, {$addToSet: {"profile.follower": currentUser._id}}, function(error, res) {*/
 		    	if (error) {
-					throwError(error.reason);
+		    		sAlert.error(error.reason);
 		    	} else {
-					throwNotification("You are now following this user");
+		    		sAlert.success("You are now following this user", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			    }
 			});
 		    }
@@ -34,14 +34,14 @@ Template.profilePage.events({
 		//updates "following" array of currentUser
 		Meteor.users.update(currentUser._id, {$pull: { "profile.following": otherId }}, function(error, res) {
 		    if (error) {
-			throwError(error.reason);
+			sAlert.error(error.reason);
 		    } else {
 		    //updates "follower" array of other user
 			Meteor.users.update(otherId, {$pull: {"profile.follower": currentUser._id}}, function(error, res) {
 		    	if (error) {
-					throwError(error.reason);
+					sAlert.error(error.reason);
 		    	} else {
-					throwNotification("You are no longer following this user");
+					sAlert.success("You are no longer following this user", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			    }
 			});
 		    }

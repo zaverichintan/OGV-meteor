@@ -12,13 +12,10 @@
 
 <template name="modelMeta">
 <div class="modelMeta">
-
  </div>
-
 	<div class="secondary-container" id="uploader-container">
 		<form action=" " method="post" class="secondary-form" id="uploader-form">
-						
-						
+
 			<label for="filename" class ="input-head"><strong> Filename </strong></label>
 			<p class ="help-text"> What you want to be known as around </p>	
 			<input class="form-control filename" id="desc-filename" name="filename" value="{{ name }}" type="text">
@@ -31,7 +28,6 @@
 			<label for="filename" class ="input-head"><strong> Model-Image</strong> </label>
 			<p class ="help-text"> An image that will be used as a thumbnail for your model, the preferred size is 500 X 300 </p>	
 			<input class="form-control model-thumb" id="desc-model-thumb" name="modelThumb" type="file">
-
 
 			<div id="checkform-body">
 			<label for="uploader-about" class ="input-head"><strong> Category </strong></label><br>			
@@ -61,10 +57,8 @@
 			</div>
 
 			<input id = "model-id" type = "hidden" value = "{{ _id }}">
-
 			<button class="btn primary-btn btn-default" type="submit" id="save-btn"> Save </button>
 		</form>
-		
 	</div>
 
 	<script>
@@ -79,4 +73,5 @@
  		}
 	}
 	</script>
+	
 </template>

@@ -33,6 +33,7 @@
 
 Router.configure({
     layoutTemplate:'layout',
+    notFoundTemplate: 'notFound',
     loadingTemplate:'preloader',
 });
 
@@ -96,18 +97,7 @@ Router.map(function() {
         }     
     }
     });
-
-    this.route('filemanager',{
-    path: '/my-models',
-    waitOn: function() {
-        return Meteor.subscribe('modelFiles');
-    },
-    data: function()
-    {
-        return ModelFiles.find({'owner' : Meteor.user()});
-    }
-    });
-
+    
     this.route('profilePage', {
     path: '/profile/:_id',
     waitOn:function()

@@ -87,7 +87,7 @@ Template.modelMeta.events({
 
 			var uploadedModel = ModelFiles.findOne(modelId);
 			if( uploadedModel.converted ){
-				Router.go('/my-models');
+				Router.go('/newsfeed');
 				sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			} else {
 				ModelFiles.remove(uploadedModel._id);
@@ -131,7 +131,7 @@ Template.modelMeta.events({
 
 				var uploadedModel = ModelFiles.findOne(modelId);
 				if( uploadedModel.converted ){
-					Router.go('/my-models');
+					Router.go('/newsfeed');
 					sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 				} else {
 					ModelFiles.remove(uploadedModel._id);

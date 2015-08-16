@@ -10,7 +10,7 @@
 			{{> modelPost }}
 	    {{/if}}
 	{{/each}}
-	<button class="btn primary-btn btn-default" id="loadMoreButton" style="margin: 10px auto auto 250px"> LOAD MORE . . . </button>
+	<button class="btn primary-btn btn-default" id="loadMoreButton" style="margin: 10px auto auto 250px"> Load more . . . </button>
     {{else}}
 	<h3>You seem to be new here, your newsfeed looks empty</h3>
     {{/if}}
@@ -22,7 +22,7 @@
     <div class="feed-item model-post">
       <div class="post-section post-sidebar user-info">
 		<a href="/profile/{{ owner._id }}">
-			<div class="post-item user-image" style="background:url('{{userImg}}');height:100px;width:100px;border-radius:8%"></div>
+			<div class="post-item user-image" style="background:url('{{userImg}}');height:100px;width:100px;border-radius:10%"></div>
 		</a>
 		<div class="post-item post-meta user-meta"></div>
       </div>
@@ -32,13 +32,17 @@
 			<a href="/profile/{{ owner._id }}"> {{ owner.profile.name }}</a> posted {{ name }} <br>on <em>{{uploadedAt}}</em>
 		</p>
 		<div class="post-item">
-	        {{> modelView }}	
+	        {{> modelView }}
+	        <div id = "editModelButtons">
+	            <a href="#"><i id="deleteModel" class="fa fa-cog fa-minus-square-o fa-2x" title="Delete model"></i></a>&nbsp;&nbsp;&nbsp;
+	            <a href ="/description/{{_id}}"><i class="fa fa-cog fa-cogs fa-2x" title="Change model settings"></i></a>
+	        </div>	        	
 			<p class="post-text post-subitem"> {{ about }} </p>
 		</div>
         <div class="post-item love-wrapper">
             {{> lovemeter }}
         </div>
-        <img src="/icons/views.png" style="height:40px;width:40px">
+        <img src="/icons/views.png" style="height:45px;width:35px">
 		    {{this.viewsCount}}
         <div class="post-item comments-wrapper">
         	{{> comments }}    

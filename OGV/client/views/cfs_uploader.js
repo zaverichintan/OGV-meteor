@@ -26,21 +26,18 @@ function uploadFile(event, temp)
 
 	Meteor.users.update(currentUser._id, {$inc:{"profile.countModels": 1}}, function(error, res) {
 		if (error) {
-			throwError(error.reason);
+			sAlert.error(error.reason);
 		} else {
-			throwNotification("Updated number of models for user");
+			sAlert.success("Updated number of models for user", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});			
 		}
 	});
-
 	ModelFiles.insert(fsFile,function(err) {
 	    if (err) {
-			throwError("There was some error in uploading your file, please try again/later");
+	    	sAlert.error("There was some error in uploading your file, please try again/later");
 	    } else {
-			throwNotification("File Uploaded, and will appear in file manager after it's converted"); 
+	    	sAlert.success("File Uploaded, and will appear in file manager after it's converted", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 		}	   
 	});
-
 	Router.go("/description/" + fsFile._id);
-
     });
 }

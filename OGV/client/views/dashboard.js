@@ -53,9 +53,9 @@ Template.dashboard.events({
 
 	    Meteor.users.update( currentUser._id,{ $set: {'profile.bio' : userBio, 'profile.name': userName, 'profile.pic': picId}}, function(error, res) {
 		if (error) {
-		    throwError(error.reason);
+        sAlert.error(error.reason);
 	    	} else {
-		    throwNotification("Settings saved");
+        sAlert.success("Settings saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 		}
 	    });
 	}
@@ -72,10 +72,10 @@ Template.dashboard.events({
 
 	    ProfilePictures.insert(fsFile, function(err, dpFile) {
 		if (err) {
-		    throwError(err.reason);
-	    	} else {
-		    throwNotification('Profile pic uploaded');
-	    	    saveSettings(dpFile._id);
+		    sAlert.error(err.reason);
+	    } else {
+            sAlert.success("Profile pic uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
+	    	saveSettings(dpFile._id);
 		} 
 	    });
 	} else {

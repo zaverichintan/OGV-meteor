@@ -70,30 +70,30 @@ Template.modelMeta.events({
 			*/
 			ModelFiles.update(modelId, {$set: {name: filename, about: description}}, function(error, res) {
 			    if (error) {
-					throwError(error.reason);
+					sAlert.error(error.reason);
 			    } else {
-					throwNotification("Data about model has been saved");
+					sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			    }
 			});
 			if(category.length > 0){
 				ModelFiles.update(modelId, {$set: {categories: category}}, function(error, res) {
 			    if (error) {
-					throwError(error.reason);
+			    	sAlert.error(error.reason);
 			    } else {
-					throwNotification("Data about model has been saved");
+					sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});					
 			    }
 			});
 			}
 
 			var uploadedModel = ModelFiles.findOne(modelId);
 			if( uploadedModel.converted ){
-				Router.go('/my-models');
-				throwNotification("Data about model has been saved");
+				Router.go('/newsfeed');
+				sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			} else {
 				ModelFiles.remove(uploadedModel._id);
 				ThumbFiles.remove(uploadedModel.thumbnail);
 				Router.go('/upload');
-				throwError("There was some error in converting your uploaded file");
+				sAlert.success("There was some error in converting your uploaded file", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			}
 		 
 		}
@@ -109,36 +109,35 @@ Template.modelMeta.events({
 	
 		ThumbFiles.insert(fsFile,function(err,thumbFile) {
 		    if (err) {
-				throwError(err.reason);
+				sAlert.error(err.reason);
 		    } else {
-				throwNotification("Thumbnail Image has been Uploaded" );
+				sAlert.success("Thumbnail Image has been Uploaded", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});	
 				ModelFiles.update(modelId, {$set: {name: filename, about: description, thumbnail:fsFile._id}}, function(error, res) {
 				    if (error) {
-					throwError(error.reason);
+				    	sAlert.error(error.reason);	
 				    } else {
-					throwNotification("Data about model has been saved");
+						sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 				    }
 				});
 				if(category.length > 0){
 					ModelFiles.update(modelId, {$set: {categories: category}}, function(error, res) {
 			    	if (error) {
-						throwError(error.reason);
+						sAlert.error(error.reason);
 			    	} else {
-						throwNotification("Data about model has been saved");
+						sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 			    	}
 					});
 				}
 
 				var uploadedModel = ModelFiles.findOne(modelId);
 				if( uploadedModel.converted ){
-					Router.go('/my-models');
-					throwNotification("Data about model has been saved");
+					Router.go('/newsfeed');
+					sAlert.success("Data about model has been saved", {effect: 'flip', onRouteClose: false, stack: false, timeout: 4000, position: 'top'});
 				} else {
 					ModelFiles.remove(uploadedModel._id);
 					ThumbFiles.remove(uploadedModel.thumbnail);
 					Router.go('/upload');
-					throwError("There was some error in converting your uploaded file");
-
+					sAlert.error("There was some error in converting your uploaded file");
 				}
 		    }
 		});

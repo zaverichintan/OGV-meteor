@@ -88,7 +88,7 @@ Template.modelViewer.helpers({
     ownerId: function()
     {
     var parts = location.href.split('/');
-    //id of model whose page is being visited
+    // Id of model whose page is being visited
     var modelId = parts.pop(); 
     var model = ModelFiles.findOne(modelId);
     return model.owner;
@@ -142,7 +142,7 @@ var windowHalfY = window.innerHeight / 2;
 
 var finalRotationY
 var guiControls, OBJMaterial, OBJMaterialOver;
-var keyboard = new KeyboardState();
+// var keyboard = new KeyboardState();
 var renderColour = 0xafa8a8;
 
 function getGrid(){
@@ -161,15 +161,8 @@ function init()
      * Grabs the model-container div from template into a variable
      * named container, and sets up the scene 
      */
-
     container = document.getElementById('model-container');
-    controller = document.getElementById('controller');
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100000);
-    camera.position.z = 1000;
-    camera.position.x = 1000;
-    camera.position.y = 1000;
- 
-
+    controller = document.getElementById('modelController');
     
     /** 
      * Create a scene, that will hold all our elements such 
@@ -194,7 +187,14 @@ function init()
     directionalLight = new THREE.PointLight(0xaaaaaa);
     directionalLight.position = camera.position;
     scene.add(directionalLight);
-   
+
+    /** Axes */
+    axes = new THREE.AxisHelper(10000);
+    scene.add(axes);
+
+    /** Grid */
+    grid = new THREE.GridHelper(3000, 100);
+    scene.add(grid);    
     
     /**
      * Loader Managerial tasks
@@ -202,13 +202,14 @@ function init()
     manager = new THREE.LoadingManager();
     manager.onProgress = function(item, loaded, total) 
     {
-	console.log(item, loaded, total);
+	   console.log(item, loaded, total);
     };
 
     /**
      * Adds the model to the viewer aka loads OBJ files 
      * using OBJ-Loader
      */
+
     group = new THREE.Object3D();
     loader = new THREE.OBJLoader(manager);
     
@@ -230,7 +231,7 @@ function init()
         object.position.y = 0.1;
 	    object.rotation.z =  90 * Math.PI/180;
 	    object.rotation.x = -90 * Math.PI/180;
-
+        
 	    group.add(object);
         scene.add(group);
 	});
@@ -254,7 +255,7 @@ function init()
     }
    
 
-    /**
+   /**
     * datGUI variable initializations
     */
     guiControls = new function() {
@@ -276,17 +277,18 @@ function init()
     }
 
     //Initialize dat.GUI
+
     datGUI = new dat.GUI({autoPlace:false});
     
-    /**
+   /**
     * Add folders/sub categories in controls
     */
-    //consisting of changes to be shown in the model
+    // Consisting of changes to be shown in the model
     var modelGui = datGUI.addFolder("Model");        
-    //activated OBJMAterialOver that overlaps the existing models
+    // Activated OBJMAterialOver that overlaps the existing models
     var overmodelGui = datGUI.addFolder("WireFrame + Model");   
 
-    /** 
+   /** 
     * datGUI GUI and of variables defined above functionality
     */
     modelGui.add(guiControls, 'visible').onChange(function (e) {
@@ -340,7 +342,7 @@ function init()
      * Sets size and color to renderer
      */
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xa1a1a1, 1);
+    renderer.setClearColor(0x555555, 1);
     
     controller.appendChild(datGUI.domElement);
     container.appendChild(renderer.domElement);
@@ -453,4 +455,4 @@ function onKeyDown( event )
             camera.lookAt(scene.position);
             break;                
     }
-} 
+}  

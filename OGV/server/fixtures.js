@@ -20,9 +20,9 @@
 
 /**
  * This file contains inital settings that are entered into database
- * during the first installation of the software 
+ * during the first installation of the software
  */
-if (OgvSettings.find().count() === 0) 
+if (OgvSettings.find().count() === 0)
 {
    OgvSettings.insert({
 	settingSwitch: true,
@@ -30,5 +30,5 @@ if (OgvSettings.find().count() === 0)
 	mailUrl : "http://username:password@example.com",
 	gobjPath : "/usr/brlcad/dev-7.25.0/bin/g-obj",
 	mgedPath : "/usr/brlcad/dev-7.25.0/bin/mged"
-    }); 
+    });
 }

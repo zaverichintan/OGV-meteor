@@ -1,5 +1,5 @@
 Meteor.methods({
-    saveFile: function(blob, name, uploadPath, encoding) 
+    saveFile: function(blob, name, uploadPath, encoding)
     {
 	var fs = Npm.require('fs'),
 	    sys = Npm.require('sys'),
@@ -15,7 +15,7 @@ Meteor.methods({
 	userDirPath = appRoot + userId + '/';
 	uploadDirPath = userDirPath + name + '/';
 	uploadFilePath = uploadDirPath + name;
-	console.log(uploadDirPath);	
+	console.log(uploadDirPath);
 	if (ext == '.obj') {
 	    if (!fs.existsSync(uploadDirPath)) {
 		if (!fs.existsSync(userDirPath)) {
@@ -30,11 +30,11 @@ Meteor.methods({
 	    } else {
 		fs.writeFileSync(uploadFilePath, blob, encoding);
 		fileUploaded = true;
-	    }	
+	    }
          } else {
 	     throw (new Meteor.Error (409,'File type not supported'));
-	 }	
-	
+	 }
+
 	if (fileUploaded) {
 	    var model = {
 	    	name: name,
@@ -45,14 +45,14 @@ Meteor.methods({
 	    }
 	    model._id = Models.insert(model);
 	}
-	
+
 	function gToObj()
 	{
 	    var objects;
 	    var mgedPath = '/usr/brlcad/dev-7.25.0/bin/mged';
 	    var g_objPath = '/usr/brlcad/dev-7.25.0/bin/g-obj';
 	    var cmd = mgedPath + " -c  " + uploadFilePath +" ls -a 2>&1";
-	    
+
 	    child = exec(cmd, function (error, stdout, stderr) {
 		sys.print('stdout' + stdout);
 		objects = stdout.split(" ");
@@ -63,7 +63,7 @@ Meteor.methods({
 	        }
 		for (i in objects) {
 		    cmd = g_objPath + " -n 10 -o " + uploadDirPath + objects[i] + ".obj" + uploadFilePath  + " " +  objects[i];
-	            console.log(cmd); 
+	            console.log(cmd);
 	            child = exec(cmd, function (error, stdout, stderr) {
 			sys.print(stdout);
 	   	    });
@@ -72,17 +72,16 @@ Meteor.methods({
 
 	}
 
-	function cleanPath(str) 
+	function cleanPath(str)
 	{
 	    if (str) {
 		return str.replace(/\.\./g,'').replace(/\/+/g,'').replace(/^\/+/,'').replace(/\/+$/,'');
 	    }
 	}
 
-	function cleanName(str) 
+	function cleanName(str)
 	{
 	    return str.replace(/\.\./g,'').replace(/\//g,'');
-	}	
+	}
     }
 });
-    

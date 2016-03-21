@@ -2,7 +2,7 @@
     {{> newsfeedSidebar}}
     <!--<div class="feed-wrapper"> -->
     <br><br><br>
-    <h1 style="margin: 10px auto 20px 13px">Hi, {{currentUser.profile.name}}!</h1> 
+    <h1 style="margin: 10px auto 20px 13px">Hi, {{currentUser.profile.name}}!</h1>
     <div class="container feed-wrapper">
     {{#if models}}
 	{{#each models}}
@@ -26,9 +26,9 @@
 		</a>
 		<div class="post-item post-meta user-meta"></div>
       </div>
-	    
+
      <div class="post-section post-content model-info">
-		<p class="post-item post-text user-name"> 
+		<p class="post-item post-text user-name">
 			<a href="/profile/{{ owner._id }}"> {{ owner.profile.name }}</a> posted {{ name }} <br>on <em>{{uploadedAt}}</em>
 		</p>
 		<div class="post-item">
@@ -36,7 +36,16 @@
 	        <div id = "editModelButtons">
 	            <a href="#"><i id="deleteModel" class="fa fa-cog fa-minus-square-o fa-2x" title="Delete model"></i></a>&nbsp;&nbsp;&nbsp;
 	            <a href ="/description/{{_id}}"><i class="fa fa-cog fa-cogs fa-2x" title="Change model settings"></i></a>
-	        </div>	        	
+              {{#if isOwner}}
+              <button class="toggle-private">
+                {{#if private}}
+                  Private
+                {{else}}
+                  Public
+                {{/if}}
+              </button>
+            {{/if}}
+          </div>
 			<p class="post-text post-subitem"> {{ about }} </p>
 		</div>
         <div class="post-item love-wrapper">
@@ -45,7 +54,7 @@
         <img src="/icons/views.png" style="height:45px;width:35px">
 		    {{this.viewsCount}}
         <div class="post-item comments-wrapper">
-        	{{> comments }}    
+        	{{> comments }}
         </div>
      </div>
      <span class="clear"></span>

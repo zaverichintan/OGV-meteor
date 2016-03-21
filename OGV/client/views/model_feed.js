@@ -23,19 +23,19 @@
  * @brief helpers and events for model feed
  *
  * Model Feed is a place where all the models by all the users are shown.
- * Model Feed is comprised of Model Posts, each Model Post is for one 
+ * Model Feed is comprised of Model Posts, each Model Post is for one
  * model and further has Model View that shows representative image of the
  * model in model feed. Apart from these 3 sub parts model feed also contain
  * various social elements which are taken care of in other files such as
- * OGV/clients/views/social.js 
+ * OGV/clients/views/social.js
  */
 
 Template.modelFeed.helpers({
     /**
      * models helper finds all the models from the database and then sorts
-     * them in reverse chronological order. 
+     * them in reverse chronological order.
      */
-    models: function() 
+    models: function()
     {
     /*var popularityIndex = 2;
     var popularLove = Lovers.find({countLovers: {$gte: popularityIndex}}).fetch();
@@ -47,9 +47,9 @@ Template.modelFeed.helpers({
 	    return model;
 	} else {
 	    return false;
-	} 
+	}
     }
-}); 
+});
 
 
 Template.modelPost.helpers({
@@ -69,17 +69,33 @@ Template.modelPost.helpers({
 	    return '/public/icons/User.png';
 	}
     },
-    
+
     owner: function()
     {
 	return Meteor.users.findOne(this.owner);
+    },
+
+    isOwner: function () {
+      return this.owner === Meteor.users.findOne(this.owner);
+    },
+
+    'click .toggle-private': function () {
+      Meteor.call("setPrivate",fsFile.name(), ! this.private);
     }
+
 });
-    
+
+Meteor.methods({
+//updates the model of file to toggle the private
+setPrivate: function (fileName, setToPrivate) {
+
+    ModelFiles.update(fileName, { $set: { private: setToPrivate } });
+  }
+});
 
 Template.modelView.helpers({
     /**
-    * returns thumbnail of the model from the user database, if there's no image 
+    * returns thumbnail of the model from the user database, if there's no image
     * a default image is shown.
     */
     thumbImg:function()
@@ -89,6 +105,6 @@ Template.modelView.helpers({
             return thumbImage;
         } else {
             // return test;
-        }  
+        }
     }
 });

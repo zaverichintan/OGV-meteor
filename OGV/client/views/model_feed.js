@@ -80,16 +80,16 @@ Template.modelPost.helpers({
     },
 
     'click .toggle-private': function () {
-      Meteor.call("setPrivate",fsFile.name(), ! this.private);
+      Meteor.call("setPrivate",this._id, ! this.private);
     }
 
 });
 
 Meteor.methods({
 //updates the model of file to toggle the private
-setPrivate: function (fileName, setToPrivate) {
+setPrivate: function (id, setToPrivate) {
 
-    ModelFiles.update(fileName, { $set: { private: setToPrivate } });
+    ModelFiles.update(id, { $set: { private: setToPrivate } });
   }
 });
 
